@@ -23,7 +23,7 @@
         /// <summary>
         /// Защита
         /// </summary>
-        public virtual int Defense { get; protected set; } = 0;
+        public virtual int Defence { get; protected set; } = 0;
 
 		/// <summary>
 		/// Сила
@@ -63,7 +63,7 @@
 		/// </summary>
         public override string ToString()
         {
-            return $"Здоровье { Health }, Защита { Defense }, Сила { Strength }";
+            return $"Здоровье { Health }, Защита { Defence }, Сила { Strength }";
         }
 
 		#endregion

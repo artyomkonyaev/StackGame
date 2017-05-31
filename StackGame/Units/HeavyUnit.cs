@@ -9,7 +9,7 @@ namespace StackGame.Units
     {
 		#region Свойства
 		
-        public override int Defense { get; protected set; } = 100;
+        public override int Defence { get; protected set; } = 100;
 
 		#endregion
 
@@ -24,12 +24,12 @@ namespace StackGame.Units
 
 		public override void GetDamage(int damage)
 		{
-            if (Defense > 0)
+            if (Defence > 0)
             {
-                Defense -= damage;
-                if (Defense < 0) {
-                    base.GetDamage(Math.Abs(Defense));
-                    Defense = 0;
+                Defence -= damage;
+                if (Defence < 0) {
+                    base.GetDamage(Math.Abs(Defence));
+                    Defence = 0;
                 }
             }
             else 

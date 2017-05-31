@@ -19,7 +19,7 @@
 		/// <summary>
 		/// Защита
 		/// </summary>
-		int Defense { get; }
+		int Defence { get; }
 
 		/// <summary>
 		/// Сила
