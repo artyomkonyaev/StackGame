@@ -39,10 +39,13 @@
     <Compile Include="Units\LightUnit.cs" />
     <Compile Include="Units\HeavyUnit.cs" />
     <Compile Include="Game\Engine.cs" />
+    <Compile Include="Army\IArmy.cs" />
+    <Compile Include="Army\Army.cs" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Units\" />
     <Folder Include="Game\" />
+    <Folder Include="Army\" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
 </Project>
