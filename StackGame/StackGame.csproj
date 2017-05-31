@@ -1,5 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
-<Project DefaultTargets="Build" ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+﻿<Project DefaultTargets="Build" ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">x86</Platform>
@@ -41,11 +40,18 @@
     <Compile Include="Game\Engine.cs" />
     <Compile Include="Army\IArmy.cs" />
     <Compile Include="Army\Army.cs" />
+    <Compile Include="Units\Creators\IUnitCreator.cs" />
+    <Compile Include="Units\Creators\LightUnitCreator.cs" />
+    <Compile Include="Units\Creators\HeavyUnitCreator.cs" />
+    <Compile Include="Units\Factory\UnitType.cs" />
+    <Compile Include="Units\Factory\UnitsFactory.cs" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Units\" />
     <Folder Include="Game\" />
     <Folder Include="Army\" />
+    <Folder Include="Units\Creators\" />
+    <Folder Include="Units\Factory\" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
 </Project>
