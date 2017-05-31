@@ -8,11 +8,6 @@
 		#region Свойства
 
 		/// <summary>
-		/// Стоимость
-		/// </summary>
-		int Cost { get; }
-
-		/// <summary>
 		/// Здоровье
 		/// </summary>
 		int Health { get; }

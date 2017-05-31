@@ -7,7 +7,7 @@
     {
 		#region Инициализация
 
-		public LightUnit() : base(25, 100, 15)
+		public LightUnit() : base(100, 15)
         { }
 
 		#endregion

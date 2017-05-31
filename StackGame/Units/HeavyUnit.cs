@@ -15,7 +15,7 @@ namespace StackGame.Units
 
 		#region Инициализация
 
-		public HeavyUnit() : base(50, 100, 10)
+		public HeavyUnit() : base(100, 10)
         { }
 
 		#endregion

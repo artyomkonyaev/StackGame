@@ -8,11 +8,6 @@
 		#region Свойства
 
 		/// <summary>
-		/// Стоимость
-		/// </summary>
-		public int Cost { get; }
-
-		/// <summary>
 		/// Здоровье
 		/// </summary>
         public int Health { get; protected set; }
@@ -34,9 +29,8 @@
 
 		#region Инициализация
 
-		protected Unit(int cost, int health, int strength)
+		protected Unit(int health, int strength)
         {
-            Cost = cost;
             Health = health;
             MaxHealth = health;
             Strength = strength;
