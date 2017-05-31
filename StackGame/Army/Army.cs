@@ -1,5 +1,7 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using StackGame.Units;
+using StackGame.Units.Factory;
 
 namespace StackGame.Army
 {
@@ -17,7 +19,7 @@ namespace StackGame.Army
         /// <summary>
         /// Название армии
         /// </summary>
-        private string name;
+        protected string name;
 
 		#endregion
 
@@ -36,9 +38,27 @@ namespace StackGame.Army
 		/// <summary>
 		/// Создать армию
 		/// </summary>
-        List<IUnit> CreateArmy(int cost) 
+        protected List<IUnit> CreateArmy(int money) 
         {
-            return new List<IUnit>();
+            var random = new Random(DateTime.Now.Millisecond);
+
+            var unitMinCost = UnitsFactory.MinCost;
+
+            var units = new List<IUnit>();
+            while (money >= unitMinCost) 
+            {
+                var availableTypes = UnitsFactory.GetUnitTypesWithCostLessThanOrEqual(money);
+                var index = random.Next(availableTypes.Length);
+
+                var unitType = availableTypes[index];
+
+                var unit = UnitsFactory.CreateUnit(unitType);
+                units.Add(unit);
+
+                money -= UnitsFactory.GetCost(unitType);
+            }
+
+            return units;
         }
 
 		/// <summary>
