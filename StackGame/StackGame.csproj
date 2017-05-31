@@ -38,9 +38,11 @@
     <Compile Include="Units\Unit.cs" />
     <Compile Include="Units\LightUnit.cs" />
     <Compile Include="Units\HeavyUnit.cs" />
+    <Compile Include="Game\Engine.cs" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Units\" />
+    <Folder Include="Game\" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
 </Project>
