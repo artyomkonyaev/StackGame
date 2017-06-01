@@ -15,6 +15,11 @@ namespace StackGame.Army
         /// </summary>
         List<IUnit> Units { get; }
 
+        /// <summary>
+        /// Все ли единицы армии мертвы
+        /// </summary>
+        bool IsAllDead { get; }
+
 		#endregion
 
 		#region Методы

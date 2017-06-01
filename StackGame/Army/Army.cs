@@ -16,6 +16,18 @@ namespace StackGame.Army
         /// Единицы армии
         /// </summary>
         public List<IUnit> Units { get; private set; }
+
+		/// <summary>
+		/// Все ли единицы армии мертвы
+		/// </summary>
+		public bool IsAllDead 
+        {
+            get
+            {
+                return Units.Count == 0;
+            }
+        }
+
         /// <summary>
         /// Название армии
         /// </summary>
