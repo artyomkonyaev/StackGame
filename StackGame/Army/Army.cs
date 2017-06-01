@@ -39,7 +39,7 @@ namespace StackGame.Army
 
 		public Army(string name)
 		{
-            Units = CreateArmy(1000);
+            Units = CreateArmy(100);
             this.name = name;
 		}
 
