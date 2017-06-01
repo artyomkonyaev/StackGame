@@ -21,6 +21,11 @@
 		/// </summary>
 		int Strength { get; }
 
+        /// <summary>
+        /// Есть ли еще здоровье
+        /// </summary>
+        bool IsAlive { get; }
+
 		#endregion
 
 		#region Методы

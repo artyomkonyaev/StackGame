@@ -25,6 +25,17 @@
 		/// </summary>
 		public int Strength { get; }
 
+		/// <summary>
+		/// Есть ли еще здоровье
+		/// </summary>
+		public bool IsAlive
+        { 
+            get 
+            {
+                return Health != 0;
+            }
+        }
+
 		#endregion
 
 		#region Инициализация
