@@ -63,6 +63,10 @@ namespace StackGame.Game
                 return false;
             }
 
+            Console.WriteLine("Состояние \"до\":");
+            Console.WriteLine(firstArmy.ToString());
+            Console.WriteLine(secondArmy.ToString());
+
             // Создаем массив противников
             var _opponents = new Opponents(firstArmy.Units[0], secondArmy.Units[0]);
             var queue = new List<Opponents>
@@ -83,6 +87,10 @@ namespace StackGame.Game
             // Удаление убитых
             RemoveDeadUnits(firstArmy);
             RemoveDeadUnits(secondArmy);
+
+			Console.WriteLine("Состояние \"после\":");
+			Console.WriteLine(firstArmy.ToString());
+			Console.WriteLine(secondArmy.ToString());
 
             return true;
         }
