@@ -45,6 +45,7 @@
     <Compile Include="Units\Creators\HeavyUnitCreator.cs" />
     <Compile Include="Units\Factory\UnitType.cs" />
     <Compile Include="Units\Factory\UnitsFactory.cs" />
+    <Compile Include="Game\Opponents.cs" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Units\" />
