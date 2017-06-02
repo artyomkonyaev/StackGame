@@ -6,7 +6,7 @@ namespace StackGame.Units
     /// <summary>
     /// Тяжелый пехотинец
     /// </summary>
-    public class HeavyUnit : Unit, IClonable
+    public class HeavyUnit : Unit, IImprovable, IClonable
     {
 		#region Свойства
 		

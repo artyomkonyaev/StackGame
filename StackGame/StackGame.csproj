@@ -57,6 +57,7 @@
     <Compile Include="Units\Abilities\ISpecialAbility.cs" />
     <Compile Include="Units\Abilities\IClonable.cs" />
     <Compile Include="Units\Abilities\IHealable.cs" />
+    <Compile Include="Units\Abilities\IImprovable.cs" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Units\" />
