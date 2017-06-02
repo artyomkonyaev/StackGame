@@ -46,6 +46,14 @@
     <Compile Include="Units\Factory\UnitType.cs" />
     <Compile Include="Units\Factory\UnitsFactory.cs" />
     <Compile Include="Game\Opponents.cs" />
+    <Compile Include="Units\ArcherUnit.cs" />
+    <Compile Include="Units\ClericUnit.cs" />
+    <Compile Include="Units\MageUnit.cs" />
+    <Compile Include="Units\WallUnit.cs" />
+    <Compile Include="Units\Creators\ArcherUnitCreator.cs" />
+    <Compile Include="Units\Creators\MageUnitCreator.cs" />
+    <Compile Include="Units\Creators\WallUnitCreator.cs" />
+    <Compile Include="Units\Creators\ClericUnitCreator.cs" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Units\" />

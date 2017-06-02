@@ -65,6 +65,14 @@ namespace StackGame.Units.Factory
                     return 25;
                 case UnitType.HeavyUnit:
                     return 50;
+                case UnitType.ArcherUnit:
+                    return 75;
+                case UnitType.ClericUnit:
+                    return 75;
+                case UnitType.MageUnit:
+                    return 100;
+                case UnitType.WallUnit:
+                    return 100;
 
                 default:
                     return int.MaxValue;
@@ -82,6 +90,14 @@ namespace StackGame.Units.Factory
                     return new LightUnitCreator();
 				case UnitType.HeavyUnit:
                     return new HeavyUnitCreator();
+                case UnitType.ArcherUnit:
+                    return new ArcherUnitCreator();
+                case UnitType.ClericUnit:
+                    return new ClericUnitCreator();
+                case UnitType.MageUnit:
+                    return new MageUnitCreator();
+                case UnitType.WallUnit:
+                    return new WallUnitCreator();
 
                 default:
                     return null;

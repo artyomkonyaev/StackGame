@@ -12,6 +12,22 @@
         /// <summary>
         /// Тяжелый пехотинец
         /// </summary>
-        HeavyUnit
+        HeavyUnit,
+        /// <summary>
+        /// Лучник
+        /// </summary>
+        ArcherUnit,
+        /// <summary>
+        /// Священник
+        /// </summary>
+        ClericUnit,
+        /// <summary>
+        /// Маг
+        /// </summary>
+        MageUnit,
+        /// <summary>
+        /// Стена
+        /// </summary>
+        WallUnit
     }
 }
