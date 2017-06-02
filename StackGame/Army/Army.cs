@@ -52,7 +52,7 @@ namespace StackGame.Army
 		/// </summary>
         protected List<IUnit> CreateArmy(int money) 
         {
-            var random = new Random(DateTime.Now.Millisecond);
+            var random = new Random();
 
             var unitMinCost = UnitsFactory.MinCost;
 
