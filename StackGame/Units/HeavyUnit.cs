@@ -1,11 +1,12 @@
 ﻿using System;
+using StackGame.Units.Abilities;
 
 namespace StackGame.Units
 {
     /// <summary>
     /// Тяжелый пехотинец
     /// </summary>
-    public class HeavyUnit : Unit
+    public class HeavyUnit : Unit, IClonable
     {
 		#region Свойства
 		
@@ -21,6 +22,11 @@ namespace StackGame.Units
 		#endregion
 
 		#region Методы
+
+		public IUnit Clone()
+		{
+			return (IUnit)MemberwiseClone();
+		}
 
 		public override void GetDamage(int damage)
 		{

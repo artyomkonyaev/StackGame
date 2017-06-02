@@ -6,7 +6,7 @@ namespace StackGame.Units
     /// <summary>
     /// Лучник
     /// </summary>
-    public class ArcherUnit : Unit, ISpecialAbility
+    public class ArcherUnit : Unit, IClonable, ISpecialAbility
     {
 		#region Свойства
 
@@ -23,6 +23,11 @@ namespace StackGame.Units
 		#endregion
 
 		#region Методы
+
+        public IUnit Clone()
+        {
+            return (IUnit)MemberwiseClone();
+        }
 
         public void DoSpecialAction(IArmy targetArmy, IUnit targetUnit)
         {

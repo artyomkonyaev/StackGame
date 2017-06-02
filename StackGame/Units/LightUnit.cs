@@ -1,9 +1,11 @@
-﻿namespace StackGame.Units
+﻿using StackGame.Units.Abilities;
+
+namespace StackGame.Units
 {
     /// <summary>
     /// Легкий пехотинец
     /// </summary>
-    public class LightUnit : Unit
+    public class LightUnit : Unit, IClonable
     {
 		#region Инициализация
 
@@ -14,10 +16,15 @@
 
 		#region Методы
 
+		public IUnit Clone()
+		{
+			return (IUnit)MemberwiseClone();
+		}
+
         public override string ToString()
         {
             return $"Легкий пехотинец: { base.ToString() }";
-        } 
+        }
 
 		#endregion
 	}

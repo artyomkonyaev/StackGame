@@ -1,9 +1,11 @@
-﻿namespace StackGame.Units
+﻿using StackGame.Units.Abilities;
+
+namespace StackGame.Units
 {
     /// <summary>
     /// Священник
     /// </summary>
-    public class ClericUnit : Unit
+    public class ClericUnit : Unit, IClonable
     {
 		#region Инициализация
 
@@ -13,6 +15,11 @@
 		#endregion
 
 		#region Методы
+
+		public IUnit Clone()
+		{
+			return (IUnit)MemberwiseClone();
+		}
 
 		public override string ToString()
 		{

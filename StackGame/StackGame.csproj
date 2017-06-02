@@ -55,6 +55,7 @@
     <Compile Include="Units\Creators\WallUnitCreator.cs" />
     <Compile Include="Units\Creators\ClericUnitCreator.cs" />
     <Compile Include="Units\Abilities\ISpecialAbility.cs" />
+    <Compile Include="Units\Abilities\IClonable.cs" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Units\" />
