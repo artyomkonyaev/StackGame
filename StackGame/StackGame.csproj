@@ -54,6 +54,7 @@
     <Compile Include="Units\Creators\MageUnitCreator.cs" />
     <Compile Include="Units\Creators\WallUnitCreator.cs" />
     <Compile Include="Units\Creators\ClericUnitCreator.cs" />
+    <Compile Include="Units\Abilities\ISpecialAbility.cs" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Units\" />
@@ -61,6 +62,7 @@
     <Folder Include="Army\" />
     <Folder Include="Units\Creators\" />
     <Folder Include="Units\Factory\" />
+    <Folder Include="Units\Abilities\" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
 </Project>
