@@ -34,15 +34,15 @@ namespace StackGame.Units
 			}
 		}
 
-		public void DoSpecialAction(IArmy targetArmy, IUnit targetUnit)
+		public void DoSpecialAction(IArmy targetArmy, int unitPosition)
 		{
-            var random = new Random(DateTime.Now.Millisecond);
+            var random = new Random();
             var chance = random.Next(100 / 50) == 0;
 
-            if (chance && targetUnit is IClonable clonableUnit)
+            if (chance && targetArmy.Units[unitPosition] is IClonable clonableUnit)
             {
-                var unit = clonableUnit.Clone();
-                targetArmy.Units.Add(unit);
+                var clonedUnit = clonableUnit.Clone();
+                targetArmy.Units.Add(clonedUnit);
             }
 		}
 

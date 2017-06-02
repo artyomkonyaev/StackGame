@@ -38,9 +38,9 @@ namespace StackGame.Units
             return (IUnit)MemberwiseClone();
         }
 
-        public void DoSpecialAction(IArmy targetArmy, IUnit targetUnit)
+        public void DoSpecialAction(IArmy targetArmy, int unitPosition)
         {
-            targetUnit.GetDamage(Power);
+            targetArmy.Units[unitPosition].GetDamage(Power);
         }
 
 		public override string ToString()

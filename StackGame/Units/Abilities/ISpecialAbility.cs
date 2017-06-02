@@ -25,7 +25,7 @@ namespace StackGame.Units.Abilities
         /// <summary>
         /// Применить специальную возможность
         /// </summary>
-        void DoSpecialAction(IArmy targetArmy, IUnit targetUnit);
+        void DoSpecialAction(IArmy targetArmy, int unitPosition);
 
 		#endregion
 	}

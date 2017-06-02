@@ -38,9 +38,9 @@ namespace StackGame.Units
 			return (IUnit)MemberwiseClone();
 		}
 
-		public void DoSpecialAction(IArmy targetArmy, IUnit targetUnit)
+		public void DoSpecialAction(IArmy targetArmy, int unitPosition)
 		{
-            if (targetUnit is IHealable healableUnit)
+            if (targetArmy.Units[unitPosition] is IHealable healableUnit)
 			{
 				healableUnit.Heal(Power);
 			}
