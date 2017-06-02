@@ -1,4 +1,5 @@
-﻿using StackGame.Units.Abilities;
+﻿using System;
+using StackGame.Units.Abilities;
 
 namespace StackGame.Units.Improvements
 {
@@ -55,6 +56,16 @@ namespace StackGame.Units.Improvements
         #endregion
 
         #region Методы
+
+        public bool CanImprove(Type type)
+        {
+            if (GetType().GetGenericTypeDefinition() == type)
+            {
+                return false;
+            }
+
+            return unit.CanImprove(type);
+        }
 
         public abstract IUnit Clone();
 

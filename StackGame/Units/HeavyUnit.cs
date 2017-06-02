@@ -23,6 +23,11 @@ namespace StackGame.Units
 
 		#region Методы
 
+        public bool CanImprove(Type type)
+        {
+            return true;
+        }
+
 		public IUnit Clone()
 		{
 			return (IUnit)MemberwiseClone();
