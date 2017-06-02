@@ -6,7 +6,7 @@ namespace StackGame.Units
     /// <summary>
     /// Тяжелый пехотинец
     /// </summary>
-    public class HeavyUnit : Unit, IHealable, IClonable
+    public class HeavyUnit : Unit, IClonable
     {
 		#region Свойства
 		
@@ -22,15 +22,6 @@ namespace StackGame.Units
 		#endregion
 
 		#region Методы
-
-		public void Heal(int healthPower)
-		{
-			Health += healthPower;
-			if (Health > MaxHealth)
-			{
-				Health = MaxHealth;
-			}
-		}
 
 		public IUnit Clone()
 		{
