@@ -1,4 +1,5 @@
-﻿using StackGame.Army;
+﻿using System;
+using StackGame.Army;
 using StackGame.Units.Abilities;
 
 namespace StackGame.Units
@@ -35,7 +36,10 @@ namespace StackGame.Units
 
 		public void DoSpecialAction(IArmy targetArmy, IUnit targetUnit)
 		{
-            if (targetUnit is IClonable clonableUnit)
+            var random = new Random(DateTime.Now.Millisecond);
+            var chance = random.Next(100 / 50) == 0;
+
+            if (chance && targetUnit is IClonable clonableUnit)
             {
                 var unit = clonableUnit.Clone();
                 targetArmy.Units.Add(unit);
