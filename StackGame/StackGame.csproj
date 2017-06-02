@@ -58,6 +58,11 @@
     <Compile Include="Units\Abilities\IClonable.cs" />
     <Compile Include="Units\Abilities\IHealable.cs" />
     <Compile Include="Units\Abilities\IImprovable.cs" />
+    <Compile Include="Units\Improvements\UnitImprove.cs" />
+    <Compile Include="Units\Improvements\HelmetUnitImprove.cs" />
+    <Compile Include="Units\Improvements\ShieldUnitImprove.cs" />
+    <Compile Include="Units\Improvements\SpearUnitImprove.cs" />
+    <Compile Include="Units\Improvements\HorseUnitImprove.cs" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Units\" />
@@ -66,6 +71,7 @@
     <Folder Include="Units\Creators\" />
     <Folder Include="Units\Factory\" />
     <Folder Include="Units\Abilities\" />
+    <Folder Include="Units\Improvements\" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
 </Project>
