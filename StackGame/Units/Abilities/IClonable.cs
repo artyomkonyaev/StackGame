@@ -5,9 +5,13 @@
     /// </summary>
     public interface IClonable
     {
+        #region Методы
+
         /// <summary>
         /// Клонировать
         /// </summary>
         IUnit Clone();
+
+        #endregion
     }
 }

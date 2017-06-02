@@ -6,7 +6,7 @@ namespace StackGame.Units
     /// <summary>
     /// Маг
     /// </summary>
-    public class MageUnit : Unit, ISpecialAbility
+    public class MageUnit : Unit, IHealable, ISpecialAbility
     {
 		#region Свойства
 
@@ -23,6 +23,15 @@ namespace StackGame.Units
 		#endregion
 
 		#region Методы
+
+		public void Heal(int healthPower)
+		{
+			Health += healthPower;
+			if (Health > MaxHealth)
+			{
+				Health = MaxHealth;
+			}
+		}
 
 		public void DoSpecialAction(IArmy targetArmy, IUnit targetUnit)
 		{

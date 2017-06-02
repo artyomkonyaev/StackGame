@@ -5,7 +5,7 @@ namespace StackGame.Units
     /// <summary>
     /// Священник
     /// </summary>
-    public class ClericUnit : Unit, IClonable
+    public class ClericUnit : Unit, IHealable, IClonable
     {
 		#region Инициализация
 
@@ -15,6 +15,15 @@ namespace StackGame.Units
 		#endregion
 
 		#region Методы
+
+		public void Heal(int healthPower)
+		{
+			Health += healthPower;
+			if (Health > MaxHealth)
+			{
+				Health = MaxHealth;
+			}
+		}
 
 		public IUnit Clone()
 		{

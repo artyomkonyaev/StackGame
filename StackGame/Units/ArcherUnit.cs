@@ -6,7 +6,7 @@ namespace StackGame.Units
     /// <summary>
     /// Лучник
     /// </summary>
-    public class ArcherUnit : Unit, IClonable, ISpecialAbility
+    public class ArcherUnit : Unit, IHealable, IClonable, ISpecialAbility
     {
 		#region Свойства
 
@@ -23,6 +23,15 @@ namespace StackGame.Units
 		#endregion
 
 		#region Методы
+
+        public void Heal(int healthPower) 
+        {
+            Health += healthPower;
+            if (Health > MaxHealth)
+            {
+                Health = MaxHealth;
+            }
+        }
 
         public IUnit Clone()
         {
