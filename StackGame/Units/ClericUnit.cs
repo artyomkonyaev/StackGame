@@ -1,12 +1,20 @@
-﻿using StackGame.Units.Abilities;
+﻿using StackGame.Army;
+using StackGame.Units.Abilities;
 
 namespace StackGame.Units
 {
     /// <summary>
     /// Священник
     /// </summary>
-    public class ClericUnit : Unit, IHealable, IClonable
+    public class ClericUnit : Unit, IHealable, IClonable, ISpecialAbility
     {
+		#region Свойства
+
+		public int Range { get; } = 3;
+		public int Power { get; } = 10;
+
+		#endregion
+
 		#region Инициализация
 
 		public ClericUnit() : base(100, 5)
@@ -28,6 +36,14 @@ namespace StackGame.Units
 		public IUnit Clone()
 		{
 			return (IUnit)MemberwiseClone();
+		}
+
+		public void DoSpecialAction(IArmy targetArmy, IUnit targetUnit)
+		{
+            if (targetUnit is IHealable healableUnit)
+			{
+				healableUnit.Heal(Power);
+			}
 		}
 
 		public override string ToString()
