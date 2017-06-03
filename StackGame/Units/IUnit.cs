@@ -33,7 +33,7 @@
 		/// <summary>
 		/// Получить урон
 		/// </summary>
-		void GetDamage(int damage);
+		void TakeDamage(int damage);
 
 		/// <summary>
 		/// Преобразовать в строку

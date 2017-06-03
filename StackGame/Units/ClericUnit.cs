@@ -10,8 +10,8 @@ namespace StackGame.Units
     {
 		#region Свойства
 
-		public int Range { get; } = 3;
-		public int Power { get; } = 10;
+		public int Range => 3;
+		public int Power => 10;
 
 		#endregion
 

@@ -15,34 +15,12 @@ namespace StackGame.Units.Improvements
         /// </summary>
         protected T unit;
 
-		public int Health {
-            get 
-            {
-                return unit.Health;
-            }
-        }
-		public virtual int Defence {
-            get 
-            {
-                return unit.Defence;
-            }
-        }
+		public int Health => unit.Health;
+        public virtual int Defence => unit.Defence;
 
-		public virtual int Strength
-        {
-            get
-            {
-                return unit.Strength;
-            }
-        }
+        public virtual int Strength => unit.Strength;
 
-		public bool IsAlive
-		{
-			get
-			{
-                return unit.IsAlive;
-			}
-		}
+		public bool IsAlive => unit.IsAlive;
 
 		#endregion
 
@@ -69,9 +47,9 @@ namespace StackGame.Units.Improvements
 
         public abstract IUnit Clone();
 
-		public virtual void GetDamage(int damage)
+		public virtual void TakeDamage(int damage)
 		{
-            unit.GetDamage(damage);
+            unit.TakeDamage(damage);
 		}
 
 		public override string ToString()

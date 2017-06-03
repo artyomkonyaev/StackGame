@@ -11,10 +11,10 @@ namespace StackGame.Units
     /// </summary>
     public class LightUnit : Unit, IHealable, IClonable, ISpecialAbility
     {
-		#region Свойства
+        #region Свойства
 
-		public int Range { get; } = 1;
-		public int Power { get; } = 0;
+        public int Range => 1;
+		public int Power => 0;
 
 		#endregion
 

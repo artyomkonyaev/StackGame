@@ -11,8 +11,8 @@ namespace StackGame.Units
     {
 		#region Свойства
 
-		public int Range { get; } = 3;
-		public int Power { get; } = 0;
+		public int Range => 3;
+		public int Power => 0;
 
 		#endregion
 

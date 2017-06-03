@@ -102,7 +102,7 @@ namespace StackGame.Game
         {
             if (first.IsAlive)
             {
-                second.GetDamage(first.Strength);
+                second.TakeDamage(first.Strength);
             }
         }
 

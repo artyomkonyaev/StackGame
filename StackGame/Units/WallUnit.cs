@@ -14,58 +14,28 @@ namespace StackGame.Units
         /// </summary>
         private GulyayGorod wall;
 
-		/// <summary>
-		/// Здоровье
-		/// </summary>
-        public override int Health
-        {
-            get 
-            {
-                return wall.GetCurrentHealth();
-            }
-        }
-		/// <summary>
-		/// Максимальное здоровье
-		/// </summary>
-		public override int MaxHealth
-        {
-            get
-            {
-                return wall.GetHealth();
-            }
-        }
+        /// <summary>
+        /// Здоровье
+        /// </summary>
+        public override int Health => wall.GetCurrentHealth();
+        /// <summary>
+        /// Максимальное здоровье
+        /// </summary>
+        public override int MaxHealth => wall.GetHealth();
 		/// <summary>
 		/// Защита
 		/// </summary>
-		public override int Defence
-        {
-            get
-            {
-                return wall.GetDefence();    
-            }
-        }
+		public override int Defence => wall.GetDefence();
 
 		/// <summary>
 		/// Сила
 		/// </summary>
-		public override int Strength
-        {
-            get
-            {
-                return wall.GetStrength();
-            }
-        }
+		public override int Strength => wall.GetStrength();
 
 		/// <summary>
 		/// Есть ли еще здоровье
 		/// </summary>
-		public override bool IsAlive
-		{
-			get
-			{
-                return !wall.IsDead;
-			}
-		}
+		public override bool IsAlive => !wall.IsDead;
 
 		#endregion
 
@@ -83,7 +53,7 @@ namespace StackGame.Units
 		/// <summary>
 		/// Получить урон
 		/// </summary>
-		public override void GetDamage(int damage)
+		public override void TakeDamage(int damage)
 		{
             wall.TakeDamage(damage);
 		}

@@ -8,16 +8,12 @@ namespace StackGame.Units
     /// </summary>
     public class HeavyUnit : Unit, IImprovable, IClonable
     {
-		#region Свойства
-		
-        public override int Defence { get; protected set; } = 100;
-
-		#endregion
-
 		#region Инициализация
 
 		public HeavyUnit() : base(100, 10)
-        { }
+        {
+            Defence = 100;
+        }
 
 		#endregion
 
@@ -33,19 +29,19 @@ namespace StackGame.Units
 			return (IUnit)MemberwiseClone();
 		}
 
-		public override void GetDamage(int damage)
+		public override void TakeDamage(int damage)
 		{
             if (Defence > 0)
             {
                 Defence -= damage;
                 if (Defence < 0) {
-                    base.GetDamage(Math.Abs(Defence));
+                    base.TakeDamage(Math.Abs(Defence));
                     Defence = 0;
                 }
             }
-            else 
+            else
             {
-                base.GetDamage(damage);
+                base.TakeDamage(damage);
             }
 		}
 

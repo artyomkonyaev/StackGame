@@ -15,13 +15,7 @@ namespace StackGame.Units.Improvements
         /// </summary>
         private int helmetDefence = 20;
 
-        public override int Defence
-        {
-            get 
-            {
-                return base.Defence + helmetDefence;
-            }
-        }
+        public override int Defence => base.Defence + helmetDefence;
 
 		#endregion
 
@@ -42,20 +36,20 @@ namespace StackGame.Units.Improvements
 			return improvedClonedUnit;
 		}
 
-		public override void GetDamage(int damage)
+		public override void TakeDamage(int damage)
 		{
 			if (helmetDefence > 0)
 			{
 				helmetDefence -= damage;
 				if (helmetDefence < 0)
 				{
-					base.GetDamage(Math.Abs(helmetDefence));
+					base.TakeDamage(Math.Abs(helmetDefence));
 					helmetDefence = 0;
 				}
 			}
 			else
 			{
-				base.GetDamage(damage);
+				base.TakeDamage(damage);
 			}
 		}
 

@@ -15,13 +15,7 @@ namespace StackGame.Units.Improvements
 		/// </summary>
 		private int shieldDefence = 30;
 
-		public override int Defence
-		{
-			get
-			{
-				return base.Defence + shieldDefence;
-			}
-		}
+		public override int Defence => base.Defence + shieldDefence;
 
 		#endregion
 
@@ -42,20 +36,20 @@ namespace StackGame.Units.Improvements
 			return improvedClonedUnit;
 		}
 
-		public override void GetDamage(int damage)
+		public override void TakeDamage(int damage)
 		{
 			if (shieldDefence > 0)
 			{
 				shieldDefence -= damage;
 				if (shieldDefence < 0)
 				{
-					base.GetDamage(Math.Abs(shieldDefence));
+					base.TakeDamage(Math.Abs(shieldDefence));
 					shieldDefence = 0;
 				}
 			}
 			else
 			{
-				base.GetDamage(damage);
+				base.TakeDamage(damage);
 			}
 		}
 

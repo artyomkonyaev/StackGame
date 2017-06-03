@@ -10,13 +10,7 @@ namespace StackGame.Units.Improvements
 	{
 		#region Свойства
 
-		public override int Strength
-		{
-			get
-			{
-				return base.Strength + 10;
-			}
-		}
+		public override int Strength => base.Strength + 10;
 
 		#endregion
 

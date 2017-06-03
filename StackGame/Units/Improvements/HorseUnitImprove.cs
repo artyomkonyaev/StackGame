@@ -15,21 +15,9 @@ namespace StackGame.Units.Improvements
 		/// </summary>
 		private int horseHealth = 50;
 
-		public override int Defence
-		{
-			get
-			{
-				return base.Defence + horseHealth;
-			}
-		}
+		public override int Defence => base.Defence + horseHealth;
 
-		public override int Strength
-		{
-			get
-			{
-				return base.Strength + 10;
-			}
-		}
+		public override int Strength => base.Strength + 10;
 
 		#endregion
 
@@ -50,20 +38,20 @@ namespace StackGame.Units.Improvements
 			return improvedClonedUnit;
 		}
 
-		public override void GetDamage(int damage)
+		public override void TakeDamage(int damage)
 		{
 			if (horseHealth > 0)
 			{
 				horseHealth -= damage;
 				if (horseHealth < 0)
 				{
-					base.GetDamage(Math.Abs(horseHealth));
+					base.TakeDamage(Math.Abs(horseHealth));
 					horseHealth = 0;
 				}
 			}
 			else
 			{
-				base.GetDamage(damage);
+				base.TakeDamage(damage);
 			}
 		}
 

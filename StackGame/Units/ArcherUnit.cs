@@ -10,8 +10,8 @@ namespace StackGame.Units
     {
 		#region Свойства
 
-		public int Range { get; } = 3;
-        public int Power { get; } = 15;
+		public int Range => 3;
+        public int Power => 15;
 
 		#endregion
 
@@ -40,7 +40,7 @@ namespace StackGame.Units
 
         public void DoSpecialAction(IArmy targetArmy, int unitPosition)
         {
-            targetArmy.Units[unitPosition].GetDamage(Power);
+            targetArmy.Units[unitPosition].TakeDamage(Power);
         }
 
 		public override string ToString()

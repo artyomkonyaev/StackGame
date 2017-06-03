@@ -14,13 +14,7 @@ namespace StackGame.Units.Factory
 		/// <summary>
 		/// Получить минимальную стоимость единицы армии
 		/// </summary>
-		public static int MinCost
-		{
-			get
-			{
-				return UnitTypes.Select(unitType => GetCost(unitType)).Min();
-			}
-		}
+		public static int MinCost => UnitTypes.Select(unitType => GetCost(unitType)).Min();
 
         /// <summary>
         /// Все типы единиц армии

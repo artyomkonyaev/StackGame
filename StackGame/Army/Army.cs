@@ -20,18 +20,12 @@ namespace StackGame.Army
 		/// <summary>
 		/// Все ли единицы армии мертвы
 		/// </summary>
-		public bool IsAllDead 
-        {
-            get
-            {
-                return Units.Count == 0;
-            }
-        }
+		public bool IsAllDead => Units.Count == 0;
 
         /// <summary>
         /// Название армии
         /// </summary>
-        protected string name;
+        private string name;
 
 		#endregion
 
@@ -50,7 +44,7 @@ namespace StackGame.Army
 		/// <summary>
 		/// Создать армию
 		/// </summary>
-        protected List<IUnit> CreateArmy(int money) 
+        private List<IUnit> CreateArmy(int money) 
         {
             var random = new Random();
 

@@ -28,13 +28,7 @@
 		/// <summary>
 		/// Есть ли еще здоровье
 		/// </summary>
-		public virtual bool IsAlive
-        { 
-            get 
-            {
-                return Health != 0;
-            }
-        }
+		public virtual bool IsAlive => Health != 0;
 
 		#endregion
 
@@ -54,7 +48,7 @@
 		/// <summary>
 		/// Получить урон
 		/// </summary>
-        public virtual void GetDamage(int damage) 
+        public virtual void TakeDamage(int damage) 
         {
             Health -= damage;
             if (Health < 0)
