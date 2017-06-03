@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using StackGame.Army;
 using StackGame.Units.Abilities;
 
@@ -14,6 +15,7 @@ namespace StackGame.Units
 		public int Range { get; private set; }
 		public int Power { get; private set; }
 		public int Chance { get; private set; }
+        public bool IsFriendly { get; private set; } = true;
 
 		#endregion
 
@@ -44,16 +46,34 @@ namespace StackGame.Units
 			return (IUnit)MemberwiseClone();
 		}
 
-		public void DoSpecialAction(IArmy targetArmy, int unitPosition)
-		{
+		public void DoSpecialAction(IArmy targetArmy, IEnumerable<int> targetRange, int position)
+        {
 			var random = new Random();
 			var chance = random.Next(100 / Chance) == 0;
 
-			if (chance && targetArmy.Units[unitPosition] is IHealable healableUnit)
+			if (chance)
 			{
-				healableUnit.Heal(Power);
+				var targetUnits = new List<IHealable>();
+				foreach (var index in targetRange)
+				{
+                    var unit = targetArmy.Units[index];
+                    if (unit.IsAlive && unit.IsDamaged && unit is IHealable healableUnit)
+                    {
+                        targetUnits.Add(healableUnit);
+                    }
+				}
+
+				if (targetUnits.Count == 0)
+				{
+					return;
+				}
+
+                var targetUnit = targetUnits[random.Next(targetUnits.Count)];
+                targetUnit.Heal(Power);
+
+                Console.WriteLine($"{ToString()} вылечил на {Power} {targetUnit.ToString()}");
 			}
-		}
+        }
 
 		public override string ToString()
 		{

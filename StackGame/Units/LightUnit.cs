@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using StackGame.Army;
 using StackGame.Units.Abilities;
@@ -16,6 +17,7 @@ namespace StackGame.Units
 		public int Range { get; protected set; }
         public int Power => 0;
 		public int Chance { get; protected set; }
+        public bool IsFriendly { get; private set; } = true;
 
 		#endregion
 
@@ -45,31 +47,57 @@ namespace StackGame.Units
 			return (IUnit)MemberwiseClone();
 		}
 
-		public void DoSpecialAction(IArmy targetArmy, int unitPosition)
+		public void DoSpecialAction(IArmy targetArmy, IEnumerable<int> targetRange, int position)
 		{
 			var random = new Random();
-            var chance = random.Next(100 / Chance) == 0;
+			var chance = random.Next(100 / Chance) == 0;
 
-            if (chance && targetArmy.Units[unitPosition] is IImprovable improvableUnit)
+			if (chance)
 			{
-                var unitImproveType = typeof(UnitImprove<>);
-                var types = unitImproveType.Assembly.GetTypes().Where(type => type.BaseType != null && type.BaseType.IsGenericType).Where(type => type.BaseType.GetGenericTypeDefinition() == unitImproveType.GetGenericTypeDefinition()).ToList();
-
-                do
-                {
-                    var type = types[random.Next(types.Count)];
-                    if (improvableUnit.CanImprove(type)) 
+				var targetUnits = new List<Tuple<int, IImprovable>>();
+				foreach (var index in targetRange)
+				{
+                    if (index == position)
                     {
-                        var unitImprove = type.MakeGenericType(improvableUnit.GetType());
-                        var improvementUnit = (IUnit)Activator.CreateInstance(unitImprove, improvableUnit);
-
-                        targetArmy.Units[unitPosition] = improvementUnit;
-
-                        break;
+                        continue;
                     }
 
-                    types.Remove(type);
-                } while (types.Count != 0);
+                    var unit = targetArmy.Units[index];
+                    if (unit.IsAlive && unit is IClonable && unit is IImprovable improvableUnit)
+					{
+						targetUnits.Add(new Tuple<int, IImprovable>(index, improvableUnit));
+					}
+				}
+
+				if (targetUnits.Count == 0)
+				{
+					return;
+				}
+
+				var targetRow = targetUnits[random.Next(targetUnits.Count)];
+                var targetIndex = targetRow.Item1;
+                var targetUnit = targetRow.Item2;
+
+				var unitImproveType = typeof(UnitImprove<>);
+				var types = unitImproveType.Assembly.GetTypes().Where(type => type.BaseType != null && type.BaseType.IsGenericType).Where(type => type.BaseType.GetGenericTypeDefinition() == unitImproveType.GetGenericTypeDefinition()).ToList();
+
+				do
+				{
+					var type = types[random.Next(types.Count)];
+					if (targetUnit.CanImprove(type))
+					{
+						var unitImprove = type.MakeGenericType(targetUnit.GetType());
+						var improvementUnit = (IUnit)Activator.CreateInstance(unitImprove, targetUnit);
+
+						targetArmy.Units[targetIndex] = improvementUnit;
+
+                        Console.WriteLine($"{ToString()} надел {unitImprove} на {targetUnit.ToString()}");
+
+						break;
+					}
+
+					types.Remove(type);
+				} while (types.Count != 0);
 			}
 		}
 

@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using StackGame.Army;
 using StackGame.Units.Abilities;
 
@@ -14,6 +15,7 @@ namespace StackGame.Units
 		public int Range { get; protected set; }
         public int Power => 0;
 		public int Chance { get; protected set; }
+        public bool IsFriendly { get; private set; } = true;
 
 		#endregion
 
@@ -38,16 +40,39 @@ namespace StackGame.Units
 			}
 		}
 
-		public void DoSpecialAction(IArmy targetArmy, int unitPosition)
+		public void DoSpecialAction(IArmy targetArmy, IEnumerable<int> targetRange, int position)
 		{
-            var random = new Random();
-            var chance = random.Next(100 / Chance) == 0;
+			var random = new Random();
+			var chance = random.Next(100 / Chance) == 0;
 
-            if (chance && targetArmy.Units[unitPosition] is IClonable clonableUnit)
-            {
-                var clonedUnit = clonableUnit.Clone();
-                targetArmy.Units.Add(clonedUnit);
-            }
+			if (chance)
+			{
+				var targetUnits = new List<IClonable>();
+				foreach (var index in targetRange)
+				{
+					if (index == position)
+					{
+						continue;
+					}
+
+                    var unit = targetArmy.Units[index];
+                    if (unit.IsAlive && unit is IClonable clonableUnit)
+					{
+						targetUnits.Add(clonableUnit);
+					}
+				}
+
+				if (targetUnits.Count == 0)
+				{
+					return;
+				}
+
+				var targetUnit = targetUnits[random.Next(targetUnits.Count)];
+				var clonedUnit = targetUnit.Clone();
+				targetArmy.Units.Add(clonedUnit);
+
+                Console.WriteLine($"{ToString()} клонировал {targetUnit.ToString()}");
+			}
 		}
 
 		public override string ToString()

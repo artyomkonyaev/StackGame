@@ -1,4 +1,5 @@
-﻿using StackGame.Army;
+﻿using System.Collections.Generic;
+using StackGame.Army;
 
 namespace StackGame.Units.Abilities
 {
@@ -22,6 +23,11 @@ namespace StackGame.Units.Abilities
 		/// </summary>
         int Chance { get; }
 
+        /// <summary>
+        /// Дружеская ли специальная возможность
+        /// </summary>
+        bool IsFriendly { get; }
+
 
         #endregion
 
@@ -30,7 +36,7 @@ namespace StackGame.Units.Abilities
         /// <summary>
         /// Применить специальную возможность
         /// </summary>
-        void DoSpecialAction(IArmy targetArmy, int unitPosition);
+        void DoSpecialAction(IArmy targetArmy, IEnumerable<int> targetRange, int position);
 
 		#endregion
 	}
