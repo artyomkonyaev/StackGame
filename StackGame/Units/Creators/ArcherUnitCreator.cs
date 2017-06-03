@@ -1,4 +1,6 @@
-﻿namespace StackGame.Units.Creators
+﻿using StackGame.Core.Configs;
+
+namespace StackGame.Units.Creators
 {
     /// <summary>
     /// Создатель лучника
@@ -12,7 +14,8 @@
 		/// </summary>
 		public IUnit Create()
 		{
-			return new ArcherUnit();
+            var parameters = Configs.Units[UnitType.ArcherUnit];
+            return new ArcherUnit(parameters.Health, parameters.Defence, parameters.Strength, parameters.Range, parameters.Power, parameters.Chance);
 		}
 
 		#endregion

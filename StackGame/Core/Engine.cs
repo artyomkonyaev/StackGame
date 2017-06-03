@@ -4,7 +4,7 @@ using System.Linq;
 using StackGame.Units;
 using StackGame.Army;
 
-namespace StackGame.Game
+namespace StackGame.Core
 {
 	/// <summary>
     /// Движок игры

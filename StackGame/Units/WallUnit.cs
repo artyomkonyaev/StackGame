@@ -41,9 +41,9 @@ namespace StackGame.Units
 
 		#region Инициализация
 
-		public WallUnit() : base(300, 0)
+		public WallUnit(int health, int defence, int price) : base(health, defence, 0)
         {
-            wall = new GulyayGorod(300, 0, 100);
+            wall = new GulyayGorod(health, defence, price);
         }
 
 		#endregion

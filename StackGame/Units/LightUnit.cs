@@ -11,17 +11,21 @@ namespace StackGame.Units
     /// </summary>
     public class LightUnit : Unit, IHealable, IClonable, ISpecialAbility
     {
-        #region Свойства
+		#region Свойства
 
-        public int Range => 1;
-		public int Power => 0;
+		public int Range { get; protected set; }
+        public int Power => 0;
+		public int Chance { get; protected set; }
 
 		#endregion
 
 		#region Инициализация
 
-		public LightUnit() : base(100, 15)
-        { }
+		public LightUnit(int health, int defence, int strength, int range, int chance) : base(health, defence, strength)
+		{
+			Range = range;
+			Chance = chance;
+		}
 
 		#endregion
 
@@ -44,7 +48,7 @@ namespace StackGame.Units
 		public void DoSpecialAction(IArmy targetArmy, int unitPosition)
 		{
 			var random = new Random();
-			var chance = random.Next(100 / 50) == 0;
+            var chance = random.Next(100 / Chance) == 0;
 
             if (chance && targetArmy.Units[unitPosition] is IImprovable improvableUnit)
 			{

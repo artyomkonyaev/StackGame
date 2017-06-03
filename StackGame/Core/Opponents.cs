@@ -1,6 +1,6 @@
 ﻿using StackGame.Units;
 
-namespace StackGame.Game
+namespace StackGame.Core
 {
     /// <summary>
     /// Противники

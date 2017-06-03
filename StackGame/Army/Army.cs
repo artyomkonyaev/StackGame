@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using StackGame.Core.Configs;
 using StackGame.Units;
 using StackGame.Units.Factory;
 
@@ -33,7 +34,7 @@ namespace StackGame.Army
 
 		public Army(string name)
 		{
-            Units = CreateArmy(1000);
+            Units = CreateArmy(Configs.ArmyCost);
             this.name = name;
 		}
 

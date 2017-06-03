@@ -1,4 +1,6 @@
-﻿namespace StackGame.Units
+﻿using System;
+
+namespace StackGame.Units
 {
 	/// <summary>
 	/// Единица армии
@@ -18,7 +20,7 @@
         /// <summary>
         /// Защита
         /// </summary>
-        public virtual int Defence { get; protected set; } = 0;
+        public virtual int Defence { get; protected set; }
 
 		/// <summary>
 		/// Сила
@@ -34,10 +36,11 @@
 
 		#region Инициализация
 
-		protected Unit(int health, int strength)
+		protected Unit(int health, int defence, int strength)
         {
             Health = health;
             MaxHealth = health;
+            Defence = defence;
             Strength = strength;
         }
 
@@ -50,11 +53,25 @@
 		/// </summary>
         public virtual void TakeDamage(int damage) 
         {
-            Health -= damage;
-            if (Health < 0)
-            {
-                Health = 0;
-            }
+			if (Defence > 0)
+			{
+				Defence -= damage;
+				if (Defence < 0)
+				{
+					Health -= Math.Abs(Defence);
+					Defence = 0;
+				}
+			}
+			else
+			{
+				Health -= damage;
+			}
+
+			if (Health < 0)
+			{
+				Health = 0;
+			}
+
         }
 
 		/// <summary>

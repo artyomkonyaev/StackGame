@@ -1,4 +1,6 @@
-﻿namespace StackGame.Units.Creators
+﻿using StackGame.Core.Configs;
+
+namespace StackGame.Units.Creators
 {
     /// <summary>
     /// Создатель легкого пехотинца
@@ -12,7 +14,8 @@
 		/// </summary>
         public IUnit Create()
         {
-            return new LightUnit();
+            var parameters = Configs.Units[UnitType.LightUnit];
+			return new LightUnit(parameters.Health, parameters.Defence, parameters.Strength, parameters.Range, parameters.Chance);
         }
 
 		#endregion

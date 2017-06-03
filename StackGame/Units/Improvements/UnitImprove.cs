@@ -4,7 +4,7 @@ using StackGame.Units.Abilities;
 namespace StackGame.Units.Improvements
 {
     /// <summary>
-    /// Улучшаемая единица армии
+    /// Улучшение единицы армии
     /// </summary>
     public abstract class UnitImprove<T> : IUnit, IImprovable, IClonable where T : IUnit, IImprovable, IClonable
     {

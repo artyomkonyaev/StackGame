@@ -1,4 +1,6 @@
-﻿namespace StackGame.Units.Creators
+﻿using StackGame.Core.Configs;
+
+namespace StackGame.Units.Creators
 {
     /// <summary>
     /// Создатель мага
@@ -12,7 +14,8 @@
 		/// </summary>
 		public IUnit Create()
 		{
-			return new MageUnit();
+            var parameters = Configs.Units[UnitType.MageUnit];
+			return new MageUnit(parameters.Health, parameters.Defence, parameters.Strength, parameters.Range, parameters.Chance);
 		}
 
 		#endregion

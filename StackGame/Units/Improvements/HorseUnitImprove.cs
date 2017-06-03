@@ -1,4 +1,5 @@
 ﻿using System;
+using StackGame.Core.Configs;
 using StackGame.Units.Abilities;
 
 namespace StackGame.Units.Improvements
@@ -8,23 +9,31 @@ namespace StackGame.Units.Improvements
 	/// </summary>
 	public class HorseUnitImprove<T> : UnitImprove<T> where T : IUnit, IImprovable, IClonable
 	{
-		#region Свойства
+        #region Свойства
 
-		/// <summary>
-		/// Жизнь лошади
-		/// </summary>
-		private int horseHealth = 50;
+        /// <summary>
+        /// Жизнь лошади
+        /// </summary>
+        private int horseHealth;
+        /// <summary>
+        /// Сила лошади
+        /// </summary>
+        private int horseStrength;
 
 		public override int Defence => base.Defence + horseHealth;
 
-		public override int Strength => base.Strength + 10;
+		public override int Strength => base.Strength + horseStrength;
 
 		#endregion
 
 		#region Инициализация
 
 		public HorseUnitImprove(T unit) : base(unit)
-		{ }
+		{
+            var parameters = Configs.UnitImproves[UnitImproveType.Horse];
+            horseHealth = parameters.Health;
+            horseStrength = parameters.Strength;
+        }
 
 		#endregion
 

@@ -1,4 +1,6 @@
-﻿namespace StackGame.Units.Creators
+﻿using StackGame.Core.Configs;
+
+namespace StackGame.Units.Creators
 {
     /// <summary>
     /// Создатель священника
@@ -12,7 +14,8 @@
 		/// </summary>
 		public IUnit Create()
 		{
-			return new ClericUnit();
+            var parameters = Configs.Units[UnitType.ClericUnit];
+			return new ClericUnit(parameters.Health, parameters.Defence, parameters.Strength, parameters.Range, parameters.Power, parameters.Chance);
 		}
 
 		#endregion

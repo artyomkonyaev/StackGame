@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Linq;
+using StackGame.Core.Configs;
 using StackGame.Units.Creators;
 
 namespace StackGame.Units.Factory
@@ -14,18 +15,7 @@ namespace StackGame.Units.Factory
 		/// <summary>
 		/// Получить минимальную стоимость единицы армии
 		/// </summary>
-		public static int MinCost => UnitTypes.Select(unitType => GetCost(unitType)).Min();
-
-        /// <summary>
-        /// Все типы единиц армии
-        /// </summary>
-        private static UnitType[] UnitTypes 
-        {
-            get 
-            {
-                return (UnitType[])Enum.GetValues(typeof(UnitType));
-            }
-        }
+		public static int MinCost => Configs.Units.Select(unitConfigs => unitConfigs.Value.Price).Min();
 
 		#endregion
 
@@ -36,7 +26,7 @@ namespace StackGame.Units.Factory
 		/// </summary>
 		public static UnitType[] GetUnitTypesWithCostLessThanOrEqual(int maxCost) 
         {
-            return UnitTypes.Where(unitType => GetCost(unitType) <= maxCost).ToArray();
+            return Configs.Units.Where(unitConfigs => unitConfigs.Value.Price <= maxCost).Select(unitConfigs => unitConfigs.Key).ToArray();
         }
 
         /// <summary>
@@ -53,24 +43,7 @@ namespace StackGame.Units.Factory
         /// </summary>
         public static int GetCost(UnitType unitType)
         {
-            switch (unitType) 
-            {
-                case UnitType.LightUnit:
-                    return 25;
-                case UnitType.HeavyUnit:
-                    return 50;
-                case UnitType.ArcherUnit:
-                    return 75;
-                case UnitType.ClericUnit:
-                    return 75;
-                case UnitType.MageUnit:
-                    return 100;
-                case UnitType.WallUnit:
-                    return 100;
-
-                default:
-                    return int.MaxValue;
-            }
+            return Configs.Units[unitType].Price;
         }
 
         /// <summary>

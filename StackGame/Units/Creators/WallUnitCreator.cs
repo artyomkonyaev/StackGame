@@ -1,4 +1,6 @@
-﻿namespace StackGame.Units.Creators
+﻿using StackGame.Core.Configs;
+
+namespace StackGame.Units.Creators
 {
     /// <summary>
     /// Создатель стены
@@ -12,7 +14,8 @@
 		/// </summary>
 		public IUnit Create()
 		{
-			return new WallUnit();
+            var parameters = Configs.Units[UnitType.WallUnit];
+            return new WallUnit(parameters.Health, parameters.Defence, parameters.Price);
 		}
 
 		#endregion

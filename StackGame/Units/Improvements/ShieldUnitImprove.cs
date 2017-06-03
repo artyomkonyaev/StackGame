@@ -1,4 +1,5 @@
 ﻿using System;
+using StackGame.Core.Configs;
 using StackGame.Units.Abilities;
 
 namespace StackGame.Units.Improvements
@@ -8,12 +9,12 @@ namespace StackGame.Units.Improvements
 	/// </summary>
 	public class ShieldUnitImprove<T> : UnitImprove<T> where T : IUnit, IImprovable, IClonable
 	{
-		#region Свойства
+        #region Свойства
 
-		/// <summary>
-		/// Защита щита
-		/// </summary>
-		private int shieldDefence = 30;
+        /// <summary>
+        /// Защита щита
+        /// </summary>
+        private int shieldDefence;
 
 		public override int Defence => base.Defence + shieldDefence;
 
@@ -22,7 +23,10 @@ namespace StackGame.Units.Improvements
 		#region Инициализация
 
 		public ShieldUnitImprove(T unit) : base(unit)
-		{ }
+		{
+            var parameters = Configs.UnitImproves[UnitImproveType.Shield];
+			shieldDefence = parameters.Defence;
+        }
 
 		#endregion
 

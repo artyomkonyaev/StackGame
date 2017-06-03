@@ -1,4 +1,4 @@
-﻿using System;
+﻿using StackGame.Core.Configs;
 using StackGame.Units.Abilities;
 
 namespace StackGame.Units.Improvements
@@ -10,14 +10,22 @@ namespace StackGame.Units.Improvements
 	{
 		#region Свойства
 
-		public override int Strength => base.Strength + 10;
+		/// <summary>
+		/// Сила копья
+		/// </summary>
+		private int horseStrength;
+
+		public override int Strength => base.Strength + horseStrength;
 
 		#endregion
 
 		#region Инициализация
 
 		public SpearUnitImprove(T unit) : base(unit)
-		{ }
+		{
+            var parameters = Configs.UnitImproves[UnitImproveType.Spear];
+            horseStrength = parameters.Strength;
+        }
 
         #endregion
 

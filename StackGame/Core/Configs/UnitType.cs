@@ -1,4 +1,4 @@
-﻿namespace StackGame.Units.Factory
+﻿﻿namespace StackGame.Core.Configs
 {
     /// <summary>
     /// Тип единицы армии

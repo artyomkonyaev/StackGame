@@ -1,4 +1,6 @@
-﻿namespace StackGame.Units.Creators
+﻿using StackGame.Core.Configs;
+
+namespace StackGame.Units.Creators
 {
 	/// <summary>
 	/// Создатель тяжелого пехотинца
@@ -12,7 +14,8 @@
 		/// </summary>
 		public IUnit Create()
 		{
-			return new HeavyUnit();
+            var parameters = Configs.Units[UnitType.HeavyUnit];
+			return new HeavyUnit(parameters.Health, parameters.Defence, parameters.Strength);
 		}
 
 		#endregion

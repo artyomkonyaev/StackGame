@@ -1,4 +1,5 @@
-﻿using StackGame.Army;
+﻿using System;
+using StackGame.Army;
 using StackGame.Units.Abilities;
 
 namespace StackGame.Units
@@ -10,15 +11,20 @@ namespace StackGame.Units
     {
 		#region Свойства
 
-		public int Range => 3;
-		public int Power => 10;
+		public int Range { get; private set; }
+		public int Power { get; private set; }
+		public int Chance { get; private set; }
 
 		#endregion
 
 		#region Инициализация
 
-		public ClericUnit() : base(100, 5)
-        { }
+		public ClericUnit(int health, int defence, int strength, int range, int power, int chance) : base(health, defence, strength)
+		{
+			Range = range;
+			Power = power;
+			Chance = chance;
+		}
 
 		#endregion
 
@@ -40,7 +46,10 @@ namespace StackGame.Units
 
 		public void DoSpecialAction(IArmy targetArmy, int unitPosition)
 		{
-            if (targetArmy.Units[unitPosition] is IHealable healableUnit)
+			var random = new Random();
+			var chance = random.Next(100 / Chance) == 0;
+
+			if (chance && targetArmy.Units[unitPosition] is IHealable healableUnit)
 			{
 				healableUnit.Heal(Power);
 			}

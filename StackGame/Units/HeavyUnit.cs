@@ -10,10 +10,8 @@ namespace StackGame.Units
     {
 		#region Инициализация
 
-		public HeavyUnit() : base(100, 10)
-        {
-            Defence = 100;
-        }
+		public HeavyUnit(int health, int defence, int strength) : base(health, defence, strength)
+        { }
 
 		#endregion
 
@@ -27,22 +25,6 @@ namespace StackGame.Units
 		public IUnit Clone()
 		{
 			return (IUnit)MemberwiseClone();
-		}
-
-		public override void TakeDamage(int damage)
-		{
-            if (Defence > 0)
-            {
-                Defence -= damage;
-                if (Defence < 0) {
-                    base.TakeDamage(Math.Abs(Defence));
-                    Defence = 0;
-                }
-            }
-            else
-            {
-                base.TakeDamage(damage);
-            }
 		}
 
 		public override string ToString()

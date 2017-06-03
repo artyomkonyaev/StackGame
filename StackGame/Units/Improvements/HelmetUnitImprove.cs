@@ -1,4 +1,5 @@
 ﻿using System;
+using StackGame.Core.Configs;
 using StackGame.Units.Abilities;
 
 namespace StackGame.Units.Improvements
@@ -13,7 +14,7 @@ namespace StackGame.Units.Improvements
         /// <summary>
         /// Защита шлема
         /// </summary>
-        private int helmetDefence = 20;
+        private int helmetDefence;
 
         public override int Defence => base.Defence + helmetDefence;
 
@@ -22,7 +23,10 @@ namespace StackGame.Units.Improvements
 		#region Инициализация
 
 		public HelmetUnitImprove(T unit) : base(unit)
-        { }
+        {
+            var parameters = Configs.UnitImproves[UnitImproveType.Helmet];
+            helmetDefence = parameters.Defence;
+        }
 
 		#endregion
 
