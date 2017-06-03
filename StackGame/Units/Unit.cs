@@ -10,11 +10,11 @@
 		/// <summary>
 		/// Здоровье
 		/// </summary>
-        public int Health { get; protected set; }
+        public virtual int Health { get; protected set; }
         /// <summary>
         /// Максимальное здоровье
         /// </summary>
-        public int MaxHealth { get; }
+        public virtual int MaxHealth { get; }
         /// <summary>
         /// Защита
         /// </summary>
@@ -23,12 +23,12 @@
 		/// <summary>
 		/// Сила
 		/// </summary>
-		public int Strength { get; }
+		public virtual int Strength { get; }
 
 		/// <summary>
 		/// Есть ли еще здоровье
 		/// </summary>
-		public bool IsAlive
+		public virtual bool IsAlive
         { 
             get 
             {
