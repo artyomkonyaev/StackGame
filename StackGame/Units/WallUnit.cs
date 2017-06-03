@@ -12,7 +12,7 @@ namespace StackGame.Units
         /// <summary>
         /// Гуляй-город
         /// </summary>
-        private GulyayGorod wall;
+        private readonly GulyayGorod wall;
 
         /// <summary>
         /// Здоровье
