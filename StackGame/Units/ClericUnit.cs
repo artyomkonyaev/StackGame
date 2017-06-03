@@ -56,6 +56,11 @@ namespace StackGame.Units
 				var targetUnits = new List<IHealable>();
 				foreach (var index in targetRange)
 				{
+					if (index == position)
+					{
+						continue;
+					}
+
                     var unit = targetArmy.Units[index];
                     if (unit.IsAlive && unit.IsDamaged && unit is IHealable healableUnit)
                     {
