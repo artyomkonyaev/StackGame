@@ -31,6 +31,10 @@ namespace StackGame.Units
 		/// Есть ли еще здоровье
 		/// </summary>
 		public virtual bool IsAlive => Health != 0;
+		/// <summary>
+		/// Поврежден ли
+		/// </summary>
+        public bool IsDamaged => Health < MaxHealth;
 
 		#endregion
 

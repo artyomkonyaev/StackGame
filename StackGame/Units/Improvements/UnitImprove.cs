@@ -21,6 +21,7 @@ namespace StackGame.Units.Improvements
         public virtual int Strength => unit.Strength;
 
 		public bool IsAlive => unit.IsAlive;
+        public virtual bool IsDamaged => unit.IsDamaged;
 
 		#endregion
 

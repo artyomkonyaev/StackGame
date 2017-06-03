@@ -25,6 +25,10 @@
         /// Есть ли еще здоровье
         /// </summary>
         bool IsAlive { get; }
+        /// <summary>
+        /// Поврежден ли
+        /// </summary>
+        bool IsDamaged { get; }
 
 		#endregion
 
