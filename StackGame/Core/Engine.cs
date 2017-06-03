@@ -1,8 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using StackGame.Units;
 using StackGame.Army;
+using StackGame.Units;
+using StackGame.Units.Abilities;
 
 namespace StackGame.Core
 {
@@ -84,10 +85,53 @@ namespace StackGame.Core
                 Hit(opponents.FirstArmyUnit, opponents.SecondArmyUnit);
             }
 
+            var tmpCount = firstArmy.Units.Count;
+            for (int i = 0; i < tmpCount; i++)
+            {
+                var unit = firstArmy.Units[i];
+				if (unit.IsAlive && unit is ISpecialAbility specialUnit)
+				{
+                    var isFirst = i == 0;
+                    if (isFirst)
+                    {
+                        continue;
+                    }
+
+                    var targetArmy = specialUnit.IsFriendly ? firstArmy : secondArmy;
+                    var radius = specialUnit.Range;
+
+                    var startIndex = i - radius;
+                    if (startIndex < 0)
+                    {
+                        startIndex = 0;
+                    }
+
+                    var endIndex = i + radius;
+                    if (endIndex >= targetArmy.Units.Count)
+                    {
+                        endIndex = targetArmy.Units.Count - 1;
+                    }
+
+                    var count = endIndex - startIndex + 1;
+
+                    if (count == 0)
+                    {
+                        continue;
+                    }
+
+                    Console.WriteLine($"unit {unit.ToString()} стартовый индекс {startIndex} количество {count}");
+
+                    var range = Enumerable.Range(startIndex, count);
+
+                    specialUnit.DoSpecialAction(targetArmy, range, i);
+				}
+            }
+
             // Удаление убитых
             RemoveDeadUnits(firstArmy);
             RemoveDeadUnits(secondArmy);
 
+            Console.WriteLine();
 			Console.WriteLine("Состояние \"после\":");
 			Console.WriteLine(firstArmy.ToString());
 			Console.WriteLine(secondArmy.ToString());
