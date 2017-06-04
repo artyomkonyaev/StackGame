@@ -112,6 +112,11 @@ namespace StackGame.Core.Engine
 			{
 				enemyUnit.TakeDamage(unit.Strength);
                 Console.WriteLine($"\ud83d\udde1 #{unit.ToString()}# нанес {unit.Strength} урона #{enemyUnit}#");
+
+				if (enemyUnit.Health == 0)
+				{
+					Console.WriteLine($"☠️ #{enemyUnit.ToString()} умер#");
+				}
 			}
 		}
 

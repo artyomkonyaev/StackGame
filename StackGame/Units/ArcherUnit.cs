@@ -72,6 +72,11 @@ namespace StackGame.Units
                 targetUnit.TakeDamage(Power);
 
                 Console.WriteLine($"\ud83d\udd2b #{ToString()}# нанес {Power} урона #{targetUnit.ToString()}#");
+                 
+				if (targetUnit.Health == 0)
+				{
+					Console.WriteLine($"☠️ #{targetUnit.ToString()} умер#");
+				}
 			}
 		}
 
