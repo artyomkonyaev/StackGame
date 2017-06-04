@@ -40,7 +40,7 @@ namespace StackGame.Core.Engine
 
         private Engine()
         {
-            Strategy = new StrategyAllVsAll();
+            Strategy = new Strategy1Vs1();
             firstArmy = new Army.Army("Белая");
             secondArmy = new Army.Army("Черная");
         }
