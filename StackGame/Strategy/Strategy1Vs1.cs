@@ -16,32 +16,22 @@ namespace StackGame.Strategy
 
 		public override List<MeleeOpponents> GetOpponentsQueue(IArmy firstArmy, IArmy secondArmy)
 		{
-            var firstArmyUnitsCount = firstArmy.Units.Count;
-            var secondArmyUnitsCount = secondArmy.Units.Count;
-            var minCount = Math.Min(firstArmyUnitsCount, secondArmyUnitsCount);
+			var opponents = new MeleeOpponents(firstArmy.Units[0], secondArmy.Units[0]);
+			var queue = new List<MeleeOpponents>
+			{
+				opponents,
+				opponents.Reverse()
+			};
 
-            var random = new Random();
-
-            var queue = new List<MeleeOpponents>();
-            for (int i = 0; i < minCount; i++)
-            {
-				var opponents = new MeleeOpponents(firstArmy.Units[i], secondArmy.Units[i]);
-				var _queue = new List<MeleeOpponents>
-				{
-					opponents,
-					opponents.Reverse()
-				};
-
-				queue = queue.Concat(_queue.Randomize()).ToList();
-            }
+			queue = queue.Randomize().ToList();
 
 			return queue;
 		}
 
 		public override IEnumerable<int> GetUnitsRangeForSpecialAbility(IArmy army, IArmy enemyArmy, ISpecialAbility unit, int unitPosition)
 		{
-            var isFirst = unitPosition < enemyArmy.Units.Count;
-            if (isFirst)
+			var isFirst = unitPosition == 0;
+			if (isFirst)
 			{
 				return null;
 			}
@@ -56,7 +46,7 @@ namespace StackGame.Strategy
 			}
 			else
 			{
-                if (unitPosition - radius >= targetArmy.Units.Count)
+				if (unitPosition - radius >= 0)
 				{
 					return null;
 				}
@@ -97,8 +87,8 @@ namespace StackGame.Strategy
 
 		protected override Tuple<int, int> GetBoundsInEmemyArmy(IArmy army, int unitPosition, int unitRange)
 		{
-			var startIndex = unitPosition - unitRange;
-			var endIndex = Math.Abs(unitRange - unitPosition) + 1 + unitRange;
+			var startIndex = 0;
+			var endIndex = Math.Abs(unitPosition - unitRange) - 1;
 
 			if (endIndex >= army.Units.Count)
 			{

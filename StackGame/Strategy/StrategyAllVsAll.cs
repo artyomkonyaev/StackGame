@@ -14,41 +14,51 @@ namespace StackGame.Strategy
     {
 		#region Методы
 
-        public override List<MeleeOpponents> GetOpponentsQueue(IArmy firstArmy, IArmy secondArmy)
-        {
-			var opponents = new MeleeOpponents(firstArmy.Units[0], secondArmy.Units[0]);
-			var queue = new List<MeleeOpponents>
+		public override List<MeleeOpponents> GetOpponentsQueue(IArmy firstArmy, IArmy secondArmy)
+		{
+			var firstArmyUnitsCount = firstArmy.Units.Count;
+			var secondArmyUnitsCount = secondArmy.Units.Count;
+			var minCount = Math.Min(firstArmyUnitsCount, secondArmyUnitsCount);
+
+			var random = new Random();
+
+			var queue = new List<MeleeOpponents>();
+			for (int i = 0; i < minCount; i++)
 			{
-				opponents,
-				opponents.Reverse()
-			};
+				var opponents = new MeleeOpponents(firstArmy.Units[i], secondArmy.Units[i]);
+				var _queue = new List<MeleeOpponents>
+				{
+					opponents,
+					opponents.Reverse()
+				};
 
-            queue = queue.Randomize().ToList();
-
-            return queue;
-        }
-
-		public override IEnumerable<int> GetUnitsRangeForSpecialAbility(IArmy army, IArmy enemyArmy, ISpecialAbility unit, int unitPosition)
-        {
-			var isFirst = unitPosition == 0;
-			if (isFirst)
-			{
-                return null;
+				queue = queue.Concat(_queue.Randomize()).ToList();
 			}
 
-            var targetArmy = unit.IsFriendly ? army : enemyArmy;
+			return queue;
+		}
+
+		public override IEnumerable<int> GetUnitsRangeForSpecialAbility(IArmy army, IArmy enemyArmy, ISpecialAbility unit, int unitPosition)
+		{
+			var isFirst = unitPosition < enemyArmy.Units.Count;
+			if (isFirst)
+			{
+				return null;
+			}
+
+			var targetArmy = unit.IsFriendly ? army : enemyArmy;
 			var radius = unit.Range;
 
 			Tuple<int, int> bounds;
 			if (unit.IsFriendly)
 			{
-                bounds = GetBoundsInAllyArmy(targetArmy, unitPosition, radius);
+				bounds = GetBoundsInAllyArmy(targetArmy, unitPosition, radius);
 			}
 			else
 			{
-				if (unitPosition - radius >= 0)
+				if (unitPosition - radius >= targetArmy.Units.Count)
 				{
-                    return null;
+					return null;
 				}
 
 				bounds = GetBoundsInEmemyArmy(targetArmy, unitPosition, radius);
@@ -65,8 +75,8 @@ namespace StackGame.Strategy
 			}
 
 			var range = Enumerable.Range(startIndex, count);
-            return range;
-        }
+			return range;
+		}
 
 		protected override Tuple<int, int> GetBoundsInAllyArmy(IArmy army, int unitPosition, int unitRange)
 		{
@@ -86,17 +96,17 @@ namespace StackGame.Strategy
 		}
 
 		protected override Tuple<int, int> GetBoundsInEmemyArmy(IArmy army, int unitPosition, int unitRange)
-        {
-			var startIndex = 0;
-			var endIndex = Math.Abs(unitPosition - unitRange) - 1;
+		{
+			var startIndex = unitPosition - unitRange;
+			var endIndex = Math.Abs(unitRange - unitPosition) + 1 + unitRange;
 
 			if (endIndex >= army.Units.Count)
 			{
 				endIndex = army.Units.Count - 1;
 			}
 
-            return new Tuple<int, int>(startIndex, endIndex);
-        }
+			return new Tuple<int, int>(startIndex, endIndex);
+		}
 
 		#endregion
 	}
