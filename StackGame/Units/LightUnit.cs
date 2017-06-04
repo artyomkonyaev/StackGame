@@ -91,7 +91,7 @@ namespace StackGame.Units
 
 						targetArmy.Units[targetIndex] = improvementUnit;
 
-                        Console.WriteLine($"{ToString()} надел {unitImprove} на {targetUnit.ToString()}");
+                        Console.WriteLine($"\ud83d\udecd #{ToString()}# надел {unitImprove.GetGenericTypeDefinition()} на #{targetUnit.ToString()}#");
 
 						break;
 					}

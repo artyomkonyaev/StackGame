@@ -76,6 +76,10 @@ namespace StackGame.Units
 				Health = 0;
 			}
 
+            if (Health == 0)
+            {
+                Console.WriteLine($"☠️ #{ToString()} умер#");
+            }
         }
 
 		/// <summary>

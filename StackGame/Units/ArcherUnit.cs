@@ -71,7 +71,7 @@ namespace StackGame.Units
                 var targetUnit = targetUnits[random.Next(targetUnits.Count)];
                 targetUnit.TakeDamage(Power);
 
-                Console.WriteLine($"{ToString()} нанес {Power} {targetUnit.ToString()}");
+                Console.WriteLine($"\ud83d\udd2b #{ToString()}# нанес {Power} урона #{targetUnit.ToString()}#");
 			}
 		}
 

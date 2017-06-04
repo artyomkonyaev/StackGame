@@ -30,7 +30,7 @@ namespace StackGame
             {
                 Console.Write("Введите команду: ");
             } while (!Int32.TryParse(Console.ReadLine(), out command));
-
+            Console.WriteLine();
             return command;
         }
 

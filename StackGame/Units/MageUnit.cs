@@ -71,7 +71,7 @@ namespace StackGame.Units
 				var clonedUnit = targetUnit.Clone();
 				targetArmy.Units.Add(clonedUnit);
 
-                Console.WriteLine($"{ToString()} клонировал {targetUnit.ToString()}");
+                Console.WriteLine($"\ud83d\udd2e #{ToString()}# клонировал #{targetUnit.ToString()}#");
 			}
 		}
 
