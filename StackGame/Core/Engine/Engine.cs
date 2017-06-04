@@ -174,11 +174,11 @@ namespace StackGame.Core.Engine
 				var specialUnit = TryGetSpecialAbilityUnit(army, tmpArmyUnitIndex);
                 if (specialUnit != null)
                 {
-                    var targetArmy = specialUnit.IsFriendly ? army : enemyArmy;
-
-					var range = Strategy.GetUnitsRangeForSpecialAbility(targetArmy, specialUnit, tmpArmyUnitIndex);
+                    var range = Strategy.GetUnitsRangeForSpecialAbility(army, enemyArmy, specialUnit, tmpArmyUnitIndex);
 					if (range != null)
 					{
+                        var targetArmy = specialUnit.IsFriendly ? army : enemyArmy;
+
 						var components = new SpecialAbilityComponents(specialUnit, targetArmy, range, tmpArmyUnitIndex);
 						return components;
 					}

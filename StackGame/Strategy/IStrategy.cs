@@ -19,7 +19,7 @@ namespace StackGame.Strategy
         /// <summary>
         /// Получить индексы единиц армии, поподаюших под воздействие специальных возможностей
         /// </summary>
-        IEnumerable<int> GetUnitsRangeForSpecialAbility(IArmy army, ISpecialAbility unit, int unitPosition);
+        IEnumerable<int> GetUnitsRangeForSpecialAbility(IArmy army, IArmy enemyArmy, ISpecialAbility unit, int unitPosition);
 
         #endregion
     }

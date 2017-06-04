@@ -28,7 +28,7 @@ namespace StackGame.Strategy
             return queue;
         }
 
-		public override IEnumerable<int> GetUnitsRangeForSpecialAbility(IArmy army, ISpecialAbility unit, int unitPosition)
+		public override IEnumerable<int> GetUnitsRangeForSpecialAbility(IArmy army, IArmy enemyArmy, ISpecialAbility unit, int unitPosition)
         {
 			var isFirst = unitPosition == 0;
 			if (isFirst)
@@ -36,12 +36,13 @@ namespace StackGame.Strategy
                 return null;
 			}
 
+            var targetArmy = unit.IsFriendly ? army : enemyArmy;
 			var radius = unit.Range;
 
 			Tuple<int, int> bounds;
 			if (unit.IsFriendly)
 			{
-                bounds = GetBoundsInAllyArmy(army, unitPosition, radius);
+                bounds = GetBoundsInAllyArmy(targetArmy, unitPosition, radius);
 			}
 			else
 			{
@@ -50,7 +51,7 @@ namespace StackGame.Strategy
                     return null;
 				}
 
-				bounds = GetBoundsInEmemyArmy(army, unitPosition, radius);
+				bounds = GetBoundsInEmemyArmy(targetArmy, unitPosition, radius);
 			}
 
 			var startIndex = bounds.Item1;

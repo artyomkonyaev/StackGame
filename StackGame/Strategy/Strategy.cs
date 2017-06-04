@@ -15,7 +15,7 @@ namespace StackGame.Strategy
 
         public abstract List<MeleeOpponents> GetOpponentsQueue(IArmy firstArmy, IArmy secondArmy);
 
-        public abstract IEnumerable<int> GetUnitsRangeForSpecialAbility(IArmy army, ISpecialAbility unit, int unitPosition);
+        public abstract IEnumerable<int> GetUnitsRangeForSpecialAbility(IArmy army, IArmy enemyArmy, ISpecialAbility unit, int unitPosition);
 
 		/// <summary>
 		/// Получить начальный и конечный индексы в армии союзников

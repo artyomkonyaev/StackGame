@@ -111,6 +111,6 @@ namespace StackGame.Core.Configs
         /// <summary>
         /// Стоимость армии
         /// </summary>
-        public static readonly int ArmyCost = 100;
+        public static readonly int ArmyCost = 300;
     }
 }
