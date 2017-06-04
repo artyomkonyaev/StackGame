@@ -13,9 +13,9 @@ namespace StackGame.Units.Improvements
 		/// <summary>
 		/// Сила копья
 		/// </summary>
-		private int horseStrength;
+		private int spearStrength;
 
-		public override int Strength => base.Strength + horseStrength;
+		public override int Strength => base.Strength + spearStrength;
 
 		#endregion
 
@@ -24,7 +24,7 @@ namespace StackGame.Units.Improvements
 		public SpearUnitImprove(T unit) : base(unit)
 		{
             var parameters = Configs.UnitImproves[UnitImproveType.Spear];
-            horseStrength = parameters.Strength;
+            spearStrength = parameters.Strength;
         }
 
         #endregion
