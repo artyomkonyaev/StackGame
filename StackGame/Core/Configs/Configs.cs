@@ -28,8 +28,8 @@ namespace StackGame.Core.Configs
 				{
 					Price = 50,
 					Health = 100,
-					Defence = 100,
-					Strength = 10
+					Defence = 50,
+					Strength = 15
 				}
 			},
 			{
@@ -53,7 +53,7 @@ namespace StackGame.Core.Configs
 					Strength = 5,
 					Range = 3,
                     Power = 10,
-                    Chance = 100
+                    Chance = 50
 				}
 			},
 			{
