@@ -100,17 +100,34 @@ namespace StackGame.Core
                     var targetArmy = specialUnit.IsFriendly ? firstArmy : secondArmy;
                     var radius = specialUnit.Range;
 
-                    var startIndex = i - radius;
-                    if (startIndex < 0)
+                    int startIndex;
+                    int endIndex;
+
+                    if (specialUnit.IsFriendly)
                     {
+						startIndex = i - radius;
+						if (startIndex < 0)
+						{
+							startIndex = 0;
+						}
+
+						endIndex = i + radius;
+                    }
+                    else
+                    {
+                        if (i - radius >= 0)
+                        {
+                            continue;
+                        }
+
                         startIndex = 0;
+                        endIndex = Math.Abs(i - radius) - 1;
                     }
 
-                    var endIndex = i + radius;
-                    if (endIndex >= targetArmy.Units.Count)
-                    {
-                        endIndex = targetArmy.Units.Count - 1;
-                    }
+					if (endIndex >= targetArmy.Units.Count)
+					{
+						endIndex = targetArmy.Units.Count - 1;
+					}
 
                     var count = endIndex - startIndex + 1;
 
