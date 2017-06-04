@@ -67,21 +67,8 @@ namespace StackGame.Strategy
             return range;
         }
 
-		protected override Tuple<int, int> GetBoundsInEmemyArmy(IArmy army, int unitPosition, int unitRange)
-        {
-			var startIndex = 0;
-			var endIndex = Math.Abs(unitPosition - unitRange) - 1;
-
-			if (endIndex >= army.Units.Count)
-			{
-				endIndex = army.Units.Count - 1;
-			}
-
-            return new Tuple<int, int>(startIndex, endIndex);
-        }
-
 		protected override Tuple<int, int> GetBoundsInAllyArmy(IArmy army, int unitPosition, int unitRange)
-        {
+		{
 			var startIndex = unitPosition - unitRange;
 			if (startIndex < 0)
 			{
@@ -89,6 +76,19 @@ namespace StackGame.Strategy
 			}
 
 			var endIndex = unitPosition + unitRange;
+			if (endIndex >= army.Units.Count)
+			{
+				endIndex = army.Units.Count - 1;
+			}
+
+			return new Tuple<int, int>(startIndex, endIndex);
+		}
+
+		protected override Tuple<int, int> GetBoundsInEmemyArmy(IArmy army, int unitPosition, int unitRange)
+        {
+			var startIndex = 0;
+			var endIndex = Math.Abs(unitPosition - unitRange) - 1;
+
 			if (endIndex >= army.Units.Count)
 			{
 				endIndex = army.Units.Count - 1;

@@ -18,7 +18,7 @@ namespace StackGame.Core.Engine
         /// <summary>
         /// Стратегия боя
         /// </summary>
-        public static IStrategy Strategy;
+        public IStrategy Strategy;
 
         /// <summary>
         /// Экземпляр класса
@@ -148,8 +148,11 @@ namespace StackGame.Core.Engine
                 {
                     continue;
                 }
+                if (_components.Count == 2)
+                {
+                    _components = _components.Randomize().ToList();
+                }
 
-                _components = _components.Randomize().ToList();
                 foreach (var components in _components)
                 {
                     Console.WriteLine($"\ud83d\udd75️ #{components.Unit.ToString()}# проверяет с {components.Range.First()} индекса {components.Range.Count()} unit");

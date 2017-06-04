@@ -13,7 +13,7 @@ namespace StackGame.Strategy
         #region Методы
 
         /// <summary>
-        /// Получить противников
+        /// Получить очередь рукопашных противников
         /// </summary>
         List<MeleeOpponents> GetOpponentsQueue(IArmy firstArmy, IArmy secondArmy);
         /// <summary>

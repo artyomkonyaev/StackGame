@@ -17,15 +17,15 @@ namespace StackGame.Strategy
 
         public abstract IEnumerable<int> GetUnitsRangeForSpecialAbility(IArmy army, ISpecialAbility unit, int unitPosition);
 
-        /// <summary>
-        /// Получить начальный и конечный индексы во вражеской армии
-        /// </summary>
-        protected abstract Tuple<int, int> GetBoundsInEmemyArmy(IArmy army, int unitPosition, int unitRange);
-
 		/// <summary>
 		/// Получить начальный и конечный индексы в армии союзников
 		/// </summary>
 		protected abstract Tuple<int, int> GetBoundsInAllyArmy(IArmy army, int unitPosition, int unitRange);
+
+        /// <summary>
+        /// Получить начальный и конечный индексы во вражеской армии
+        /// </summary>
+        protected abstract Tuple<int, int> GetBoundsInEmemyArmy(IArmy army, int unitPosition, int unitRange);
 
 		#endregion
 	}
