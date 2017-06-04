@@ -75,7 +75,7 @@ namespace StackGame.Units
                  
 				if (targetUnit.Health == 0)
 				{
-					Console.WriteLine($"☠️ #{targetUnit.ToString()} умер#");
+					Console.WriteLine($"☠️ #{targetUnit.ToString()}# умер");
 				}
 			}
 		}

@@ -115,7 +115,7 @@ namespace StackGame.Core.Engine
 
 				if (enemyUnit.Health == 0)
 				{
-					Console.WriteLine($"☠️ #{enemyUnit.ToString()} умер#");
+					Console.WriteLine($"☠️ #{enemyUnit.ToString()}# умер");
 				}
 			}
 		}
