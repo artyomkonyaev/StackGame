@@ -1,5 +1,5 @@
 ﻿using System;
-using StackGame.Core;
+using StackGame.Core.Engine;
 
 namespace StackGame
 {

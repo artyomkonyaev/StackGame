@@ -40,14 +40,12 @@
     <Compile Include="Units\Unit.cs" />
     <Compile Include="Units\LightUnit.cs" />
     <Compile Include="Units\HeavyUnit.cs" />
-    <Compile Include="Core\Engine.cs" />
     <Compile Include="Army\IArmy.cs" />
     <Compile Include="Army\Army.cs" />
     <Compile Include="Units\Creators\IUnitCreator.cs" />
     <Compile Include="Units\Creators\LightUnitCreator.cs" />
     <Compile Include="Units\Creators\HeavyUnitCreator.cs" />
     <Compile Include="Units\Factory\UnitsFactory.cs" />
-    <Compile Include="Core\Opponents.cs" />
     <Compile Include="Units\ArcherUnit.cs" />
     <Compile Include="Units\ClericUnit.cs" />
     <Compile Include="Units\MageUnit.cs" />
@@ -70,6 +68,13 @@
     <Compile Include="Core\Configs\UnitType.cs" />
     <Compile Include="Core\Configs\UnitImproveType.cs" />
     <Compile Include="Core\Configs\UnitImproveParameters.cs" />
+    <Compile Include="Strategy\IStrategy.cs" />
+    <Compile Include="Core\Engine\Engine.cs" />
+    <Compile Include="Core\Engine\MeleeOpponents.cs" />
+    <Compile Include="Core\Engine\SpecialAbilityComponents.cs" />
+    <Compile Include="Strategy\Strategy.cs" />
+    <Compile Include="Extensions.cs" />
+    <Compile Include="Strategy\StrategyAllVsAll.cs" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Units\" />
@@ -80,6 +85,8 @@
     <Folder Include="Units\Abilities\" />
     <Folder Include="Units\Improvements\" />
     <Folder Include="Core\Configs\" />
+    <Folder Include="Strategy\" />
+    <Folder Include="Core\Engine\" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
 </Project>
