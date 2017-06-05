@@ -40,7 +40,7 @@ namespace StackGame.Core.Engine
 
         private Engine()
         {
-            Strategy = new Strategy1Vs1();
+            Strategy = new StrategyNVsN(3);
             firstArmy = new Army.Army("Белая");
             secondArmy = new Army.Army("Черная");
         }
@@ -160,7 +160,7 @@ namespace StackGame.Core.Engine
 
                 foreach (var components in _components)
                 {
-                    Console.WriteLine($"\ud83d\udd75️ #{components.Unit.ToString()}# проверяет с {components.Range.First()} индекса {components.Range.Count()} unit");
+                    Console.WriteLine($"\ud83d\udd75️ #{components.Unit.ToString()}# проверяет unit с индексами {string.Join(", ", components.Range.ToArray())}");
                     components.Unit.DoSpecialAction(components.Army, components.Range, components.Position);
                 }
             }
