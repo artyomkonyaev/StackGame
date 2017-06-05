@@ -10,11 +10,11 @@ namespace StackGame.Strategy
     /// <summary>
     /// Стратегия "1 на 1"
     /// </summary>
-    public class Strategy1Vs1 : Strategy
+    public class Strategy1Vs1 : IStrategy
     {
 		#region Методы
 
-		public override List<MeleeOpponents> GetOpponentsQueue(IArmy firstArmy, IArmy secondArmy)
+		public List<MeleeOpponents> GetOpponentsQueue(IArmy firstArmy, IArmy secondArmy)
 		{
 			var opponents = new MeleeOpponents(firstArmy.Units[0], secondArmy.Units[0]);
 			var queue = new List<MeleeOpponents>
@@ -28,7 +28,7 @@ namespace StackGame.Strategy
 			return queue;
 		}
 
-		public override IEnumerable<int> GetUnitsRangeForSpecialAbility(IArmy army, IArmy enemyArmy, ISpecialAbility unit, int unitPosition)
+		public IEnumerable<int> GetUnitsRangeForSpecialAbility(IArmy army, IArmy enemyArmy, ISpecialAbility unit, int unitPosition)
 		{
 			var isFirst = unitPosition == 0;
 			if (isFirst)
@@ -68,7 +68,10 @@ namespace StackGame.Strategy
 			return range;
 		}
 
-		protected override Tuple<int, int> GetBoundsInAllyArmy(IArmy army, int unitPosition, int unitRange)
+		/// <summary>
+		/// Получить начальный и конечный индексы в армии союзников
+		/// </summary>
+		private Tuple<int, int> GetBoundsInAllyArmy(IArmy army, int unitPosition, int unitRange)
 		{
 			var startIndex = unitPosition - unitRange;
 			if (startIndex < 0)
@@ -85,7 +88,10 @@ namespace StackGame.Strategy
 			return new Tuple<int, int>(startIndex, endIndex);
 		}
 
-		protected override Tuple<int, int> GetBoundsInEmemyArmy(IArmy army, int unitPosition, int unitRange)
+		/// <summary>
+		/// Получить начальный и конечный индексы во вражеской армии
+		/// </summary>
+		private Tuple<int, int> GetBoundsInEmemyArmy(IArmy army, int unitPosition, int unitRange)
 		{
 			var startIndex = 0;
 			var endIndex = Math.Abs(unitPosition - unitRange) - 1;

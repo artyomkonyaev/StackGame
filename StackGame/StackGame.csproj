@@ -72,7 +72,6 @@
     <Compile Include="Core\Engine\Engine.cs" />
     <Compile Include="Core\Engine\MeleeOpponents.cs" />
     <Compile Include="Core\Engine\SpecialAbilityComponents.cs" />
-    <Compile Include="Strategy\Strategy.cs" />
     <Compile Include="Extensions.cs" />
     <Compile Include="Strategy\StrategyAllVsAll.cs" />
     <Compile Include="Strategy\Strategy1Vs1.cs" />

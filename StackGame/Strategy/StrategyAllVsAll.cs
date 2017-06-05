@@ -10,17 +10,15 @@ namespace StackGame.Strategy
     /// <summary>
     /// Стратегия "все со всеми"
     /// </summary>
-    public class StrategyAllVsAll : Strategy
+    public class StrategyAllVsAll : IStrategy
     {
 		#region Методы
 
-		public override List<MeleeOpponents> GetOpponentsQueue(IArmy firstArmy, IArmy secondArmy)
+		public List<MeleeOpponents> GetOpponentsQueue(IArmy firstArmy, IArmy secondArmy)
 		{
 			var firstArmyUnitsCount = firstArmy.Units.Count;
 			var secondArmyUnitsCount = secondArmy.Units.Count;
-			var minCount = Math.Min(firstArmyUnitsCount, secondArmyUnitsCount);
-
-			var random = new Random();
+            var minCount = Math.Min(firstArmyUnitsCount, secondArmyUnitsCount);
 
 			var queue = new List<MeleeOpponents>();
 			for (int i = 0; i < minCount; i++)
@@ -38,7 +36,7 @@ namespace StackGame.Strategy
 			return queue;
 		}
 
-		public override IEnumerable<int> GetUnitsRangeForSpecialAbility(IArmy army, IArmy enemyArmy, ISpecialAbility unit, int unitPosition)
+		public IEnumerable<int> GetUnitsRangeForSpecialAbility(IArmy army, IArmy enemyArmy, ISpecialAbility unit, int unitPosition)
 		{
 			var isFirst = unitPosition < enemyArmy.Units.Count;
 			if (isFirst)
@@ -78,7 +76,10 @@ namespace StackGame.Strategy
 			return range;
 		}
 
-		protected override Tuple<int, int> GetBoundsInAllyArmy(IArmy army, int unitPosition, int unitRange)
+		/// <summary>
+		/// Получить начальный и конечный индексы в армии союзников
+		/// </summary>
+		private Tuple<int, int> GetBoundsInAllyArmy(IArmy army, int unitPosition, int unitRange)
 		{
 			var startIndex = unitPosition - unitRange;
 			if (startIndex < 0)
@@ -95,7 +96,10 @@ namespace StackGame.Strategy
 			return new Tuple<int, int>(startIndex, endIndex);
 		}
 
-		protected override Tuple<int, int> GetBoundsInEmemyArmy(IArmy army, int unitPosition, int unitRange)
+		/// <summary>
+		/// Получить начальный и конечный индексы во вражеской армии
+		/// </summary>
+		private Tuple<int, int> GetBoundsInEmemyArmy(IArmy army, int unitPosition, int unitRange)
 		{
 			var startIndex = unitPosition - unitRange;
 			var endIndex = Math.Abs(unitRange - unitPosition) + 1 + unitRange;
