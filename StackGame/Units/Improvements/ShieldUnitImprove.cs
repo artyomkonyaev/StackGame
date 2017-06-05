@@ -59,7 +59,7 @@ namespace StackGame.Units.Improvements
 
 		public override string ToString()
 		{
-            return $"{ base.ToString() } |щит { shieldDefence }|";
+            return $"{ base.ToString() } |щит - защита { shieldDefence }|";
 		}
 
 		#endregion

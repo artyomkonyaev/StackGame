@@ -66,7 +66,7 @@ namespace StackGame.Units.Improvements
 
 		public override string ToString()
 		{
-			return $"{ base.ToString() } |лошадь { horseHealth }|";
+            return $"{ base.ToString() } |лошадь - здоровье { horseHealth }, атака { horseStrength }|";
 		}
 
 		#endregion

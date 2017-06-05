@@ -76,7 +76,7 @@ namespace StackGame.Units
                 var targetUnit = targetUnits[random.Next(targetUnits.Count)];
                 targetUnit.Heal(Power);
 
-                Console.WriteLine($"✅ #{ToString()}# вылечил на {Power} здоровья #{targetUnit.ToString()}#");
+                Console.WriteLine($"\ud83d\udc8a #{ ToString() }# вылечил на { Power } здоровья #{ targetUnit.ToString() }#");
 			}
         }
 

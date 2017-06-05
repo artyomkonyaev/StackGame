@@ -111,11 +111,11 @@ namespace StackGame.Core.Engine
 			if (unit.IsAlive && unit.Strength > 0 && enemyUnit.IsAlive)
 			{
 				enemyUnit.TakeDamage(unit.Strength);
-                Console.WriteLine($"\ud83d\udde1 #{unit.ToString()}# нанес {unit.Strength} урона #{enemyUnit}#");
+                Console.WriteLine($"\ud83d\udde1 #{ unit.ToString() }# нанес { unit.Strength } урона #{ enemyUnit }#");
 
 				if (enemyUnit.Health == 0)
 				{
-					Console.WriteLine($"☠️ #{enemyUnit.ToString()}# умер");
+					Console.WriteLine($"☠️ #{ enemyUnit.ToString() }# умер");
 				}
 			}
 		}
@@ -153,14 +153,14 @@ namespace StackGame.Core.Engine
                 {
                     continue;
                 }
-                if (_components.Count == 2)
+                if (_components.Count > 1)
                 {
                     _components = _components.Randomize().ToList();
                 }
 
                 foreach (var components in _components)
                 {
-                    Console.WriteLine($"\ud83d\udd75️ #{components.Unit.ToString()}# проверяет unit с индексами {string.Join(", ", components.Range.ToArray())}");
+                    Console.WriteLine($"\ud83d\udd75️ #{ components.Unit.ToString() }# проверяет unit с индексами { string.Join(", ", components.Range.ToArray()) }");
                     components.Unit.DoSpecialAction(components.Army, components.Range, components.Position);
                 }
             }

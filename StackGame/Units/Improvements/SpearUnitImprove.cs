@@ -41,7 +41,7 @@ namespace StackGame.Units.Improvements
 
 		public override string ToString()
 		{
-			return $"{ base.ToString() } |копье|";
+            return $"{ base.ToString() } |копье - атака { spearStrength }|";
 		}
 
 		#endregion
