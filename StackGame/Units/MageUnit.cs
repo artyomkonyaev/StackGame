@@ -1,5 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
+using StackGame.Core.Engine;
+using StackGame.Commands;
 using StackGame.Army;
 using StackGame.Units.Abilities;
 
@@ -31,15 +33,6 @@ namespace StackGame.Units
 
 		#region Методы
 
-		public void Heal(int healthPower)
-		{
-			Health += healthPower;
-			if (Health > MaxHealth)
-			{
-				Health = MaxHealth;
-			}
-		}
-
 		public void DoSpecialAction(IArmy targetArmy, IEnumerable<int> targetRange, int position)
 		{
 			var random = new Random();
@@ -68,10 +61,9 @@ namespace StackGame.Units
 				}
 
 				var targetUnit = targetUnits[random.Next(targetUnits.Count)];
-				var clonedUnit = targetUnit.Clone();
-				targetArmy.Units.Add(clonedUnit);
 
-                Console.WriteLine($"\ud83d\udd2e #{ ToString() }# клонировал #{ targetUnit.ToString() }#");
+				var command = new CloneCommand(this, targetUnit, targetArmy);
+				Engine.GetInstance().CommandManager.Execute(command);
 			}
 		}
 

@@ -10,11 +10,15 @@
 		/// <summary>
 		/// Здоровье
 		/// </summary>
-		int Health { get; }
+        int Health { get; set; }
+		/// <summary>
+		/// Максимальное здоровье
+		/// </summary>
+		int MaxHealth { get; }
 		/// <summary>
 		/// Защита
 		/// </summary>
-		int Defence { get; }
+        int Defence { get; }
 
 		/// <summary>
 		/// Сила
@@ -33,11 +37,6 @@
 		#endregion
 
 		#region Методы
-
-		/// <summary>
-		/// Получить урон
-		/// </summary>
-		void TakeDamage(int damage);
 
 		/// <summary>
 		/// Преобразовать в строку

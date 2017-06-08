@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace StackGame.Units
+﻿namespace StackGame.Units
 {
 	/// <summary>
 	/// Единица армии
@@ -12,7 +10,7 @@ namespace StackGame.Units
 		/// <summary>
 		/// Здоровье
 		/// </summary>
-        public virtual int Health { get; protected set; }
+        public virtual int Health { get; set; }
         /// <summary>
         /// Максимальное здоровье
         /// </summary>
@@ -20,7 +18,7 @@ namespace StackGame.Units
         /// <summary>
         /// Защита
         /// </summary>
-        public virtual int Defence { get; protected set; }
+        public virtual int Defence { get; }
 
 		/// <summary>
 		/// Сила
@@ -40,6 +38,11 @@ namespace StackGame.Units
 
 		#region Инициализация
 
+        protected Unit(int defence)
+        {
+            Defence = defence;
+        }
+
 		protected Unit(int health, int defence, int strength)
         {
             Health = health;
@@ -51,31 +54,6 @@ namespace StackGame.Units
 		#endregion
 
 		#region Методы
-
-		/// <summary>
-		/// Получить урон
-		/// </summary>
-        public virtual void TakeDamage(int damage) 
-        {
-			if (Defence > 0)
-			{
-				Defence -= damage;
-				if (Defence < 0)
-				{
-					Health -= Math.Abs(Defence);
-					Defence = 0;
-				}
-			}
-			else
-			{
-				Health -= damage;
-			}
-
-			if (Health < 0)
-			{
-				Health = 0;
-			}
-        }
 
 		/// <summary>
 		/// Преобразовать в строку

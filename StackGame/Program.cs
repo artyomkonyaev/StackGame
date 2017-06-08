@@ -36,7 +36,7 @@ namespace StackGame
 
         public static void Main(string[] args)
         {
-            int command = 0;
+			int command = 0;
             do
             {
                 PrintMenu();

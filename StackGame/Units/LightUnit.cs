@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using StackGame.Core.Engine;
+using StackGame.Commands;
 using StackGame.Army;
 using StackGame.Units.Abilities;
 using StackGame.Units.Improvements;
@@ -32,15 +34,6 @@ namespace StackGame.Units
 		#endregion
 
 		#region Методы
-
-		public void Heal(int healthPower)
-		{
-			Health += healthPower;
-			if (Health > MaxHealth)
-			{
-				Health = MaxHealth;
-			}
-		}
 
 		public IUnit Clone()
 		{
@@ -79,7 +72,7 @@ namespace StackGame.Units
                 var targetUnit = targetRow.Item2;
 
 				var unitImproveType = typeof(UnitImprove<>);
-				var types = unitImproveType.Assembly.GetTypes().Where(type => type.BaseType != null && type.BaseType.IsGenericType).Where(type => type.BaseType.GetGenericTypeDefinition() == unitImproveType.GetGenericTypeDefinition()).ToList();
+				var types = unitImproveType.Assembly.GetTypes().Where(type => type.BaseType != null && type.BaseType.IsGenericType).Where(type => type.BaseType.GetGenericTypeDefinition() == unitImproveType).ToList();
 
 				do
 				{
@@ -87,11 +80,9 @@ namespace StackGame.Units
 					if (targetUnit.CanImprove(type))
 					{
 						var unitImprove = type.MakeGenericType(targetUnit.GetType());
-						var improvementUnit = (IUnit)Activator.CreateInstance(unitImprove, targetUnit);
 
-						targetArmy.Units[targetIndex] = improvementUnit;
-
-                        Console.WriteLine($"\ud83d\udecd #{ ToString() }# надел { unitImprove.GetGenericTypeDefinition() } на #{ targetUnit.ToString() }#");
+                        var command = new ImproveCommand(this, (IUnit)targetUnit, targetArmy, targetIndex, unitImprove);
+						Engine.GetInstance().CommandManager.Execute(command);
 
 						break;
 					}

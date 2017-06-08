@@ -13,7 +13,7 @@ namespace StackGame.Units.Improvements
 		/// <summary>
 		/// Сила копья
 		/// </summary>
-		private int spearStrength;
+		private readonly int spearStrength;
 
 		public override int Strength => base.Strength + spearStrength;
 
@@ -33,7 +33,7 @@ namespace StackGame.Units.Improvements
 
         public override IUnit Clone()
         {
-            var clonedUnit = (T)unit.Clone();
+            var clonedUnit = (T)Unit.Clone();
             var improvedClonedUnit = new SpearUnitImprove<T>(clonedUnit);
 
             return improvedClonedUnit;

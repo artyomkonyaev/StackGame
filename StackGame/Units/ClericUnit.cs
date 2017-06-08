@@ -1,5 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
+using StackGame.Core.Engine;
+using StackGame.Commands;
 using StackGame.Army;
 using StackGame.Units.Abilities;
 
@@ -31,15 +33,6 @@ namespace StackGame.Units
 		#endregion
 
 		#region Методы
-
-		public void Heal(int healthPower)
-		{
-			Health += healthPower;
-			if (Health > MaxHealth)
-			{
-				Health = MaxHealth;
-			}
-		}
 
 		public IUnit Clone()
 		{
@@ -74,9 +67,9 @@ namespace StackGame.Units
 				}
 
                 var targetUnit = targetUnits[random.Next(targetUnits.Count)];
-                targetUnit.Heal(Power);
 
-                Console.WriteLine($"\ud83d\udc8a #{ ToString() }# вылечил на { Power } здоровья #{ targetUnit.ToString() }#");
+                var command = new HealCommand(this, (IUnit)targetUnit, Power);
+				Engine.GetInstance().CommandManager.Execute(command);
 			}
         }
 

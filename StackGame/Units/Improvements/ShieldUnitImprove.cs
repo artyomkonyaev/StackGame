@@ -1,5 +1,4 @@
-﻿using System;
-using StackGame.Core.Configs;
+﻿using StackGame.Core.Configs;
 using StackGame.Units.Abilities;
 
 namespace StackGame.Units.Improvements
@@ -14,7 +13,7 @@ namespace StackGame.Units.Improvements
         /// <summary>
         /// Защита щита
         /// </summary>
-        private int shieldDefence;
+        private readonly int shieldDefence;
 
 		public override int Defence => base.Defence + shieldDefence;
 
@@ -34,27 +33,10 @@ namespace StackGame.Units.Improvements
 
 		public override IUnit Clone()
 		{
-			var clonedUnit = (T)unit.Clone();
+			var clonedUnit = (T)Unit.Clone();
 			var improvedClonedUnit = new ShieldUnitImprove<T>(clonedUnit);
 
 			return improvedClonedUnit;
-		}
-
-		public override void TakeDamage(int damage)
-		{
-			if (shieldDefence > 0)
-			{
-				shieldDefence -= damage;
-				if (shieldDefence < 0)
-				{
-					base.TakeDamage(Math.Abs(shieldDefence));
-					shieldDefence = 0;
-				}
-			}
-			else
-			{
-				base.TakeDamage(damage);
-			}
 		}
 
 		public override string ToString()

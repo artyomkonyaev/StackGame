@@ -13,15 +13,20 @@ namespace StackGame.Units.Improvements
         /// <summary>
         /// Улучшаемая единица армии
         /// </summary>
-        protected T unit;
+        public T Unit { get; protected set; }
 
-		public int Health => unit.Health;
-        public virtual int Defence => unit.Defence;
+		public int Health
+        {
+            get => Unit.Health;
+            set => Unit.Health = value;
+        }
+        public int MaxHealth => Unit.MaxHealth;
+        public virtual int Defence => Unit.Defence;
 
-        public virtual int Strength => unit.Strength;
+        public virtual int Strength => Unit.Strength;
 
-		public bool IsAlive => unit.IsAlive;
-        public virtual bool IsDamaged => unit.IsDamaged;
+		public bool IsAlive => Unit.IsAlive;
+        public bool IsDamaged => Unit.IsDamaged;
 
 		#endregion
 
@@ -29,7 +34,7 @@ namespace StackGame.Units.Improvements
 
         protected UnitImprove(T unit)
 		{
-            this.unit = unit;
+            Unit = unit;
 		}
 
         #endregion
@@ -43,19 +48,14 @@ namespace StackGame.Units.Improvements
                 return false;
             }
 
-            return unit.CanImprove(type);
+            return Unit.CanImprove(type);
         }
 
         public abstract IUnit Clone();
 
-		public virtual void TakeDamage(int damage)
-		{
-            unit.TakeDamage(damage);
-		}
-
 		public override string ToString()
 		{
-            return unit.ToString();
+            return Unit.ToString();
 		}
 
 		#endregion

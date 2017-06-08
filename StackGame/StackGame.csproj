@@ -76,6 +76,14 @@
     <Compile Include="Strategy\StrategyAllVsAll.cs" />
     <Compile Include="Strategy\Strategy1Vs1.cs" />
     <Compile Include="Strategy\StrategyNVsN.cs" />
+    <Compile Include="Commands\CommandManager.cs" />
+    <Compile Include="Commands\ICommand.cs" />
+    <Compile Include="Commands\EmptyCommand.cs" />
+    <Compile Include="Commands\HitCommand.cs" />
+    <Compile Include="Commands\HealCommand.cs" />
+    <Compile Include="Commands\ImproveCommand.cs" />
+    <Compile Include="Commands\CloneCommand.cs" />
+    <Compile Include="Commands\CollectDeadCommand.cs" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Units\" />
@@ -88,6 +96,7 @@
     <Folder Include="Core\Configs\" />
     <Folder Include="Strategy\" />
     <Folder Include="Core\Engine\" />
+    <Folder Include="Commands\" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
 </Project>

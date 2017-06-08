@@ -1,6 +1,7 @@
 ﻿﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using StackGame.Commands;
 using StackGame.Strategy;
 using StackGame.Army;
 using StackGame.Units;
@@ -18,7 +19,12 @@ namespace StackGame.Core.Engine
         /// <summary>
         /// Стратегия боя
         /// </summary>
-        public IStrategy Strategy;
+        public IStrategy Strategy = new Strategy1Vs1();
+
+        /// <summary>
+        /// Менеджер команд
+        /// </summary>
+        public readonly CommandManager CommandManager = new CommandManager();
 
         /// <summary>
         /// Экземпляр класса
@@ -28,22 +34,18 @@ namespace StackGame.Core.Engine
         /// <summary>
         /// Первая армия
         /// </summary>
-        private IArmy firstArmy { get; set; }
+        private readonly IArmy firstArmy = new Army.Army("Белая");
         /// <summary>
         /// Вторая армия
         /// </summary>
-        private IArmy secondArmy { get; set; }
+        private readonly IArmy secondArmy = new Army.Army("Черная");
 
         #endregion
 
         #region Инициализация
 
         private Engine()
-        {
-            Strategy = new StrategyNVsN(3);
-            firstArmy = new Army.Army("Белая");
-            secondArmy = new Army.Army("Черная");
-        }
+        { }
 
         #endregion
 
@@ -72,21 +74,20 @@ namespace StackGame.Core.Engine
             }
 
             Console.WriteLine("Состояние \"до\":");
-            Console.WriteLine(firstArmy.ToString());
-            Console.WriteLine(secondArmy.ToString());
+            Console.WriteLine(firstArmy);
+            Console.WriteLine(secondArmy);
 
             MeleeAttack();
             Console.WriteLine();
             SpecialAbilityAttack();
             Console.WriteLine();
-
-            // Удаление убитых
-            RemoveDeadUnits(firstArmy);
-            RemoveDeadUnits(secondArmy);
+            CollectDeadUnits();
 
 			Console.WriteLine("Состояние \"после\":");
-			Console.WriteLine(firstArmy.ToString());
-			Console.WriteLine(secondArmy.ToString());
+            Console.WriteLine(firstArmy);
+			Console.WriteLine(secondArmy);
+
+            CommandManager.EndTurn();
 
             return true;
         }
@@ -110,13 +111,8 @@ namespace StackGame.Core.Engine
 		{
 			if (unit.IsAlive && unit.Strength > 0 && enemyUnit.IsAlive)
 			{
-				enemyUnit.TakeDamage(unit.Strength);
-                Console.WriteLine($"\ud83d\udde1 #{ unit.ToString() }# нанес { unit.Strength } урона #{ enemyUnit }#");
-
-				if (enemyUnit.Health == 0)
-				{
-					Console.WriteLine($"☠️ #{ enemyUnit.ToString() }# умер");
-				}
+                var command = new HitCommand(unit, enemyUnit, unit.Strength);
+				CommandManager.Execute(command);
 			}
 		}
 
@@ -160,8 +156,7 @@ namespace StackGame.Core.Engine
 
                 foreach (var components in _components)
                 {
-                    Console.WriteLine($"\ud83d\udd75️ #{ components.Unit.ToString() }# проверяет unit с индексами { string.Join(", ", components.Range.ToArray()) }");
-                    components.Unit.DoSpecialAction(components.Army, components.Range, components.Position);
+                    ApplySpecialAbility(components.Army, components.Range, components.Unit, components.Position);
                 }
             }
         }
@@ -169,7 +164,7 @@ namespace StackGame.Core.Engine
         /// <summary>
         /// Пытаемся получить компоненты для применения специальных возможностей
         /// </summary>
-        SpecialAbilityComponents? TryGetSpecialAbilityComponents(IArmy army, IArmy enemyArmy, int armyUnitsCount, ref int armyUnitIndex)
+        private SpecialAbilityComponents? TryGetSpecialAbilityComponents(IArmy army, IArmy enemyArmy, int armyUnitsCount, ref int armyUnitIndex)
         {
             if (armyUnitIndex < armyUnitsCount)
             {
@@ -196,7 +191,7 @@ namespace StackGame.Core.Engine
         /// <summary>
         /// Пытаемся получить единицу армии, обладающую специальными возможностями
         /// </summary>
-        ISpecialAbility TryGetSpecialAbilityUnit(IArmy army, int unitPosition)
+        private ISpecialAbility TryGetSpecialAbilityUnit(IArmy army, int unitPosition)
         {
             var unit = army.Units[unitPosition];
             if (unit.IsAlive && unit is ISpecialAbility specialUnit)
@@ -208,15 +203,30 @@ namespace StackGame.Core.Engine
         }
 
         /// <summary>
+        /// Применить специальную возможность
+        /// </summary>
+        private void ApplySpecialAbility(IArmy targetArmy, IEnumerable<int> range, ISpecialAbility unit, int unitPosition)
+        {
+			Console.WriteLine($"\ud83d\udd75️ #{ unit }# проверяет unit с индексами { string.Join(", ", range.ToArray()) }");
+			unit.DoSpecialAction(targetArmy, range, unitPosition);
+        }
+
+		/// <summary>
+		/// Удалить мертвые единицы армии
+		/// </summary>
+        private void CollectDeadUnits()
+		{
+			CollectDeadUnits(firstArmy);
+			CollectDeadUnits(secondArmy);
+		}
+
+        /// <summary>
         /// Удалить мертвые единицы армии
         /// </summary>
-        private void RemoveDeadUnits(IArmy army)
+        private void CollectDeadUnits(IArmy army)
         {
-            var dead = army.Units.Where(unit => !unit.IsAlive).ToList();
-            foreach (var unitToBeDeleted in dead)
-            {
-                army.Units.Remove(unitToBeDeleted);
-            }
+            var command = new CollectDeadCommand(army);
+            CommandManager.Execute(command);
         }
 
 		#endregion

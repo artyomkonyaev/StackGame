@@ -1,4 +1,5 @@
-﻿using SpecialUnits;
+﻿using System.Reflection;
+using SpecialUnits;
 
 namespace StackGame.Units
 {
@@ -17,15 +18,26 @@ namespace StackGame.Units
         /// <summary>
         /// Здоровье
         /// </summary>
-        public override int Health => wall.GetCurrentHealth();
+        public override int Health
+        {
+            get => wall.GetCurrentHealth();
+            set
+            {
+                if (value < Health)
+                {
+                    var damage = Health - value;
+                    wall.TakeDamage(damage);
+                }
+                else
+                {
+                    wall.GetType().GetField("_currentHealth", BindingFlags.NonPublic | BindingFlags.Instance).SetValue(wall, value);
+                }
+            }
+        }
         /// <summary>
         /// Максимальное здоровье
         /// </summary>
         public override int MaxHealth => wall.GetHealth();
-		/// <summary>
-		/// Защита
-		/// </summary>
-		public override int Defence => wall.GetDefence();
 
 		/// <summary>
 		/// Сила
@@ -41,22 +53,14 @@ namespace StackGame.Units
 
 		#region Инициализация
 
-		public WallUnit(int health, int defence, int price) : base(health, defence, 0)
+		public WallUnit(int health, int defence, int price) : base(defence)
         {
-            wall = new GulyayGorod(health, defence, price);
+            wall = new GulyayGorod(health, 0, price);
         }
 
 		#endregion
 
 		#region Методы
-
-		/// <summary>
-		/// Получить урон
-		/// </summary>
-		public override void TakeDamage(int damage)
-		{
-            wall.TakeDamage(damage);
-		}
 
 		public override string ToString()
 		{
