@@ -76,8 +76,6 @@ namespace StackGame.Units
 			{
                 var message = $"☠️ #{ this }# умер";
                 NotifyObservers(message);
-
-                Console.WriteLine(message);
             }
         }
 

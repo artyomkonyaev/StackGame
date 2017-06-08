@@ -56,6 +56,11 @@ namespace StackGame.Commands
             enemyUnit.TakeDamage(damage);
 
             Console.WriteLine($"\ud83d\udde1 #{ unit }# нанес { damage } урона #{ enemyUnit }#");
+
+            if (!enemyUnit.IsAlive)
+            {
+                Console.WriteLine($"☠️ #{ enemyUnit }# умер");
+            }
         }
 
 		public void Undo()

@@ -241,7 +241,6 @@ namespace StackGame.Core.Engine
         /// </summary>
         private void ApplySpecialAbility(IArmy targetArmy, IEnumerable<int> range, ISpecialAbility unit, int unitPosition)
         {
-			Console.WriteLine($"\ud83d\udd75️ #{ unit }# проверяет unit с индексами { string.Join(", ", range.ToArray()) }");
 			unit.DoSpecialAction(targetArmy, range, unitPosition);
         }
 
