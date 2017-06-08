@@ -1,4 +1,5 @@
 ﻿using System;
+using StackGame.Loggers;
 using StackGame.Units;
 
 namespace StackGame.Commands
@@ -45,7 +46,7 @@ namespace StackGame.Commands
 
 		#region Методы
 
-		public void Execute()
+		public void Execute(ILogger logger)
 		{
 			damage = maxDamage * (100 - enemyUnit.Defence) / 100;
 			if (damage > enemyUnit.Health)
@@ -55,15 +56,17 @@ namespace StackGame.Commands
 
             enemyUnit.TakeDamage(damage);
 
-            Console.WriteLine($"\ud83d\udde1 #{ unit }# нанес { damage } урона #{ enemyUnit }#");
+			var message = $"\ud83d\udde1 #{ unit }# нанес { damage } урона #{ enemyUnit }#";
+			logger.Log(message);
 
             if (!enemyUnit.IsAlive)
             {
-                Console.WriteLine($"☠️ #{ enemyUnit }# умер");
+				message = $"☠️ #{ enemyUnit }# умер";
+				logger.Log(message);
             }
         }
 
-		public void Undo()
+		public void Undo(ILogger logger)
 		{ 
             enemyUnit.Health += damage;
         }

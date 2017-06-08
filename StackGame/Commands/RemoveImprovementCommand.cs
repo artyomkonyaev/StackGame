@@ -1,4 +1,5 @@
 ﻿using System;
+using StackGame.Loggers;
 using StackGame.Army;
 using StackGame.Units;
 using StackGame.Units.Abilities;
@@ -41,15 +42,16 @@ namespace StackGame.Commands
 
 		#region Методы
 
-		public void Execute()
+		public void Execute(ILogger logger)
 		{
             var baseUnit = ((IUnitImprove)unit).Unit;
             army.Units[unitPosition] = baseUnit;
 
-            Console.WriteLine($"\ud83d\uddd1 #{ baseUnit }# потерял { unit.GetType().GetGenericTypeDefinition() }");
+			var message = $"\ud83d\uddd1 #{ baseUnit }# потерял { unit.GetType().GetGenericTypeDefinition() }";
+			logger.Log(message);
         }
 
-		public void Undo()
+		public void Undo(ILogger logger)
 		{
             army.Units[unitPosition] = (IUnit)unit;
 		}

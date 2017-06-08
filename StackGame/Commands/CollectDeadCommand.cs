@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using StackGame.Loggers;
 using StackGame.Army;
 using StackGame.Units;
 
@@ -35,7 +36,7 @@ namespace StackGame.Commands
 
 		#region Методы
 
-		public void Execute()
+		public void Execute(ILogger logger)
 		{
 			foreach (var pair in deadUnits)
             {
@@ -43,7 +44,7 @@ namespace StackGame.Commands
             }
 		}
 
-		public void Undo()
+		public void Undo(ILogger logger)
 		{
 			foreach (var pair in deadUnits)
 			{

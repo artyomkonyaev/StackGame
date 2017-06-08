@@ -91,6 +91,8 @@
     <Compile Include="Observers\FileObserver.cs" />
     <Compile Include="Commands\RemoveImprovementCommand.cs" />
     <Compile Include="Units\Improvements\IUnitImprove.cs" />
+    <Compile Include="Loggers\ILogger.cs" />
+    <Compile Include="Loggers\ConsoleLogger.cs" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Units\" />
@@ -105,6 +107,7 @@
     <Folder Include="Commands\" />
     <Folder Include="Army\Factory\" />
     <Folder Include="Observers\" />
+    <Folder Include="Loggers\" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
 </Project>

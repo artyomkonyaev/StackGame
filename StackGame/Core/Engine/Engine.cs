@@ -1,12 +1,12 @@
 ﻿﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using StackGame.Loggers;
 using StackGame.Observers;
 using StackGame.Commands;
 using StackGame.Strategy;
 using StackGame.Army;
 using StackGame.Army.Factory;
-using StackGame.Units;
 using StackGame.Units.Abilities;
 
 namespace StackGame.Core.Engine
@@ -66,7 +66,8 @@ namespace StackGame.Core.Engine
             AddObservers(secondArmy, observers);
 
             // Создание менеджера команд
-            CommandManager = new CommandManager();
+            var logger = new ConsoleLogger();
+            CommandManager = new CommandManager(logger);
         }
 
         #endregion

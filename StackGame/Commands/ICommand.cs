@@ -1,4 +1,6 @@
-﻿namespace StackGame.Commands
+﻿using StackGame.Loggers;
+
+namespace StackGame.Commands
 {
     /// <summary>
     /// Интерфейс команды
@@ -10,11 +12,11 @@
 		/// <summary>
 		/// Выполнить команду
 		/// </summary>
-		void Execute();
+		void Execute(ILogger logger);
 		/// <summary>
 		/// Отменить результат выполнения команды
 		/// </summary>
-		void Undo();
+		void Undo(ILogger logger);
 
 		#endregion
     }

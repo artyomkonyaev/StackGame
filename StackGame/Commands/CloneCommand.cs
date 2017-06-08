@@ -1,4 +1,5 @@
 ﻿using System;
+using StackGame.Loggers;
 using StackGame.Army;
 using StackGame.Units;
 using StackGame.Units.Abilities;
@@ -40,15 +41,16 @@ namespace StackGame.Commands
 
 		#region Методы
 
-		public void Execute()
+		public void Execute(ILogger logger)
 		{
 			var clonedUnit = targetUnit.Clone();
 			army.Units.Add(clonedUnit);
 
-			Console.WriteLine($"\ud83d\udd2e #{ unit }# клонировал #{ targetUnit }#");
+            var message = $"\ud83d\udd2e #{ unit }# клонировал #{ targetUnit }#";
+            logger.Log(message);
 		}
 
-		public void Undo()
+		public void Undo(ILogger logger)
 		{
             army.Units.RemoveAt(army.Units.Count - 1);
 		}

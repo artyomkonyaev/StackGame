@@ -1,4 +1,5 @@
 ﻿using System;
+using StackGame.Loggers;
 using StackGame.Units;
 
 namespace StackGame.Commands
@@ -45,7 +46,7 @@ namespace StackGame.Commands
 
 		#region Методы
 
-		public void Execute()
+		public void Execute(ILogger logger)
 		{
             if (targetUnit.Health + maxHealthPower > targetUnit.MaxHealth)
             {
@@ -54,10 +55,11 @@ namespace StackGame.Commands
 
             targetUnit.Health += healthPower;
 
-            Console.WriteLine($"\ud83d\udc8a #{ unit }# вылечил на { healthPower } здоровья #{ targetUnit }#");
+            var message = $"\ud83d\udc8a #{ unit }# вылечил на { healthPower } здоровья #{ targetUnit }#";
+			logger.Log(message);
 		}
 
-		public void Undo()
+		public void Undo(ILogger logger)
 		{
 			targetUnit.Health -= healthPower;
 		}

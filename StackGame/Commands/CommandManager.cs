@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using StackGame.Loggers;
 
 namespace StackGame.Commands
 {
@@ -27,18 +28,32 @@ namespace StackGame.Commands
         /// </summary>
         private readonly Stack<ICommand> redoStack = new Stack<ICommand>();
 
+        /// <summary>
+        /// Журнал
+        /// </summary>
+        private readonly ILogger logger;
+
+		#endregion
+
+		#region Инициализация
+
+        public CommandManager(ILogger logger)
+        {
+            this.logger = logger;
+        }
+
 		#endregion
 
 		#region Методы
 
-        /// <summary>
-        /// Выполнить команду
-        /// </summary>
-        /// <returns>The execute.</returns>
-        /// <param name="command">Command.</param>
-        public void Execute(ICommand command)
+		/// <summary>
+		/// Выполнить команду
+		/// </summary>
+		/// <returns>The execute.</returns>
+		/// <param name="command">Command.</param>
+		public void Execute(ICommand command)
         {
-            command.Execute();
+            command.Execute(logger);
             undoStack.Push(command);
         }
 
@@ -65,7 +80,7 @@ namespace StackGame.Commands
 				var command = undoStack.Pop();
                 redoStack.Push(command);
 
-                command.Undo();
+                command.Undo(logger);
             }
 
             redoStack.Push(emptyCommand);
@@ -83,7 +98,7 @@ namespace StackGame.Commands
 				var command = redoStack.Pop();
 				undoStack.Push(command);
 
-                command.Execute();
+                command.Execute(logger);
             }
 
             undoStack.Push(emptyCommand);

@@ -1,4 +1,6 @@
-﻿namespace StackGame.Commands
+﻿using StackGame.Loggers;
+
+namespace StackGame.Commands
 {
     /// <summary>
     /// Пустая команда
@@ -7,10 +9,10 @@
     {
         #region Методы
 
-        public void Execute()
+        public void Execute(ILogger logger)
         { }
 
-        public void Undo()
+        public void Undo(ILogger logger)
         { }
 
 		#endregion
