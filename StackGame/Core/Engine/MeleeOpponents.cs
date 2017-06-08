@@ -1,4 +1,4 @@
-﻿﻿using StackGame.Units;
+﻿﻿using StackGame.Army;
 
 namespace StackGame.Core.Engine
 {
@@ -10,22 +10,32 @@ namespace StackGame.Core.Engine
         #region Свойства
 
         /// <summary>
-        /// Единица армии
+        /// Армия
         /// </summary>
-        public IUnit Unit { get; private set; }
+        public IArmy Army { get; private set; }
+        /// <summary>
+        /// Позиция единицы армии
+        /// </summary>
+        public int UnitPosition { get; private set; }
 		/// <summary>
-		/// Вражеская единица армии
+		/// Вражеская армия
 		/// </summary>
-		public IUnit EnemyUnit { get; private set; }
+		public IArmy EnemyArmy { get; private set; }
+		/// <summary>
+		/// Позиция вражеской единицы армии
+		/// </summary>
+		public int EnemyUnitPosition { get; private set; }
 
 		#endregion
 
 		#region Инициализация
 
-        public MeleeOpponents(IUnit unit, IUnit enemyUnit) 
+        public MeleeOpponents(IArmy army, int unitPosition, IArmy enemyArmy, int enemyUnitPosition) 
         {
-            Unit = unit;
-            EnemyUnit = enemyUnit;
+            Army = army;
+            UnitPosition = unitPosition;
+            EnemyArmy = enemyArmy;
+            EnemyUnitPosition = enemyUnitPosition;
         }
 
 		#endregion
@@ -37,7 +47,7 @@ namespace StackGame.Core.Engine
 		/// </summary>
 		public MeleeOpponents Reverse() 
         {
-            var opponents = new MeleeOpponents(EnemyUnit, Unit);
+            var opponents = new MeleeOpponents(EnemyArmy, EnemyUnitPosition, Army, UnitPosition);
             return opponents;
         }
 

@@ -23,7 +23,7 @@ namespace StackGame.Strategy
 			var queue = new List<MeleeOpponents>();
 			for (int i = 0; i < minCount; i++)
 			{
-				var opponents = new MeleeOpponents(firstArmy.Units[i], secondArmy.Units[i]);
+				var opponents = new MeleeOpponents(firstArmy, i, secondArmy, i);
 				var _queue = new List<MeleeOpponents>
 				{
 					opponents,

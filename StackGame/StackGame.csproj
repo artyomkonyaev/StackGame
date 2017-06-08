@@ -89,6 +89,8 @@
     <Compile Include="Observers\IObserver.cs" />
     <Compile Include="Observers\BeepObserver.cs" />
     <Compile Include="Observers\FileObserver.cs" />
+    <Compile Include="Commands\RemoveImprovementCommand.cs" />
+    <Compile Include="Units\Improvements\IUnitImprove.cs" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Units\" />

@@ -7,6 +7,15 @@ namespace StackGame.Units.Abilities
     /// </summary>
     public interface IImprovable
     {
+        #region Свойства
+
+        /// <summary>
+        /// Количество улучшений
+        /// </summary>
+        int ImprovementsCount { get; }
+
+		#endregion
+
 		#region Методы
 
 		/// <summary>

@@ -6,14 +6,14 @@ namespace StackGame.Units.Improvements
     /// <summary>
     /// Улучшение единицы армии
     /// </summary>
-    public abstract class UnitImprove<T> : IUnit, IImprovable, IClonable where T : IUnit, IImprovable, IClonable
+    public abstract class UnitImprove<T> : IUnitImprove, IUnit, IImprovable, IClonable where T : IUnit, IImprovable, IClonable
     {
-        #region Свойства
+		#region Свойства
 
-        /// <summary>
-        /// Улучшаемая единица армии
-        /// </summary>
-        public T Unit { get; protected set; }
+		/// <summary>
+		/// Улучшаемая единица армии
+		/// </summary>
+        public IUnit Unit { get; protected set; }
 
 		public int Health
         {
@@ -27,6 +27,11 @@ namespace StackGame.Units.Improvements
 
 		public bool IsAlive => Unit.IsAlive;
         public bool IsDamaged => Unit.IsDamaged;
+
+		/// <summary>
+		/// Количество улучшений
+		/// </summary>
+        public int ImprovementsCount => ((T)Unit).ImprovementsCount + 1;
 
 		#endregion
 
@@ -48,7 +53,7 @@ namespace StackGame.Units.Improvements
                 return false;
             }
 
-            return Unit.CanImprove(type);
+            return ((T)Unit).CanImprove(type);
         }
 
         public abstract IUnit Clone();

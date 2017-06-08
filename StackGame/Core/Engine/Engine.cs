@@ -26,7 +26,7 @@ namespace StackGame.Core.Engine
         /// <summary>
         /// Менеджер команд
         /// </summary>
-        public readonly CommandManager CommandManager = new CommandManager();
+        public readonly CommandManager CommandManager;
 
         /// <summary>
         /// Экземпляр класса
@@ -48,12 +48,14 @@ namespace StackGame.Core.Engine
 
         private Engine()
         {
+            // Создание армий
             var factory = new RandomUnitsFactory();
             var armyCost = Configs.Configs.ArmyCost;
 
             firstArmy = new Army.Army("Белая", factory, armyCost);
             secondArmy = new Army.Army("Черная", factory, armyCost);
 
+            // Добавление наблюдателей для единиц армий
             var observers = new List<IObserver>
             {
                 new FileObserver(),
@@ -62,6 +64,9 @@ namespace StackGame.Core.Engine
 
             AddObservers(firstArmy, observers);
             AddObservers(secondArmy, observers);
+
+            // Создание менеджера команд
+            CommandManager = new CommandManager();
         }
 
         #endregion
@@ -134,19 +139,28 @@ namespace StackGame.Core.Engine
             var queue = Strategy.GetOpponentsQueue(firstArmy, secondArmy);
 			foreach (var opponents in queue)
 			{
-				Hit(opponents.Unit, opponents.EnemyUnit);
+                Hit(opponents.Army, opponents.UnitPosition, opponents.EnemyArmy, opponents.EnemyUnitPosition);
 			}
         }
 
 		/// <summary>
 		/// Атаковать противника
 		/// </summary>
-		private void Hit(IUnit unit, IUnit enemyUnit)
+        private void Hit(IArmy army, int unitPosition, IArmy enemyArmy, int enemyUnitPosition)
 		{
+            var unit = army.Units[unitPosition];
+            var enemyUnit = enemyArmy.Units[enemyUnitPosition];
+
 			if (unit.IsAlive && unit.Strength > 0 && enemyUnit.IsAlive)
 			{
-                var command = new HitCommand(unit, enemyUnit, unit.Strength);
+                ICommand command = new HitCommand(unit, enemyUnit, unit.Strength);
 				CommandManager.Execute(command);
+
+                if (enemyUnit.IsAlive && enemyUnit is IImprovable improvableUnit && improvableUnit.ImprovementsCount > 0)
+                {
+                    command = new RemoveImprovementCommand(improvableUnit, enemyArmy, enemyUnitPosition);
+                    CommandManager.Execute(command);
+                }
 			}
 		}
 

@@ -9,9 +9,18 @@ namespace StackGame.Units
     /// </summary>
     public class HeavyUnit : Unit, IImprovable, IClonable
     {
-		#region Инициализация
+        #region
 
-		public HeavyUnit(int health, int defence, int strength) : base(health, defence, strength)
+        /// <summary>
+        /// Количество улучшений
+        /// </summary>
+        public int ImprovementsCount => 0;
+
+        #endregion
+
+        #region Инициализация
+
+        public HeavyUnit(int health, int defence, int strength) : base(health, defence, strength)
         { }
 
 		#endregion

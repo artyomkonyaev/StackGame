@@ -16,7 +16,7 @@ namespace StackGame.Strategy
 
 		public List<MeleeOpponents> GetOpponentsQueue(IArmy firstArmy, IArmy secondArmy)
 		{
-			var opponents = new MeleeOpponents(firstArmy.Units[0], secondArmy.Units[0]);
+			var opponents = new MeleeOpponents(firstArmy, 0, secondArmy, 0);
 			var queue = new List<MeleeOpponents>
 			{
 				opponents,

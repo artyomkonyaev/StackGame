@@ -33,7 +33,7 @@ namespace StackGame.Units.Improvements
 
 		public override IUnit Clone()
 		{
-			var clonedUnit = (T)Unit.Clone();
+			var clonedUnit = (T)((T)Unit).Clone();
 			var improvedClonedUnit = new ShieldUnitImprove<T>(clonedUnit);
 
 			return improvedClonedUnit;
