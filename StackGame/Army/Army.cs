@@ -58,8 +58,10 @@ namespace StackGame.Army
 				}
 			}
 
-			var command = new CollectDeadCommand(this, deadUnits);
-			Engine.GetInstance().CommandManager.Execute(command);
+            if (deadUnits.Count != 0) {
+				var command = new CollectDeadCommand(this, deadUnits);
+				Engine.GetInstance().CommandManager.Execute(command);
+            }
         }
 
 		/// <summary>
