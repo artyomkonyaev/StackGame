@@ -19,15 +19,16 @@ namespace StackGame.Commands
         /// <summary>
         /// Мертвые
         /// </summary>
-        private List<KeyValuePair<int, IUnit>> deadUnits;
+        private readonly List<KeyValuePair<int, IUnit>> deadUnits;
 
 		#endregion
 
 		#region Инициализация
 
-        public CollectDeadCommand(IArmy army)
+        public CollectDeadCommand(IArmy army, List<KeyValuePair<int, IUnit>> deadUnits)
 		{
 			this.army = army;
+            this.deadUnits = deadUnits;
 		}
 
 		#endregion
@@ -36,18 +37,7 @@ namespace StackGame.Commands
 
 		public void Execute()
 		{
-			deadUnits = new List<KeyValuePair<int, IUnit>>();
-			for (var i = 0; i < army.Units.Count; i++)
-			{
-				var unit = army.Units[i];
-				if (!unit.IsAlive)
-				{
-					var pair = new KeyValuePair<int, IUnit>(i, unit);
-					deadUnits.Add(pair);
-				}
-			}
-
-            foreach (var pair in deadUnits)
+			foreach (var pair in deadUnits)
             {
                 army.Units.RemoveAt(pair.Key);
             }

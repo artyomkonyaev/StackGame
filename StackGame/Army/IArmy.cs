@@ -20,9 +20,14 @@ namespace StackGame.Army
         /// </summary>
         bool IsAllDead { get; }
 
-		#endregion
+        #endregion
 
-		#region Методы
+        #region Методы
+
+        /// <summary>
+        /// Удалить мертвые единицы армии
+        /// </summary>
+        void CollectDeadUnits();
 
 		/// <summary>
 		/// Преобразовать в строку

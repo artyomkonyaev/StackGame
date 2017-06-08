@@ -1,6 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using StackGame.Core.Configs;
+﻿using System.Collections.Generic;
+using StackGame.Core.Engine;
+using StackGame.Commands;
 using StackGame.Army.Factory;
 using StackGame.Units;
 
@@ -41,6 +41,26 @@ namespace StackGame.Army
 		#endregion
 
 		#region Методы
+
+		/// <summary>
+		/// Удалить мертвые единицы армии
+		/// </summary>
+		public void CollectDeadUnits()
+        {
+			var deadUnits = new List<KeyValuePair<int, IUnit>>();
+			for (var i = 0; i < Units.Count; i++)
+			{
+				var unit = Units[i];
+				if (!unit.IsAlive)
+				{
+					var pair = new KeyValuePair<int, IUnit>(i, unit);
+					deadUnits.Add(pair);
+				}
+			}
+
+			var command = new CollectDeadCommand(this, deadUnits);
+			Engine.GetInstance().CommandManager.Execute(command);
+        }
 
 		/// <summary>
 		/// Преобразовать в строку

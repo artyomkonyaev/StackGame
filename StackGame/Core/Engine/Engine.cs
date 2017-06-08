@@ -1,7 +1,6 @@
 ﻿﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using StackGame.Core.Configs;
 using StackGame.Commands;
 using StackGame.Strategy;
 using StackGame.Army;
@@ -224,18 +223,9 @@ namespace StackGame.Core.Engine
 		/// </summary>
         private void CollectDeadUnits()
 		{
-			CollectDeadUnits(firstArmy);
-			CollectDeadUnits(secondArmy);
+            firstArmy.CollectDeadUnits();
+			secondArmy.CollectDeadUnits();
 		}
-
-        /// <summary>
-        /// Удалить мертвые единицы армии
-        /// </summary>
-        private void CollectDeadUnits(IArmy army)
-        {
-            var command = new CollectDeadCommand(army);
-            CommandManager.Execute(command);
-        }
 
 		#endregion
 	}
