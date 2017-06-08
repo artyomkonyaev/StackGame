@@ -28,7 +28,7 @@ namespace StackGame.Core.Configs
 				{
 					Price = 50,
 					Health = 100,
-					Defence = 50,
+					Defence = 20,
 					Strength = 15
 				}
 			},
@@ -84,13 +84,13 @@ namespace StackGame.Core.Configs
             {
                 UnitImproveType.Helmet, new UnitImproveParameters
                 {
-                    Defence = 20
+                    Defence = 15
                 }
             },
 			{
                 UnitImproveType.Shield, new UnitImproveParameters
 				{
-					Defence = 30
+					Defence = 15
 				}
 			},
 			{
@@ -102,8 +102,8 @@ namespace StackGame.Core.Configs
 			{
                 UnitImproveType.Horse, new UnitImproveParameters
 				{
-                    Health = 50,
-                    Strength = 10
+                    Defence = 10,
+                    Strength = 5
 				}
 			}
         };

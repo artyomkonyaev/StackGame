@@ -14,13 +14,13 @@ namespace StackGame.Units.Improvements
         /// <summary>
         /// Жизнь лошади
         /// </summary>
-        private int horseHealth;
+        private readonly int horseDefence;
         /// <summary>
         /// Сила лошади
         /// </summary>
-        private int horseStrength;
+        private readonly int horseStrength;
 
-		public override int Defence => base.Defence + horseHealth;
+		public override int Defence => base.Defence + horseDefence;
 
 		public override int Strength => base.Strength + horseStrength;
 
@@ -31,7 +31,7 @@ namespace StackGame.Units.Improvements
 		public HorseUnitImprove(T unit) : base(unit)
 		{
             var parameters = Configs.UnitImproves[UnitImproveType.Horse];
-            horseHealth = parameters.Health;
+            horseDefence = parameters.Defence;
             horseStrength = parameters.Strength;
         }
 
@@ -66,7 +66,7 @@ namespace StackGame.Units.Improvements
 
 		public override string ToString()
 		{
-            return $"{ base.ToString() } |лошадь - здоровье { horseHealth }, атака { horseStrength }|";
+            return $"{ base.ToString() } |лошадь - защита { horseDefence }, атака { horseStrength }|";
 		}
 
 		#endregion

@@ -6,10 +6,6 @@
     public struct UnitImproveParameters
     {
 		/// <summary>
-		/// Здоровье
-		/// </summary>
-		public int Health;
-		/// <summary>
 		/// Защита
 		/// </summary>
 		public int Defence;
