@@ -1,6 +1,7 @@
 ﻿﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using StackGame.Observers;
 using StackGame.Commands;
 using StackGame.Strategy;
 using StackGame.Army;
@@ -52,6 +53,15 @@ namespace StackGame.Core.Engine
 
             firstArmy = new Army.Army("Белая", factory, armyCost);
             secondArmy = new Army.Army("Черная", factory, armyCost);
+
+            var observers = new List<IObserver>
+            {
+                new FileObserver(),
+                new BeepObserver()
+            };
+
+            AddObservers(firstArmy, observers);
+            AddObservers(secondArmy, observers);
         }
 
         #endregion
@@ -69,6 +79,23 @@ namespace StackGame.Core.Engine
             }
 
             return instance;
+        }
+
+        /// <summary>
+        /// Добавить наблюдателей для армии
+        /// </summary>
+        private void AddObservers(IArmy army, List<IObserver> observers)
+        {
+			foreach (var unit in army.Units)
+			{
+				if (unit is IObservable observableUnit)
+				{
+					foreach (var observer in observers)
+					{
+                        observableUnit.RegisterObserver(observer);
+					}
+				}
+			}
         }
 
         /// <summary>

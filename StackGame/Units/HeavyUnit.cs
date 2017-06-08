@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Linq;
 using StackGame.Units.Abilities;
 
 namespace StackGame.Units
@@ -24,7 +25,10 @@ namespace StackGame.Units
 
 		public IUnit Clone()
 		{
-			return (IUnit)MemberwiseClone();
+			var clonedUnit = (Unit)MemberwiseClone();
+			clonedUnit.observers = observers.Select(observer => observer).ToList();
+
+			return clonedUnit;
 		}
 
 		public override string ToString()

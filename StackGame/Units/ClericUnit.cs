@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using StackGame.Core.Engine;
 using StackGame.Commands;
 using StackGame.Army;
@@ -36,7 +37,10 @@ namespace StackGame.Units
 
 		public IUnit Clone()
 		{
-			return (IUnit)MemberwiseClone();
+			var clonedUnit = (Unit)MemberwiseClone();
+			clonedUnit.observers = observers.Select(observer => observer).ToList();
+
+			return clonedUnit;
 		}
 
 		public void DoSpecialAction(IArmy targetArmy, IEnumerable<int> targetRange, int position)

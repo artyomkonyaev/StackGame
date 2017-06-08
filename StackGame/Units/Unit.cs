@@ -1,11 +1,14 @@
 ﻿using System;
+using System.Collections.Generic;
+using StackGame.Observers;
+using StackGame.Units.Abilities;
 
 namespace StackGame.Units
 {
 	/// <summary>
 	/// Единица армии
 	/// </summary>
-	public abstract class Unit : IUnit
+    public abstract class Unit : IUnit, IObservable
     {
 		#region Свойства
 
@@ -35,6 +38,11 @@ namespace StackGame.Units
 		/// Поврежден ли
 		/// </summary>
         public bool IsDamaged => Health < MaxHealth;
+
+        /// <summary>
+        /// Наблюдатели
+        /// </summary>
+        internal List<IObserver> observers = new List<IObserver>();
 
 		#endregion
 
@@ -66,8 +74,38 @@ namespace StackGame.Units
 
 			if (Health == 0)
 			{
-                Console.WriteLine($"☠️ #{ this }# умер");
-			}
+                var message = $"☠️ #{ this }# умер";
+                NotifyObservers(message);
+
+                Console.WriteLine(message);
+            }
+        }
+
+		/// <summary>
+		/// Зарегистрировать наблюдателя
+		/// </summary>
+		public void RegisterObserver(IObserver observer)
+        {
+            observers.Add(observer);
+        }
+
+		/// <summary>
+		/// Удалить наблюдателя
+		/// </summary>
+		public void RemoveObserver(IObserver observer)
+        {
+            observers.Remove(observer);
+        }
+
+		/// <summary>
+		/// Уведомить наблюдателя
+		/// </summary>
+		public void NotifyObservers(object @object)
+        {
+            foreach (var observer in observers)
+            {
+                observer.Update(@object);
+            }
         }
 
 		/// <summary>

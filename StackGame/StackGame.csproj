@@ -85,6 +85,10 @@
     <Compile Include="Commands\CollectDeadCommand.cs" />
     <Compile Include="Army\Factory\IArmyFactory.cs" />
     <Compile Include="Army\Factory\RandomUnitsFactory.cs" />
+    <Compile Include="Units\Abilities\IObservable.cs" />
+    <Compile Include="Observers\IObserver.cs" />
+    <Compile Include="Observers\BeepObserver.cs" />
+    <Compile Include="Observers\FileObserver.cs" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Units\" />
@@ -98,6 +102,7 @@
     <Folder Include="Core\Engine\" />
     <Folder Include="Commands\" />
     <Folder Include="Army\Factory\" />
+    <Folder Include="Observers\" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
 </Project>
