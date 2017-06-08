@@ -53,14 +53,9 @@ namespace StackGame.Commands
 				damage = enemyUnit.Health;
 			}
 
-            enemyUnit.Health -= damage;
+            enemyUnit.TakeDamage(damage);
 
             Console.WriteLine($"\ud83d\udde1 #{ unit }# нанес { damage } урона #{ enemyUnit }#");
-
-			if (enemyUnit.Health == 0)
-			{
-				Console.WriteLine($"☠️ #{ enemyUnit }# умер");
-			}
         }
 
 		public void Undo()

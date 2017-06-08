@@ -1,4 +1,6 @@
-﻿namespace StackGame.Units
+﻿using System;
+
+namespace StackGame.Units
 {
 	/// <summary>
 	/// Единица армии
@@ -54,6 +56,19 @@
 		#endregion
 
 		#region Методы
+
+		/// <summary>
+		/// Получить урон
+		/// </summary>
+		public void TakeDamage(int damage)
+        {
+            Health -= damage;
+
+			if (Health == 0)
+			{
+                Console.WriteLine($"☠️ #{ this }# умер");
+			}
+        }
 
 		/// <summary>
 		/// Преобразовать в строку

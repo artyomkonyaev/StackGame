@@ -38,6 +38,11 @@
 
 		#region Методы
 
+        /// <summary>
+        /// Получить урон
+        /// </summary>
+        void TakeDamage(int damage);
+
 		/// <summary>
 		/// Преобразовать в строку
 		/// </summary>

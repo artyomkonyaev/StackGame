@@ -53,6 +53,11 @@ namespace StackGame.Units.Improvements
 
         public abstract IUnit Clone();
 
+		public void TakeDamage(int damage)
+		{
+            Unit.TakeDamage(damage);
+		}
+
 		public override string ToString()
 		{
             return Unit.ToString();
