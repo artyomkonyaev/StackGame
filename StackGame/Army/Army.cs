@@ -1,8 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
 using StackGame.Core.Configs;
+using StackGame.Army.Factory;
 using StackGame.Units;
-using StackGame.Units.Factory;
 
 namespace StackGame.Army
 {
@@ -26,47 +26,21 @@ namespace StackGame.Army
         /// <summary>
         /// Название армии
         /// </summary>
-        private string name;
+        private readonly string name;
 
 		#endregion
 
 		#region Инициализация
 
-		public Army(string name)
+        public Army(string name, IArmyFactory factory, int cost)
 		{
-            Units = CreateArmy(Configs.ArmyCost);
+            Units = factory.CreateArmy(cost);
             this.name = name;
 		}
 
 		#endregion
 
 		#region Методы
-
-		/// <summary>
-		/// Создать армию
-		/// </summary>
-        private List<IUnit> CreateArmy(int money) 
-        {
-            var random = new Random();
-
-            var unitMinCost = UnitsFactory.MinCost;
-
-            var units = new List<IUnit>();
-            while (money >= unitMinCost) 
-            {
-                var availableTypes = UnitsFactory.GetUnitTypesWithCostLessThanOrEqual(money);
-                var index = random.Next(availableTypes.Length);
-
-                var unitType = availableTypes[index];
-
-                var unit = UnitsFactory.CreateUnit(unitType);
-                units.Add(unit);
-
-                money -= UnitsFactory.GetCost(unitType);
-            }
-
-            return units;
-        }
 
 		/// <summary>
 		/// Преобразовать в строку

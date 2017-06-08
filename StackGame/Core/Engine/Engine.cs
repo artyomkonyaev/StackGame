@@ -1,9 +1,11 @@
 ﻿﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using StackGame.Core.Configs;
 using StackGame.Commands;
 using StackGame.Strategy;
 using StackGame.Army;
+using StackGame.Army.Factory;
 using StackGame.Units;
 using StackGame.Units.Abilities;
 
@@ -34,18 +36,24 @@ namespace StackGame.Core.Engine
         /// <summary>
         /// Первая армия
         /// </summary>
-        private readonly IArmy firstArmy = new Army.Army("Белая");
+        private readonly IArmy firstArmy;
         /// <summary>
         /// Вторая армия
         /// </summary>
-        private readonly IArmy secondArmy = new Army.Army("Черная");
+        private readonly IArmy secondArmy;
 
         #endregion
 
         #region Инициализация
 
         private Engine()
-        { }
+        {
+            var factory = new RandomUnitsFactory();
+            var armyCost = Configs.Configs.ArmyCost;
+
+            firstArmy = new Army.Army("Белая", factory, armyCost);
+            secondArmy = new Army.Army("Черная", factory, armyCost);
+        }
 
         #endregion
 

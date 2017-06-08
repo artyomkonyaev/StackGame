@@ -1,30 +1,58 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using StackGame.Core.Configs;
+using StackGame.Units;
 using StackGame.Units.Creators;
 
-namespace StackGame.Units.Factory
+namespace StackGame.Army.Factory
 {
     /// <summary>
     /// Фабрика единиц армии
     /// </summary>
-    public static class UnitsFactory
+    public class RandomUnitsFactory : IArmyFactory
     {
 		#region Свойства
 
 		/// <summary>
 		/// Получить минимальную стоимость единицы армии
 		/// </summary>
-		public static int MinCost => Configs.Units.Select(unitConfigs => unitConfigs.Value.Price).Min();
+		private int MinCost => Configs.Units.Select(unitConfigs => unitConfigs.Value.Price).Min();
 
 		#endregion
 
 		#region Методы
 
 		/// <summary>
+		/// Создать армию
+		/// </summary>
+		public List<IUnit> CreateArmy(int money)
+		{
+			var random = new Random();
+
+			var unitMinCost = MinCost;
+
+			var units = new List<IUnit>();
+			while (money >= unitMinCost)
+			{
+				var availableTypes = GetUnitTypesWithCostLessThanOrEqual(money);
+				var index = random.Next(availableTypes.Length);
+
+				var unitType = availableTypes[index];
+
+				var unit = CreateUnit(unitType);
+				units.Add(unit);
+
+				money -= GetCost(unitType);
+			}
+
+			return units;
+		}
+
+		/// <summary>
 		/// Получить типы единиц армии, чья стоимость ниже указанной
 		/// </summary>
-		public static UnitType[] GetUnitTypesWithCostLessThanOrEqual(int maxCost) 
+		private UnitType[] GetUnitTypesWithCostLessThanOrEqual(int maxCost) 
         {
             return Configs.Units.Where(unitConfigs => unitConfigs.Value.Price <= maxCost).Select(unitConfigs => unitConfigs.Key).ToArray();
         }
@@ -32,7 +60,7 @@ namespace StackGame.Units.Factory
         /// <summary>
         /// Создать единицу армии
         /// </summary>
-        public static IUnit CreateUnit(UnitType unitType)
+        private IUnit CreateUnit(UnitType unitType)
         {
             var creator = GetCreator(unitType);
             return creator.Create();
@@ -41,7 +69,7 @@ namespace StackGame.Units.Factory
         /// <summary>
         /// Получить стоимость единицы армии
         /// </summary>
-        public static int GetCost(UnitType unitType)
+        private int GetCost(UnitType unitType)
         {
             return Configs.Units[unitType].Price;
         }
@@ -49,7 +77,7 @@ namespace StackGame.Units.Factory
         /// <summary>
         /// Получить создателя единицы армии
         /// </summary>
-        private static IUnitCreator GetCreator(UnitType unitType)
+        private IUnitCreator GetCreator(UnitType unitType)
         {
 			switch (unitType)
 			{

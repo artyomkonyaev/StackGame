@@ -45,7 +45,6 @@
     <Compile Include="Units\Creators\IUnitCreator.cs" />
     <Compile Include="Units\Creators\LightUnitCreator.cs" />
     <Compile Include="Units\Creators\HeavyUnitCreator.cs" />
-    <Compile Include="Units\Factory\UnitsFactory.cs" />
     <Compile Include="Units\ArcherUnit.cs" />
     <Compile Include="Units\ClericUnit.cs" />
     <Compile Include="Units\MageUnit.cs" />
@@ -84,19 +83,21 @@
     <Compile Include="Commands\ImproveCommand.cs" />
     <Compile Include="Commands\CloneCommand.cs" />
     <Compile Include="Commands\CollectDeadCommand.cs" />
+    <Compile Include="Army\Factory\IArmyFactory.cs" />
+    <Compile Include="Army\Factory\RandomUnitsFactory.cs" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Units\" />
     <Folder Include="Core\" />
     <Folder Include="Army\" />
     <Folder Include="Units\Creators\" />
-    <Folder Include="Units\Factory\" />
     <Folder Include="Units\Abilities\" />
     <Folder Include="Units\Improvements\" />
     <Folder Include="Core\Configs\" />
     <Folder Include="Strategy\" />
     <Folder Include="Core\Engine\" />
     <Folder Include="Commands\" />
+    <Folder Include="Army\Factory\" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
 </Project>
