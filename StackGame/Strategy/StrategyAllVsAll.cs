@@ -102,8 +102,12 @@ namespace StackGame.Strategy
 		private Tuple<int, int> GetBoundsInEmemyArmy(IArmy army, int unitPosition, int unitRange)
 		{
 			var startIndex = unitPosition - unitRange;
-			var endIndex = Math.Abs(unitRange - unitPosition) + 1 + unitRange;
+			if (startIndex < 0)
+			{
+				startIndex = 0;
+			}
 
+			var endIndex = Math.Abs(unitRange - unitPosition) + 1 + unitRange;
 			if (endIndex >= army.Units.Count)
 			{
 				endIndex = army.Units.Count - 1;
