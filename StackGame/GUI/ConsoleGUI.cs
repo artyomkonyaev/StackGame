@@ -6,6 +6,9 @@ namespace StackGame.GUI
     {
 		#region Методы
 
+        /// <summary>
+        /// Вывести ошибку
+        /// </summary>
         public static void PrintError(string message)
         {
             Console.WriteLine($"🚫 { message }");
