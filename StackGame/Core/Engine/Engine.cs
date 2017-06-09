@@ -97,7 +97,7 @@ namespace StackGame.Core.Engine
 			// Добавление наблюдателей для единиц армий
 			var observers = new List<IObserver>
 			{
-				new FileObserver(),
+				new FileObserver("DeadLog.txt"),
 				new BeepObserver()
 			};
 

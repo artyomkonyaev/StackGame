@@ -14,7 +14,7 @@ namespace StackGame.Observers
 		/// <summary>
 		/// Название файла
 		/// </summary>
-		private readonly string fileName = "DeadLog.txt";
+		private readonly string fileName;
         /// <summary>
         /// Путь к файлу
         /// </summary>
@@ -24,8 +24,10 @@ namespace StackGame.Observers
 
 		#region Инициализация
 
-		public FileObserver()
+		public FileObserver(string fileName)
 		{
+            this.fileName = fileName;
+
             var pathToDesktop = Environment.GetFolderPath(Environment.SpecialFolder.DesktopDirectory);
             filePath = Path.Combine(pathToDesktop, fileName);
 
