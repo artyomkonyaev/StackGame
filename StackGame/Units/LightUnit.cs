@@ -35,6 +35,11 @@ namespace StackGame.Units
 
 		#region Методы
 
+		public void Heal(int healthPower)
+		{
+			Health += healthPower;
+		}
+
 		public IUnit Clone()
 		{
 			var clonedUnit = (Unit)MemberwiseClone();

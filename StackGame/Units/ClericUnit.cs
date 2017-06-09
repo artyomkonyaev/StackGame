@@ -35,6 +35,11 @@ namespace StackGame.Units
 
 		#region Методы
 
+		public void Heal(int healthPower)
+		{
+			Health += healthPower;
+		}
+
 		public IUnit Clone()
 		{
 			var clonedUnit = (Unit)MemberwiseClone();
@@ -72,7 +77,7 @@ namespace StackGame.Units
 
                 var targetUnit = targetUnits[random.Next(targetUnits.Count)];
 
-                var command = new HealCommand(this, (IUnit)targetUnit, Power);
+                var command = new HealCommand(this, targetUnit, Power);
 				Engine.GetInstance().CommandManager.Execute(command);
 			}
         }

@@ -1,6 +1,6 @@
-﻿using System;
-using StackGame.Loggers;
+﻿using StackGame.Loggers;
 using StackGame.Units;
+using StackGame.Units.Abilities;
 
 namespace StackGame.Commands
 {
@@ -18,7 +18,7 @@ namespace StackGame.Commands
 		/// <summary>
 		/// Лечимая единица армии
 		/// </summary>
-		private readonly IUnit targetUnit;
+		private readonly IHealable targetUnit;
 		/// <summary>
 		/// Максимальное количество единиц здоровья, что можно восстановить
 		/// </summary>
@@ -33,7 +33,7 @@ namespace StackGame.Commands
 
 		#region Инициализация
 
-		public HealCommand(IUnit unit, IUnit targetUnit, int maxHealthPower)
+		public HealCommand(IUnit unit, IHealable targetUnit, int maxHealthPower)
 		{
 			this.unit = unit;
 			this.targetUnit = targetUnit;
@@ -48,12 +48,12 @@ namespace StackGame.Commands
 
 		public void Execute(ILogger logger)
 		{
-            if (targetUnit.Health + maxHealthPower > targetUnit.MaxHealth)
+            if (((IUnit)targetUnit).Health + maxHealthPower > ((IUnit)targetUnit).MaxHealth)
             {
-                healthPower = targetUnit.MaxHealth - targetUnit.Health;
+                healthPower = ((IUnit)targetUnit).MaxHealth - ((IUnit)targetUnit).Health;
             }
 
-            targetUnit.Health += healthPower;
+            targetUnit.Heal(healthPower);
 
             var message = $"\ud83d\udc8a #{ unit }# вылечил на { healthPower } здоровья #{ targetUnit }#";
 			logger.Log(message);
@@ -61,7 +61,7 @@ namespace StackGame.Commands
 
 		public void Undo(ILogger logger)
 		{
-			targetUnit.Health -= healthPower;
+			((IUnit)targetUnit).Health -= healthPower;
 		}
 
 		#endregion

@@ -35,7 +35,12 @@ namespace StackGame.Units
 
 		#region Методы
 
-        public IUnit Clone()
+		public void Heal(int healthPower)
+		{
+			Health += healthPower;
+		}
+
+		public IUnit Clone()
         {
             var clonedUnit = (Unit)MemberwiseClone();
             clonedUnit.observers = observers.Select(observer => observer).ToList();

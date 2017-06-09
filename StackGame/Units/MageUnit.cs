@@ -33,6 +33,11 @@ namespace StackGame.Units
 
 		#region Методы
 
+		public void Heal(int healthPower)
+		{
+			Health += healthPower;
+		}
+
 		public void DoSpecialAction(IArmy targetArmy, IEnumerable<int> targetRange, int position)
 		{
 			var random = new Random();
