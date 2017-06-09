@@ -7,8 +7,31 @@ namespace StackGame
 {
     class MainClass
     {
+        /// <summary>
+        /// Вывести copyright
+        /// </summary>
+        public static void PrintCopyright()
+        {
+            Console.ForegroundColor = ConsoleColor.Red;
+
+            Console.WriteLine();
+            Console.WriteLine("##############################");
+            Console.WriteLine("#                            #");
+            Console.WriteLine("#         Выполнил студент   #");
+            Console.WriteLine("#   РЭУ им Г. В. Плеханова   #");
+            Console.WriteLine("#          группы ДКО-142б   #");
+            Console.WriteLine("#    Халяпин Илья Игоревич   #");
+            Console.WriteLine("#                            #");
+            Console.WriteLine("##############################");
+            Console.WriteLine();
+
+            Console.ResetColor();
+        }
+
         public static void Main(string[] args)
         {
+            PrintCopyright();
+
             var gameStarted = false;
                   
             MainCommand? command = null;
