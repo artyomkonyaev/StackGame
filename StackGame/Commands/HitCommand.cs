@@ -56,12 +56,12 @@ namespace StackGame.Commands
 
             enemyUnit.TakeDamage(damage);
 
-			var message = $"\ud83d\udde1 #{ unit }# нанес { damage } урона #{ enemyUnit }#";
+			var message = $"🗡  { unit } нанес { damage } урона { enemyUnit }";
 			logger.Log(message);
 
             if (!enemyUnit.IsAlive)
             {
-				message = $"☠️ #{ enemyUnit }# умер";
+				message = $"☠️  { enemyUnit } умер";
 				logger.Log(message);
             }
         }

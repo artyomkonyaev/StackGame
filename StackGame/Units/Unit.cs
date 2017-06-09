@@ -74,7 +74,7 @@ namespace StackGame.Units
 
             if (!IsAlive)
 			{
-                var message = $"☠️ #{ this }# умер";
+                var message = $"☠️ { this } умер";
                 NotifyObservers(message);
             }
         }
@@ -111,7 +111,7 @@ namespace StackGame.Units
 		/// </summary>
         public override string ToString()
         {
-            return $"Здоровье { Health }, Защита { Defence }, Сила { Strength }";
+            return $"(здоровье { Health }, защита { Defence }, сила { Strength })";
         }
 
 		#endregion

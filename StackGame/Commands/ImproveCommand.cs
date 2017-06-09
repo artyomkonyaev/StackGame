@@ -55,7 +55,7 @@ namespace StackGame.Commands
 			var improvementUnit = (IUnit)Activator.CreateInstance(unitImprove, targetUnit);
             army.Units[targetUnitPosition] = improvementUnit;
 
-			var message = $"\ud83d\udecd #{ unit }# надел { unitImprove.GetGenericTypeDefinition() } на #{ targetUnit }#";
+			var message = $"🛍  { unit } надел вещь на { targetUnit }";
 			logger.Log(message);
 		}
 

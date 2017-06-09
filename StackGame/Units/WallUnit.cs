@@ -64,7 +64,7 @@ namespace StackGame.Units
 
 		public override string ToString()
 		{
-			return $"Стена: { base.ToString() }";
+			return $"Стена { base.ToString() }";
 		}
 
 		#endregion

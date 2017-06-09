@@ -95,6 +95,11 @@
     <Compile Include="Loggers\ConsoleLogger.cs" />
     <Compile Include="Loggers\FileLogger.cs" />
     <Compile Include="Units\Proxy\HeavyUnitProxy.cs" />
+    <Compile Include="GUI\ConsoleGUI.cs" />
+    <Compile Include="GUI\MainCommand.cs" />
+    <Compile Include="GUI\SelectStrategyCommand.cs" />
+    <Compile Include="Commands\ChangeCountTurnsWithoutDeathCommand.cs" />
+    <Compile Include="Commands\ChangeStrategyCommand.cs" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Units\" />
@@ -111,6 +116,7 @@
     <Folder Include="Observers\" />
     <Folder Include="Loggers\" />
     <Folder Include="Units\Proxy\" />
+    <Folder Include="GUI\" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
 </Project>

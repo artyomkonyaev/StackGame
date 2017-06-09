@@ -79,7 +79,7 @@ namespace StackGame.Units
 
 		public override string ToString()
 		{
-			return $"Лучник: { base.ToString() }";
+			return $"Лучник { base.ToString() }";
 		}
 
 		#endregion

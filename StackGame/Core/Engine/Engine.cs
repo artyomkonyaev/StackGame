@@ -23,12 +23,18 @@ namespace StackGame.Core.Engine
         /// <summary>
         /// Стратегия боя
         /// </summary>
-        public IStrategy Strategy = new Strategy1Vs1();
+        public IStrategy Strategy;
 
         /// <summary>
         /// Менеджер команд
         /// </summary>
-        public readonly CommandManager CommandManager;
+        public CommandManager CommandManager;
+
+        /// <summary>
+        /// Закончена ли игра
+        /// </summary>
+        public bool IsGameEnded => FirstArmy.IsAllDead || SecondArmy.IsAllDead;
+
 		/// <summary>
 		/// Количество шагов без смертей
 		/// </summary>
@@ -58,34 +64,7 @@ namespace StackGame.Core.Engine
         #region Инициализация
 
         private Engine()
-        {
-            // Создание армий
-            var factory = new RandomUnitsFactory();
-            var armyCost = Configs.Configs.ArmyCost;
-
-            firstArmy = new Army.Army("Белая", factory, armyCost);
-            secondArmy = new Army.Army("Черная", factory, armyCost);
-
-            // Добавление наблюдателей для единиц армий
-            var observers = new List<IObserver>
-            {
-                new FileObserver(),
-                new BeepObserver()
-            };
-
-            AddObservers(firstArmy, observers);
-            AddObservers(secondArmy, observers);
-
-            // Создание менеджера команд
-            ILogger logger = new ConsoleLogger();
-            CommandManager = new CommandManager(logger);
-
-            // Замена тяжелых пехотинцев на прокси
-            logger = new FileLogger("HeavyUnitProxyLog.txt");
-
-            ReplaceHeavyUnitsWithProxy(firstArmy, logger);
-            ReplaceHeavyUnitsWithProxy(secondArmy, logger);
-        }
+        { }
 
         #endregion
 
@@ -102,6 +81,44 @@ namespace StackGame.Core.Engine
             }
 
             return instance;
+        }
+
+        /// <summary>
+        /// Начать новую игру
+        /// </summary>
+        public void NewGame(int armyCost)
+        {
+			// Создание армий
+			var factory = new RandomUnitsFactory();
+			
+            FirstArmy = new Army.Army("Белая", factory, armyCost);
+			SecondArmy = new Army.Army("Черная", factory, armyCost);
+
+			// Добавление наблюдателей для единиц армий
+			var observers = new List<IObserver>
+			{
+				new FileObserver(),
+				new BeepObserver()
+			};
+
+			AddObservers(FirstArmy, observers);
+			AddObservers(SecondArmy, observers);
+
+			// Создание менеджера команд
+			ILogger logger = new ConsoleLogger();
+			CommandManager = new CommandManager(logger);
+
+			// Замена тяжелых пехотинцев на прокси
+			logger = new FileLogger("HeavyUnitProxyLog.txt");
+
+			ReplaceHeavyUnitsWithProxy(FirstArmy, logger);
+			ReplaceHeavyUnitsWithProxy(SecondArmy, logger);
+
+			// Выбор стратегии
+			Strategy = new Strategy1Vs1();
+
+            // Обнуление количества шагов без смертей
+            CountTurnsWithoutDeath = 0;
         }
 
         /// <summary>
@@ -140,29 +157,34 @@ namespace StackGame.Core.Engine
         /// <summary>
         /// Следующий ход
         /// </summary>
-        public bool NextStep() {
-            if (firstArmy.IsAllDead || secondArmy.IsAllDead) 
+        public void NextStep() 
+        {
+            if (!IsCanMakeNextStep)
             {
-                return false;
+                return;
             }
 
-            Console.WriteLine("Состояние \"до\":");
-            Console.WriteLine(firstArmy);
-            Console.WriteLine(secondArmy);
-
             MeleeAttack();
-            Console.WriteLine();
             SpecialAbilityAttack();
-            Console.WriteLine();
             CollectDeadUnits();
 
-			Console.WriteLine("Состояние \"после\":");
-            Console.WriteLine(firstArmy);
-			Console.WriteLine(secondArmy);
-
             CommandManager.EndTurn();
+        }
 
-            return true;
+        /// <summary>
+        /// Играть до конца
+        /// </summary>
+        public void PlayToEnd()
+        {
+            while (IsCanMakeNextStep)
+            {
+                NextStep();
+
+                if (IsGameEnded)
+                {
+                    return;
+                }
+            }
         }
 
         /// <summary>
@@ -170,7 +192,7 @@ namespace StackGame.Core.Engine
         /// </summary>
         private void MeleeAttack()
         {
-            var queue = Strategy.GetOpponentsQueue(firstArmy, secondArmy);
+            var queue = Strategy.GetOpponentsQueue(FirstArmy, SecondArmy);
 			foreach (var opponents in queue)
 			{
                 Hit(opponents.Army, opponents.UnitPosition, opponents.EnemyArmy, opponents.EnemyUnitPosition);
@@ -207,24 +229,24 @@ namespace StackGame.Core.Engine
         /// </summary>
         private void SpecialAbilityAttack()
         {
-            var firstArmyUnitsCount = firstArmy.Units.Count;
+            var firstArmyUnitsCount = FirstArmy.Units.Count;
             var firstArmyUnitIndex = 0;
 
-            var secondArmyUnitsCount = secondArmy.Units.Count;
+            var secondArmyUnitsCount = SecondArmy.Units.Count;
             var secondArmyUnitIndex = 0;
 
             while (firstArmyUnitIndex < firstArmyUnitsCount || secondArmyUnitIndex < secondArmyUnitsCount)
             {
                 var _components = new List<SpecialAbilityComponents>();
 
-                var firstArmyComponents = TryGetSpecialAbilityComponents(firstArmy, secondArmy, firstArmyUnitsCount, ref firstArmyUnitIndex);
+                var firstArmyComponents = TryGetSpecialAbilityComponents(FirstArmy, SecondArmy, firstArmyUnitsCount, ref firstArmyUnitIndex);
                 if (firstArmyComponents.HasValue)
                 {
                     var specialAbilityComponents = firstArmyComponents.Value;
                     _components.Add(specialAbilityComponents);
                 }
 
-				var secondArmyComponents = TryGetSpecialAbilityComponents(secondArmy, firstArmy, secondArmyUnitsCount, ref secondArmyUnitIndex);
+				var secondArmyComponents = TryGetSpecialAbilityComponents(SecondArmy, FirstArmy, secondArmyUnitsCount, ref secondArmyUnitIndex);
 				if (secondArmyComponents.HasValue)
 				{
 					var specialAbilityComponents = secondArmyComponents.Value;
@@ -317,6 +339,20 @@ namespace StackGame.Core.Engine
 			var command = new ChangeCountTurnsWithoutDeathCommand(CountTurnsWithoutDeath, newCountTurnsWithoutDeath);
 			CommandManager.Execute(command);
 		}
+
+        /// <summary>
+        /// Изменить стратегию
+        /// </summary>
+        public void ChangeStrategy(IStrategy strategy)
+        {
+            if (Strategy.GetType() != strategy.GetType())
+            {
+                ICommand command = new ChangeStrategyCommand(Strategy, strategy, CountTurnsWithoutDeath);
+                CommandManager.Execute(command);
+
+                CommandManager.EndTurn();
+            }
+        }
 
 		#endregion
 	}

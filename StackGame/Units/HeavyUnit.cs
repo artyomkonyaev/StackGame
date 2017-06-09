@@ -42,7 +42,7 @@ namespace StackGame.Units
 
 		public override string ToString()
 		{
-			return $"Тяжелый пехотинец: { base.ToString() }";
+			return $"Тяжелый пехотинец { base.ToString() }";
 		}
 
 		#endregion

@@ -47,7 +47,7 @@ namespace StackGame.Commands
             var baseUnit = ((IUnitImprove)unit).Unit;
             army.Units[unitPosition] = baseUnit;
 
-			var message = $"\ud83d\uddd1 #{ baseUnit }# потерял { unit.GetType().GetGenericTypeDefinition() }";
+			var message = $"🗑  { baseUnit } потерял вещь";
 			logger.Log(message);
         }
 

@@ -70,10 +70,17 @@ namespace StackGame.Army
 		/// Преобразовать в строку
 		/// </summary>
         public override string ToString() {
-            string army = $"Армия: { name }\n";
-            foreach (var unit in Units) 
+            string army = $"Армия \"{ name }\"\n";
+            if (Units.IsEmpty())
             {
-                army += unit.ToString() + "\n";
+                army += "Пусто" + "\n";
+            }
+            else
+            {
+				foreach (var unit in Units)
+				{
+					army += unit.ToString() + "\n";
+				}
             }
 
             return army;

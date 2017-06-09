@@ -65,7 +65,7 @@ namespace StackGame.Commands
             var emptyCommand = new EmptyCommand();
             undoStack.Push(emptyCommand);
 
-            redoStack.Clear();
+            CleanRedoCommands();
         }
 
         /// <summary>
@@ -102,6 +102,14 @@ namespace StackGame.Commands
             }
 
             undoStack.Push(emptyCommand);
+        }
+
+        /// <summary>
+        /// Очистить стек команд для повтора
+        /// </summary>
+        public void CleanRedoCommands()
+        {
+            redoStack.Clear();
         }
 
 		#endregion

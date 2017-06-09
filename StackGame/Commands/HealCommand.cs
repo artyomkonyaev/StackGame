@@ -55,7 +55,7 @@ namespace StackGame.Commands
 
             targetUnit.Heal(healthPower);
 
-            var message = $"\ud83d\udc8a #{ unit }# вылечил на { healthPower } здоровья #{ targetUnit }#";
+            var message = $"💊 { unit } вылечил на { healthPower } здоровья { targetUnit }";
 			logger.Log(message);
 		}
 

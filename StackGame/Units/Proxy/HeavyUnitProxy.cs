@@ -78,12 +78,12 @@ namespace StackGame.Units.Proxy
 		{
             heavyUnit.TakeDamage(damage);
 
-            var message = $"{ DateTime.Now }: \ud83d\udca2 #{ this }# получил урон { damage }";
+            var message = $"{ DateTime.Now }: 💢 { this } получил урон { damage }";
             logger.Log(message);
 
             if (!IsAlive)
             {
-				message = $"{ DateTime.Now }: ☠️ #{ this }# умер";
+				message = $"{ DateTime.Now }: ☠️ { this } умер";
 				logger.Log(message);
             }
 		}
@@ -98,7 +98,7 @@ namespace StackGame.Units.Proxy
             var clonedUnit = (HeavyUnit)heavyUnit.Clone();
             var clonedUnitProxy = new HeavyUnitProxy(clonedUnit, logger);
 
-			var message = $"{ DateTime.Now }: \ud83d\uddff #{ this }# клонирован";
+			var message = $"{ DateTime.Now }: 🗿 { this } клонирован";
 			logger.Log(message);
 
             return clonedUnitProxy;

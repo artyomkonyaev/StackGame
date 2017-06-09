@@ -46,7 +46,7 @@ namespace StackGame.Commands
 			var clonedUnit = targetUnit.Clone();
 			army.Units.Add(clonedUnit);
 
-            var message = $"\ud83d\udd2e #{ unit }# клонировал #{ targetUnit }#";
+            var message = $"🔮 { unit } клонировал { targetUnit }";
             logger.Log(message);
 		}
 

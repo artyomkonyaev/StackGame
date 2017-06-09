@@ -1,71 +1,176 @@
 ﻿using System;
+using StackGame.GUI;
+using StackGame.Strategy;
 using StackGame.Core.Engine;
 
 namespace StackGame
 {
     class MainClass
     {
-        /// <summary>
-        /// Вывести меню
-        /// </summary>
-        static void PrintMenu() 
-        {
-            Console.WriteLine("Меню:");
-            Console.WriteLine("1. Начало игры");
-            Console.WriteLine("2. Показать армию");
-            Console.WriteLine("3. Сделать ход");
-            Console.WriteLine("4. Ход назад");
-            Console.WriteLine("5. Ход вперед");
-            Console.WriteLine("6. Ходы до концы");
-            Console.WriteLine("7. Выход");
-        }
-
-        /// <summary>
-        /// Считать команду
-        /// </summary>
-        static int ReadCommand() 
-        {
-            int command = 0;
-            do
-            {
-                Console.Write("Введите команду: ");
-            } while (!Int32.TryParse(Console.ReadLine(), out command));
-            Console.WriteLine();
-            return command;
-        }
-
         public static void Main(string[] args)
         {
-            int command = 0;
+            var gameStarted = false;
+                  
+            MainCommand? command = null;
             do
             {
-                PrintMenu();
-                command = ReadCommand();
+                ConsoleGUI.PrintMainMenu();
+                command = ConsoleGUI.ReadMainCommand();
+
+                if (!gameStarted && command != MainCommand.NewGame && command != MainCommand.Exit)
+                {
+                    var message = "Игра не запущена. Необходимо начать новую игру.";
+					ConsoleGUI.PrintError(message);
+                    Console.WriteLine();
+
+                    continue;
+                }
+                if (gameStarted && command != MainCommand.NewGame && command != MainCommand.PrintArmies && command != MainCommand.Undo && command != MainCommand.Exit)
+                {
+					if (Engine.GetInstance().IsGameEnded)
+					{
+                        var message = "Игра закончена. Необходимо начать новую игру.";
+						ConsoleGUI.PrintError(message);
+						Console.WriteLine();
+
+						continue;
+					}
+                }
 
                 switch (command)
                 {
-                    case 1:
-                        Engine.GetInstance();
-                        Console.WriteLine("Игра начата");
+                    case MainCommand.NewGame:
+                        var armyCost = ConsoleGUI.ReadArmyCost();
+                        Engine.GetInstance().NewGame(armyCost);
+                        gameStarted = true;
+
+                        Console.WriteLine("Новая игра начата.");
+                        Console.WriteLine();
+
+						if (Engine.GetInstance().IsGameEnded)
+						{
+							Console.WriteLine("Необходимо увеличить стоимость армии.");
+							Console.WriteLine();
+						}
+
+						Console.WriteLine(Engine.GetInstance().FirstArmy);
+						Console.WriteLine(Engine.GetInstance().SecondArmy);
 
                         break;
-                    case 3:
-                        if (!Engine.GetInstance().NextStep())
+                    case MainCommand.NextTurn:
+                        if (!Engine.GetInstance().IsCanMakeNextStep)
                         {
-                            Console.WriteLine("Конец игры");
-                            command = 7;
+							Console.WriteLine("⚠️  Необходимо изменить стратегию игры или начать новую игру.");
+							Console.WriteLine();
+
+                            continue;
+                        }
+
+                        Engine.GetInstance().NextStep();
+                        Console.WriteLine();
+
+                        if (Engine.GetInstance().IsGameEnded)
+                        {
+                            Console.WriteLine("Игра закончена.");
+                            Console.WriteLine();
+
+							Console.WriteLine(Engine.GetInstance().FirstArmy);
+							Console.WriteLine(Engine.GetInstance().SecondArmy);
                         }
 
                         break;
-                    case 7:
-                        break;
+                    case MainCommand.PlayToEnd:
+                        Engine.GetInstance().PlayToEnd();
+                        Console.WriteLine();
 
-                    default:
-                        Console.WriteLine("Команда не существует!");
+                        if (Engine.GetInstance().IsGameEnded)
+                        {
+                            Console.WriteLine("Игра закончена.");
+                            Console.WriteLine();
+
+							Console.WriteLine(Engine.GetInstance().FirstArmy);
+							Console.WriteLine(Engine.GetInstance().SecondArmy);
+                        }
+                        else
+                        {
+                            Console.WriteLine("⚠️  Необходимо изменить стратегию игры или начать новую игру.");
+                            Console.WriteLine();
+                        }
+
                         break;
-                        
+                    case MainCommand.PrintArmies:
+						Console.WriteLine(Engine.GetInstance().FirstArmy);
+						Console.WriteLine(Engine.GetInstance().SecondArmy);
+
+                        break;
+                    case MainCommand.SelectStrategy:
+                        ConsoleGUI.PrintSelectStrategyMenu();
+                        var selectStrategyCommand = ConsoleGUI.ReadSelectStrategyCommand();
+
+                        IStrategy strategy = null;
+                        switch (selectStrategyCommand)
+                        {
+                            case SelectStrategyCommand.Strategy1Vs1:
+                                strategy = new Strategy1Vs1();
+
+                                break;
+                            case SelectStrategyCommand.StrategyNVsN:
+                                var n = ConsoleGUI.ReadNForNVsNStrategy();
+                                strategy = new StrategyNVsN(n);
+
+                                break;
+                            case SelectStrategyCommand.StrategyAllVsAll:
+                                strategy = new StrategyAllVsAll();
+
+                                break;
+                            case SelectStrategyCommand.Cancel:
+                                continue;
+                        }
+
+                        Engine.GetInstance().ChangeStrategy(strategy);
+                        Console.WriteLine();
+
+                        break;
+                    case MainCommand.Undo:
+                        if (!Engine.GetInstance().CommandManager.CanUndo)
+                        {
+                            var message = "Невозможно вернуться на ход назад.";
+							ConsoleGUI.PrintError(message);
+                            Console.WriteLine();
+
+                            continue;
+                        }
+
+                        Engine.GetInstance().CommandManager.Undo();
+
+                        Console.WriteLine("Выполнен ход назад.");
+						Console.WriteLine();
+
+                        break;
+                    case MainCommand.Redo:
+						if (!Engine.GetInstance().CommandManager.CanRedo)
+						{
+							var message = "Невозможно выполнить ход вперед.";
+							ConsoleGUI.PrintError(message);
+							Console.WriteLine();
+
+							continue;
+						}
+
+						Engine.GetInstance().CommandManager.Redo();
+                        Console.WriteLine();
+
+						Console.WriteLine("Выполнен ход вперед.");
+						Console.WriteLine();
+
+                        break;
+                    case MainCommand.Exit:
+                        Console.WriteLine("Конец игры.");
+                        Console.WriteLine();
+
+                        break;
                 }
-            } while (command != 7);
+            } while (command.Value != MainCommand.Exit);
         }
     }
 }

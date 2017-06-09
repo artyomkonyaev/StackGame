@@ -102,7 +102,7 @@ namespace StackGame.Units
 
         public override string ToString()
         {
-            return $"Легкий пехотинец: { base.ToString() }";
+            return $"Легкий пехотинец { base.ToString() }";
         }
 
 		#endregion

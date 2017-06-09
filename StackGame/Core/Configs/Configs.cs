@@ -109,10 +109,8 @@ namespace StackGame.Core.Configs
         };
 
         /// <summary>
-        /// Стоимость армии
         /// Максимальное количество шагов без смертей
         /// </summary>
-        public static readonly int ArmyCost = 300;
         public static readonly int MaxTurnsWithoutDeathCount = 100;
     }
 }
