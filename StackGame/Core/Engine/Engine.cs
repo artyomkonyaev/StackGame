@@ -29,6 +29,15 @@ namespace StackGame.Core.Engine
         /// Менеджер команд
         /// </summary>
         public readonly CommandManager CommandManager;
+		/// <summary>
+		/// Количество шагов без смертей
+		/// </summary>
+		public int CountTurnsWithoutDeath { get; set; }
+
+        /// <summary>
+        /// Может ли сделать следующий ход
+        /// </summary>
+        public bool IsCanMakeNextStep => CountTurnsWithoutDeath < Configs.Configs.MaxTurnsWithoutDeathCount;
 
         /// <summary>
         /// Экземпляр класса
@@ -38,11 +47,11 @@ namespace StackGame.Core.Engine
         /// <summary>
         /// Первая армия
         /// </summary>
-        private readonly IArmy firstArmy;
+        public IArmy FirstArmy { get; private set; }
         /// <summary>
         /// Вторая армия
         /// </summary>
-        private readonly IArmy secondArmy;
+        public IArmy SecondArmy { get; private set; }
 
         #endregion
 
@@ -292,8 +301,21 @@ namespace StackGame.Core.Engine
 		/// </summary>
         private void CollectDeadUnits()
 		{
-            firstArmy.CollectDeadUnits();
-			secondArmy.CollectDeadUnits();
+            var firstArmyDeadUnitsCount = FirstArmy.CollectDeadUnits();
+			var secondArmyDeadUnitsCount = SecondArmy.CollectDeadUnits();
+
+            int newCountTurnsWithoutDeath;
+            if (firstArmyDeadUnitsCount == 0 && secondArmyDeadUnitsCount == 0)
+            {
+                newCountTurnsWithoutDeath = CountTurnsWithoutDeath + 1;
+            }
+            else
+            {
+                newCountTurnsWithoutDeath = 0;
+            }
+
+			var command = new ChangeCountTurnsWithoutDeathCommand(CountTurnsWithoutDeath, newCountTurnsWithoutDeath);
+			CommandManager.Execute(command);
 		}
 
 		#endregion
