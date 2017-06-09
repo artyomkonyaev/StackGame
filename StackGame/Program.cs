@@ -1,6 +1,6 @@
 ﻿using System;
 using StackGame.GUI;
-using StackGame.Strategy;
+using StackGame.Core.Strategies;
 using StackGame.Core.Engine;
 
 namespace StackGame

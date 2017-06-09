@@ -3,7 +3,7 @@ using StackGame.Loggers;
 using StackGame.Army;
 using StackGame.Units;
 
-namespace StackGame.Commands
+namespace StackGame.Core.Commands
 {
     /// <summary>
     /// Команда "улучшить"

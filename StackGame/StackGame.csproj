@@ -67,29 +67,15 @@
     <Compile Include="Core\Configs\UnitType.cs" />
     <Compile Include="Core\Configs\UnitImproveType.cs" />
     <Compile Include="Core\Configs\UnitImproveParameters.cs" />
-    <Compile Include="Strategy\IStrategy.cs" />
     <Compile Include="Core\Engine\Engine.cs" />
     <Compile Include="Core\Engine\MeleeOpponents.cs" />
     <Compile Include="Core\Engine\SpecialAbilityComponents.cs" />
     <Compile Include="Extensions.cs" />
-    <Compile Include="Strategy\StrategyAllVsAll.cs" />
-    <Compile Include="Strategy\Strategy1Vs1.cs" />
-    <Compile Include="Strategy\StrategyNVsN.cs" />
-    <Compile Include="Commands\CommandManager.cs" />
-    <Compile Include="Commands\ICommand.cs" />
-    <Compile Include="Commands\EmptyCommand.cs" />
-    <Compile Include="Commands\HitCommand.cs" />
-    <Compile Include="Commands\HealCommand.cs" />
-    <Compile Include="Commands\ImproveCommand.cs" />
-    <Compile Include="Commands\CloneCommand.cs" />
-    <Compile Include="Commands\CollectDeadCommand.cs" />
     <Compile Include="Army\Factory\IArmyFactory.cs" />
     <Compile Include="Army\Factory\RandomUnitsFactory.cs" />
-    <Compile Include="Units\Abilities\IObservable.cs" />
     <Compile Include="Observers\IObserver.cs" />
     <Compile Include="Observers\BeepObserver.cs" />
     <Compile Include="Observers\FileObserver.cs" />
-    <Compile Include="Commands\RemoveImprovementCommand.cs" />
     <Compile Include="Units\Improvements\IUnitImprove.cs" />
     <Compile Include="Loggers\ILogger.cs" />
     <Compile Include="Loggers\ConsoleLogger.cs" />
@@ -98,8 +84,22 @@
     <Compile Include="GUI\ConsoleGUI.cs" />
     <Compile Include="GUI\MainCommand.cs" />
     <Compile Include="GUI\SelectStrategyCommand.cs" />
-    <Compile Include="Commands\ChangeCountTurnsWithoutDeathCommand.cs" />
-    <Compile Include="Commands\ChangeStrategyCommand.cs" />
+    <Compile Include="Core\Commands\ChangeCountTurnsWithoutDeathCommand.cs" />
+    <Compile Include="Core\Commands\ChangeStrategyCommand.cs" />
+    <Compile Include="Core\Commands\CloneCommand.cs" />
+    <Compile Include="Core\Commands\CollectDeadCommand.cs" />
+    <Compile Include="Core\Commands\CommandManager.cs" />
+    <Compile Include="Core\Commands\EmptyCommand.cs" />
+    <Compile Include="Core\Commands\HealCommand.cs" />
+    <Compile Include="Core\Commands\HitCommand.cs" />
+    <Compile Include="Core\Commands\ICommand.cs" />
+    <Compile Include="Core\Commands\ImproveCommand.cs" />
+    <Compile Include="Core\Commands\RemoveImprovementCommand.cs" />
+    <Compile Include="Core\Strategies\IStrategy.cs" />
+    <Compile Include="Core\Strategies\Strategy1Vs1.cs" />
+    <Compile Include="Core\Strategies\StrategyAllVsAll.cs" />
+    <Compile Include="Core\Strategies\StrategyNVsN.cs" />
+    <Compile Include="Observers\IObservable.cs" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Units\" />
@@ -109,14 +109,14 @@
     <Folder Include="Units\Abilities\" />
     <Folder Include="Units\Improvements\" />
     <Folder Include="Core\Configs\" />
-    <Folder Include="Strategy\" />
     <Folder Include="Core\Engine\" />
-    <Folder Include="Commands\" />
     <Folder Include="Army\Factory\" />
     <Folder Include="Observers\" />
     <Folder Include="Loggers\" />
     <Folder Include="Units\Proxy\" />
     <Folder Include="GUI\" />
+    <Folder Include="Core\Commands\" />
+    <Folder Include="Core\Strategies\" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
 </Project>

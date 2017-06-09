@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using StackGame.Loggers;
 
-namespace StackGame.Commands
+namespace StackGame.Core.Commands
 {
     /// <summary>
     /// Менеджер команд

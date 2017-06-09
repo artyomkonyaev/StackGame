@@ -1,5 +1,4 @@
-﻿using System;
-namespace StackGame.Core.Configs
+﻿namespace StackGame.Core.Configs
 {
     /// <summary>
     /// Параметры единицы армии

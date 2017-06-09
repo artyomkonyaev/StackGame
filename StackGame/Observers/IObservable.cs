@@ -1,6 +1,4 @@
-﻿using StackGame.Observers;
-
-namespace StackGame.Units.Abilities
+﻿namespace StackGame.Observers
 {
     /// <summary>
     /// Интерфейс наблюдемой единицы армии

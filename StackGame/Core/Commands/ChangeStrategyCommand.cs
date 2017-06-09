@@ -1,8 +1,7 @@
 ﻿using StackGame.Loggers;
-using StackGame.Core.Engine;
-using StackGame.Strategy;
+using StackGame.Core.Strategies;
 
-namespace StackGame.Commands
+namespace StackGame.Core.Commands
 {
     /// <summary>
     /// Команда "изменить стратегию"
@@ -41,8 +40,8 @@ namespace StackGame.Commands
 
 		public void Execute(ILogger logger)
 		{
-            Engine.GetInstance().Strategy = strategy;
-            Engine.GetInstance().CountTurnsWithoutDeath = 0;
+            Engine.Engine.GetInstance().Strategy = strategy;
+            Engine.Engine.GetInstance().CountTurnsWithoutDeath = 0;
 
 			var message = "📌 Стратегия изменена";
 			logger.Log(message);
@@ -50,8 +49,8 @@ namespace StackGame.Commands
 
 		public void Undo(ILogger logger)
 		{
-			Engine.GetInstance().Strategy = sourceStrategy;
-            Engine.GetInstance().CountTurnsWithoutDeath = countTurnsWithoutDeath;
+			Engine.Engine.GetInstance().Strategy = sourceStrategy;
+            Engine.Engine.GetInstance().CountTurnsWithoutDeath = countTurnsWithoutDeath;
 		}
 
 		#endregion

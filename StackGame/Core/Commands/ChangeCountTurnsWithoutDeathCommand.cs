@@ -1,7 +1,6 @@
 ﻿using StackGame.Loggers;
-using StackGame.Core.Engine;
 
-namespace StackGame.Commands
+namespace StackGame.Core.Commands
 {
     /// <summary>
     /// Команда "изменить количество шагов без смертей"
@@ -35,12 +34,12 @@ namespace StackGame.Commands
 
 		public void Execute(ILogger logger)
 		{
-            Engine.GetInstance().CountTurnsWithoutDeath = countTurnsWithoutDeath;
+            Engine.Engine.GetInstance().CountTurnsWithoutDeath = countTurnsWithoutDeath;
 		}
 
 		public void Undo(ILogger logger)
 		{
-			Engine.GetInstance().CountTurnsWithoutDeath = sourceCountTurnsWithoutDeath;
+			Engine.Engine.GetInstance().CountTurnsWithoutDeath = sourceCountTurnsWithoutDeath;
 		}
 
 		#endregion

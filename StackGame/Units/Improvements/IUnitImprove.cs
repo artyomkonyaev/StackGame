@@ -1,6 +1,4 @@
-﻿using StackGame.Units;
-
-namespace StackGame.Units.Improvements
+﻿namespace StackGame.Units.Improvements
 {
     /// <summary>
     /// Интерфейс улучшения единицы армии

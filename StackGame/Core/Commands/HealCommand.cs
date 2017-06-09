@@ -2,7 +2,7 @@
 using StackGame.Units;
 using StackGame.Units.Abilities;
 
-namespace StackGame.Commands
+namespace StackGame.Core.Commands
 {
 	/// <summary>
 	/// Команда "лечить"

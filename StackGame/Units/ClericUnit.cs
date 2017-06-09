@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using StackGame.Core.Engine;
-using StackGame.Commands;
+using StackGame.Core.Commands;
 using StackGame.Army;
 using StackGame.Units.Abilities;
 

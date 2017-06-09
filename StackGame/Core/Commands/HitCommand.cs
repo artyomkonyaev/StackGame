@@ -1,8 +1,7 @@
-﻿using System;
-using StackGame.Loggers;
+﻿using StackGame.Loggers;
 using StackGame.Units;
 
-namespace StackGame.Commands
+namespace StackGame.Core.Commands
 {
     /// <summary>
     /// Команда "атаковать"

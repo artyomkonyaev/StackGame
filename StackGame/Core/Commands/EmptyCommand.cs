@@ -1,6 +1,6 @@
 ﻿using StackGame.Loggers;
 
-namespace StackGame.Commands
+namespace StackGame.Core.Commands
 {
     /// <summary>
     /// Пустая команда

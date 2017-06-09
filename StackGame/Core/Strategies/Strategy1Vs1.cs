@@ -5,40 +5,32 @@ using StackGame.Core.Engine;
 using StackGame.Army;
 using StackGame.Units.Abilities;
 
-namespace StackGame.Strategy
+namespace StackGame.Core.Strategies
 {
     /// <summary>
-    /// Стратегия "все со всеми"
+    /// Стратегия "1 на 1"
     /// </summary>
-    public class StrategyAllVsAll : IStrategy
+    public class Strategy1Vs1 : IStrategy
     {
 		#region Методы
 
 		public List<MeleeOpponents> GetOpponentsQueue(IArmy firstArmy, IArmy secondArmy)
 		{
-			var firstArmyUnitsCount = firstArmy.Units.Count;
-			var secondArmyUnitsCount = secondArmy.Units.Count;
-            var minCount = Math.Min(firstArmyUnitsCount, secondArmyUnitsCount);
-
-			var queue = new List<MeleeOpponents>();
-			for (int i = 0; i < minCount; i++)
+			var opponents = new MeleeOpponents(firstArmy, 0, secondArmy, 0);
+			var queue = new List<MeleeOpponents>
 			{
-				var opponents = new MeleeOpponents(firstArmy, i, secondArmy, i);
-				var _queue = new List<MeleeOpponents>
-				{
-					opponents,
-					opponents.Reverse()
-				};
+				opponents,
+				opponents.Reverse()
+			};
 
-				queue = queue.Concat(_queue.Randomize()).ToList();
-			}
+			queue = queue.Randomize().ToList();
 
 			return queue;
 		}
 
 		public IEnumerable<int> GetUnitsRangeForSpecialAbility(IArmy army, IArmy enemyArmy, ISpecialAbility unit, int unitPosition)
 		{
-			var isFirst = unitPosition < enemyArmy.Units.Count;
+			var isFirst = unitPosition == 0;
 			if (isFirst)
 			{
 				return null;
@@ -54,7 +46,7 @@ namespace StackGame.Strategy
 			}
 			else
 			{
-				if (unitPosition - radius >= targetArmy.Units.Count)
+				if (unitPosition - radius >= 0)
 				{
 					return null;
 				}
@@ -101,13 +93,9 @@ namespace StackGame.Strategy
 		/// </summary>
 		private Tuple<int, int> GetBoundsInEmemyArmy(IArmy army, int unitPosition, int unitRange)
 		{
-			var startIndex = unitPosition - unitRange;
-			if (startIndex < 0)
-			{
-				startIndex = 0;
-			}
+			var startIndex = 0;
+			var endIndex = Math.Abs(unitPosition - unitRange) - 1;
 
-			var endIndex = Math.Abs(unitRange - unitPosition) + 1 + unitRange;
 			if (endIndex >= army.Units.Count)
 			{
 				endIndex = army.Units.Count - 1;

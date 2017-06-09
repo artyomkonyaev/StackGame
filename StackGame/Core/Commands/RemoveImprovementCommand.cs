@@ -1,11 +1,10 @@
-﻿using System;
-using StackGame.Loggers;
+﻿using StackGame.Loggers;
 using StackGame.Army;
 using StackGame.Units;
 using StackGame.Units.Abilities;
 using StackGame.Units.Improvements;
 
-namespace StackGame.Commands
+namespace StackGame.Core.Commands
 {
 	/// <summary>
 	/// Команда "удалить улучшение"

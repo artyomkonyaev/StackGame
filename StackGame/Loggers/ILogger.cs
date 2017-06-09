@@ -1,5 +1,4 @@
-﻿using System;
-namespace StackGame.Loggers
+﻿namespace StackGame.Loggers
 {
     /// <summary>
     /// Интерфейс журнала

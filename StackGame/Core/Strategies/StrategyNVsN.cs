@@ -5,7 +5,7 @@ using StackGame.Core.Engine;
 using StackGame.Army;
 using StackGame.Units.Abilities;
 
-namespace StackGame.Strategy
+namespace StackGame.Core.Strategies
 {
     /// <summary>
     /// Стратегия "n на n"
