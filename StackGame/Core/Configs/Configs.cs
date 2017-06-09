@@ -17,10 +17,10 @@ namespace StackGame.Core.Configs
                 {
                     Price = 25,
                     Health = 100,
-                    Defence = 0,
+                    Defence = 5,
                     Strength = 15,
                     Range = 1,
-                    Chance = 50
+                    Chance = 25
                 }
             },
 			{
@@ -37,7 +37,7 @@ namespace StackGame.Core.Configs
 				{
 					Price = 75,
 					Health = 100,
-					Defence = 0,
+					Defence = 5,
 					Strength = 10,
 					Range = 3,
 					Power = 15,
@@ -64,7 +64,7 @@ namespace StackGame.Core.Configs
 					Defence = 0,
 					Strength = 5,
 					Range = 3,
-                    Chance = 50
+                    Chance = 25
 				}
 			},
 			{

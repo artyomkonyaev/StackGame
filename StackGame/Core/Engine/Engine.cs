@@ -215,7 +215,7 @@ namespace StackGame.Core.Engine
                 if (enemyUnit.IsAlive && enemyUnit is IImprovable improvableUnit && improvableUnit.ImprovementsCount > 0)
                 {
                     var random = new Random();
-                    if (random.Next(2) == 0)
+                    if (random.Next(4) == 0)
                     {
 						command = new RemoveImprovementCommand(improvableUnit, enemyArmy, enemyUnitPosition);
 						CommandManager.Execute(command);
