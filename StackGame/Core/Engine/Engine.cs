@@ -7,7 +7,9 @@ using StackGame.Commands;
 using StackGame.Strategy;
 using StackGame.Army;
 using StackGame.Army.Factory;
+using StackGame.Units;
 using StackGame.Units.Abilities;
+using StackGame.Units.Proxy;
 
 namespace StackGame.Core.Engine
 {
@@ -66,8 +68,14 @@ namespace StackGame.Core.Engine
             AddObservers(secondArmy, observers);
 
             // Создание менеджера команд
-            var logger = new ConsoleLogger();
+            ILogger logger = new ConsoleLogger();
             CommandManager = new CommandManager(logger);
+
+            // Замена тяжелых пехотинцев на прокси
+            logger = new FileLogger("HeavyUnitProxyLog.txt");
+
+            ReplaceHeavyUnitsWithProxy(firstArmy, logger);
+            ReplaceHeavyUnitsWithProxy(secondArmy, logger);
         }
 
         #endregion
@@ -102,6 +110,22 @@ namespace StackGame.Core.Engine
 					}
 				}
 			}
+        }
+
+        /// <summary>
+        /// Заменить тяжелых пехотинцев на proxy
+        /// </summary>
+        private void ReplaceHeavyUnitsWithProxy(IArmy army, ILogger logger)
+        {
+            for (int i = 0; i < army.Units.Count; i++)
+            {
+                var unit = army.Units[i];
+                if (unit is HeavyUnit heavyUnit)
+                {
+                    var heavyUnitProxy = new HeavyUnitProxy(heavyUnit, logger);
+                    army.Units[i] = heavyUnitProxy;
+                }
+            }
         }
 
         /// <summary>

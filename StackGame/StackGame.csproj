@@ -94,6 +94,7 @@
     <Compile Include="Loggers\ILogger.cs" />
     <Compile Include="Loggers\ConsoleLogger.cs" />
     <Compile Include="Loggers\FileLogger.cs" />
+    <Compile Include="Units\Proxy\HeavyUnitProxy.cs" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Units\" />
@@ -109,6 +110,7 @@
     <Folder Include="Army\Factory\" />
     <Folder Include="Observers\" />
     <Folder Include="Loggers\" />
+    <Folder Include="Units\Proxy\" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
 </Project>
