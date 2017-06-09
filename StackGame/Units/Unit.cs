@@ -33,7 +33,7 @@ namespace StackGame.Units
 		/// <summary>
 		/// Есть ли еще здоровье
 		/// </summary>
-		public virtual bool IsAlive => Health != 0;
+		public virtual bool IsAlive => Health > 0;
 		/// <summary>
 		/// Поврежден ли
 		/// </summary>
@@ -72,7 +72,7 @@ namespace StackGame.Units
         {
             Health -= damage;
 
-			if (Health == 0)
+            if (!IsAlive)
 			{
                 var message = $"☠️ #{ this }# умер";
                 NotifyObservers(message);
