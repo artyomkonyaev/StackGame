@@ -93,6 +93,7 @@
     <Compile Include="Units\Improvements\IUnitImprove.cs" />
     <Compile Include="Loggers\ILogger.cs" />
     <Compile Include="Loggers\ConsoleLogger.cs" />
+    <Compile Include="Loggers\FileLogger.cs" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Units\" />
