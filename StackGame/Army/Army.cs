@@ -45,7 +45,7 @@ namespace StackGame.Army
 		/// <summary>
 		/// Удалить мертвые единицы армии
 		/// </summary>
-		public void CollectDeadUnits()
+		public int CollectDeadUnits()
         {
 			var deadUnits = new List<KeyValuePair<int, IUnit>>();
 			for (var i = 0; i < Units.Count; i++)
@@ -62,6 +62,8 @@ namespace StackGame.Army
 				var command = new CollectDeadCommand(this, deadUnits);
 				Engine.GetInstance().CommandManager.Execute(command);
             }
+
+            return deadUnits.Count;
         }
 
 		/// <summary>

@@ -27,7 +27,7 @@ namespace StackGame.Army
         /// <summary>
         /// Удалить мертвые единицы армии
         /// </summary>
-        void CollectDeadUnits();
+        int CollectDeadUnits();
 
 		/// <summary>
 		/// Преобразовать в строку
