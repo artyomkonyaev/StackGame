@@ -9,13 +9,26 @@ namespace StackGame
     /// </summary>
     public static class Extensions
     {
-        /// <summary>
-        /// Перемешать
-        /// </summary>
-		public static IEnumerable<T> Randomize<T>(this IEnumerable<T> source)
+		#region Методы
+
+		/// <summary>
+		/// Пустая ли коллекция
+		/// </summary>
+		public static bool IsEmpty<T>(this IEnumerable<T> source)
 		{
-			Random rnd = new Random();
-			return source.OrderBy(item => rnd.Next());
+			var isEmpty = !source.Any();
+			return isEmpty;
 		}
+
+		/// <summary>
+		/// Перемешать
+		/// </summary>
+		public static IEnumerable<T> Randomize<T>(this IEnumerable<T> source)
+        {
+            Random rnd = new Random();
+            return source.OrderBy(item => rnd.Next());
+        }
+
+        #endregion
     }
 }

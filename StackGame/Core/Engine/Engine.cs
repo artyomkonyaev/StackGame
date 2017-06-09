@@ -222,7 +222,7 @@ namespace StackGame.Core.Engine
 					_components.Add(specialAbilityComponents);
 				}
 
-                if (_components.Count == 0)
+                if (_components.IsEmpty())
                 {
                     continue;
                 }

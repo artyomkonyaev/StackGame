@@ -70,7 +70,7 @@ namespace StackGame.Units
 					}
 				}
 
-				if (targetUnits.Count == 0)
+				if (targetUnits.IsEmpty())
 				{
 					return;
 				}
@@ -96,7 +96,7 @@ namespace StackGame.Units
 					}
 
 					types.Remove(type);
-				} while (types.Count != 0);
+                } while (!types.IsEmpty());
 			}
 		}
 

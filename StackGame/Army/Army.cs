@@ -21,7 +21,7 @@ namespace StackGame.Army
 		/// <summary>
 		/// Все ли единицы армии мертвы
 		/// </summary>
-		public bool IsAllDead => Units.Count == 0;
+		public bool IsAllDead => Units.IsEmpty();
 
         /// <summary>
         /// Название армии
@@ -58,7 +58,7 @@ namespace StackGame.Army
 				}
 			}
 
-            if (deadUnits.Count != 0) {
+            if (!deadUnits.IsEmpty()) {
 				var command = new CollectDeadCommand(this, deadUnits);
 				Engine.GetInstance().CommandManager.Execute(command);
             }

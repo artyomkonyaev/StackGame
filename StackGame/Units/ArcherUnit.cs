@@ -65,7 +65,7 @@ namespace StackGame.Units
                     }
                 }
 
-                if (targetUnits.Count == 0)
+                if (targetUnits.IsEmpty())
                 {
                     return;
                 }

@@ -13,11 +13,11 @@ namespace StackGame.Commands
         /// <summary>
         /// Возможно ли отменить ход
         /// </summary>
-        public bool CanUndo => undoStack.Count > 0;
+        public bool CanUndo => !undoStack.IsEmpty();
         /// <summary>
         /// Возможно ли повторить ход
         /// </summary>
-        public bool CanRedo => redoStack.Count > 0;
+        public bool CanRedo => !redoStack.IsEmpty();
 
         /// <summary>
         /// Стек команд для отмены
