@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Linq;
 using StackGame.Loggers;
 using StackGame.Army;
 using StackGame.Units;
@@ -38,7 +39,10 @@ namespace StackGame.Commands
 
 		public void Execute(ILogger logger)
 		{
-			foreach (var pair in deadUnits)
+            var _deadUnits = deadUnits.Select(unit => unit).ToList();
+            _deadUnits.Reverse();
+
+			foreach (var pair in _deadUnits)
             {
                 army.Units.RemoveAt(pair.Key);
             }
