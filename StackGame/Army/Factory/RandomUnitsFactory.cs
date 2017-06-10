@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
 using StackGame.Core.Configs;
 using StackGame.Units;
@@ -28,15 +27,13 @@ namespace StackGame.Army.Factory
 		/// </summary>
 		public List<IUnit> CreateArmy(int money)
 		{
-			var random = new Random();
-
 			var unitMinCost = MinCost;
 
 			var units = new List<IUnit>();
 			while (money >= unitMinCost)
 			{
 				var availableTypes = GetUnitTypesWithCostLessThanOrEqual(money);
-				var index = random.Next(availableTypes.Length);
+				var index = Helpers.Random.Next(availableTypes.Length);
 
 				var unitType = availableTypes[index];
 

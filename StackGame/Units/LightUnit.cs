@@ -50,8 +50,7 @@ namespace StackGame.Units
 
 		public void DoSpecialAction(IArmy targetArmy, IEnumerable<int> targetRange, int position)
 		{
-			var random = new Random();
-			var chance = random.Next(100 / Chance) == 0;
+			var chance = Helpers.Random.Next(100 / Chance) == 0;
 
 			if (chance)
 			{
@@ -75,7 +74,7 @@ namespace StackGame.Units
 					return;
 				}
 
-				var targetRow = targetUnits[random.Next(targetUnits.Count)];
+				var targetRow = targetUnits[Helpers.Random.Next(targetUnits.Count)];
                 var targetIndex = targetRow.Item1;
                 var targetUnit = targetRow.Item2;
 
@@ -84,7 +83,7 @@ namespace StackGame.Units
 
 				do
 				{
-					var type = types[random.Next(types.Count)];
+					var type = types[Helpers.Random.Next(types.Count)];
 					if (targetUnit.CanImprove(type))
 					{
 						var unitImprove = type.MakeGenericType(targetUnit.GetType());

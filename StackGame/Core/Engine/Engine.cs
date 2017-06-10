@@ -1,5 +1,4 @@
-﻿﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
 using StackGame.Loggers;
 using StackGame.Observers;
@@ -214,8 +213,7 @@ namespace StackGame.Core.Engine
 
                 if (enemyUnit.IsAlive && enemyUnit is IImprovable improvableUnit && improvableUnit.ImprovementsCount > 0)
                 {
-                    var random = new Random();
-                    if (random.Next(4) == 0)
+                    if (Helpers.Random.Next(4) == 0)
                     {
 						command = new RemoveImprovementCommand(improvableUnit, enemyArmy, enemyUnitPosition);
 						CommandManager.Execute(command);

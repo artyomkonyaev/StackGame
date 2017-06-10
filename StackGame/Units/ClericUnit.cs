@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
 using StackGame.Core.Engine;
 using StackGame.Core.Commands;
@@ -50,8 +49,7 @@ namespace StackGame.Units
 
 		public void DoSpecialAction(IArmy targetArmy, IEnumerable<int> targetRange, int position)
         {
-			var random = new Random();
-			var chance = random.Next(100 / Chance) == 0;
+			var chance = Helpers.Random.Next(100 / Chance) == 0;
 
 			if (chance)
 			{
@@ -75,7 +73,7 @@ namespace StackGame.Units
 					return;
 				}
 
-                var targetUnit = targetUnits[random.Next(targetUnits.Count)];
+                var targetUnit = targetUnits[Helpers.Random.Next(targetUnits.Count)];
 
                 var command = new HealCommand(this, targetUnit, Power);
 				Engine.GetInstance().CommandManager.Execute(command);

@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
 
 namespace StackGame
@@ -25,8 +24,7 @@ namespace StackGame
 		/// </summary>
 		public static IEnumerable<T> Randomize<T>(this IEnumerable<T> source)
         {
-            Random rnd = new Random();
-            return source.OrderBy(item => rnd.Next());
+            return source.OrderBy(item => Helpers.Random.Next());
         }
 
         #endregion
