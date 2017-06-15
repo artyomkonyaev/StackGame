@@ -85,7 +85,7 @@ namespace StackGame.Core.Engine
         /// <summary>
         /// Начать новую игру
         /// </summary>
-        public void NewGame(int armyCost)
+        public void NewGame(int armyCost, IStrategy strategy)
         {
 			// Создание армий
 			var factory = new RandomUnitsFactory();
@@ -113,8 +113,8 @@ namespace StackGame.Core.Engine
 			ReplaceHeavyUnitsWithProxy(FirstArmy, logger);
 			ReplaceHeavyUnitsWithProxy(SecondArmy, logger);
 
-			// Выбор стратегии
-			Strategy = new Strategy1Vs1();
+            // Выбор стратегии
+            Strategy = strategy;
 
             // Обнуление количества шагов без смертей
             CountTurnsWithoutDeath = 0;

@@ -64,20 +64,49 @@ namespace StackGame
                 {
                     case MainCommand.NewGame:
                         var armyCost = ConsoleGUI.ReadArmyCost();
-                        Engine.GetInstance().NewGame(armyCost);
-                        gameStarted = true;
 
-                        Console.WriteLine("Новая игра начата.");
-                        Console.WriteLine();
+						ConsoleGUI.PrintSelectStrategyMenu();
+						var _selectStrategyCommand = ConsoleGUI.ReadSelectStrategyCommand();
+
+						IStrategy _strategy = null;
+						switch (_selectStrategyCommand)
+						{
+							case SelectStrategyCommand.Strategy1Vs1:
+								_strategy = new Strategy1Vs1();
+
+								break;
+							case SelectStrategyCommand.StrategyNVsN:
+								var n = ConsoleGUI.ReadNForNVsNStrategy();
+								_strategy = new StrategyNVsN(n);
+
+								break;
+							case SelectStrategyCommand.StrategyAllVsAll:
+								_strategy = new StrategyAllVsAll();
+
+								break;
+							case SelectStrategyCommand.Cancel:
+								continue;
+						}
+
+                        Engine.GetInstance().NewGame(armyCost, _strategy);
 
 						if (Engine.GetInstance().IsGameEnded)
 						{
+                            gameStarted = false;
+
 							Console.WriteLine("Необходимо увеличить стоимость армии.");
 							Console.WriteLine();
 						}
+                        else
+                        {
+							gameStarted = true;
 
-						Console.WriteLine(Engine.GetInstance().FirstArmy);
-						Console.WriteLine(Engine.GetInstance().SecondArmy);
+							Console.WriteLine("Новая игра начата.");
+							Console.WriteLine();
+
+							Console.WriteLine(Engine.GetInstance().FirstArmy);
+							Console.WriteLine(Engine.GetInstance().SecondArmy);
+                        }
 
                         break;
                     case MainCommand.NextTurn:
