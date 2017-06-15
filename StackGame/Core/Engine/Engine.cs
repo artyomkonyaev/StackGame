@@ -34,6 +34,15 @@ namespace StackGame.Core.Engine
         /// </summary>
         public bool IsGameEnded => FirstArmy.IsAllDead || SecondArmy.IsAllDead;
 
+        /// <summary>
+        /// Победила ли первая армия
+        /// </summary>
+        public bool IsFirstArmyWin => IsGameEnded && SecondArmy.IsAllDead;
+		/// <summary>
+		/// Победила ли вторая армия
+		/// </summary>
+		public bool IsSecondArmyWin => IsGameEnded && FirstArmy.IsAllDead;
+
 		/// <summary>
 		/// Количество шагов без смертей
 		/// </summary>

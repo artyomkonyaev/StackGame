@@ -11,7 +11,7 @@ namespace StackGame.GUI
         /// </summary>
         public static void PrintError(string message)
         {
-            Console.WriteLine($"🚫 { message }");
+            Console.WriteLine($"🚫  { message }");
         }
 
 		/// <summary>

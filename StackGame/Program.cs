@@ -124,10 +124,15 @@ namespace StackGame
                         if (Engine.GetInstance().IsGameEnded)
                         {
                             Console.WriteLine("Игра закончена.");
+                            if (Engine.GetInstance().IsFirstArmyWin)
+                            {
+                                Console.WriteLine("Победила первая армия.");
+                            }
+                            else if (Engine.GetInstance().IsSecondArmyWin)
+                            {
+                                Console.WriteLine("Победила вторая армия.");   
+                            }
                             Console.WriteLine();
-
-							Console.WriteLine(Engine.GetInstance().FirstArmy);
-							Console.WriteLine(Engine.GetInstance().SecondArmy);
                         }
 
                         break;
@@ -138,10 +143,15 @@ namespace StackGame
                         if (Engine.GetInstance().IsGameEnded)
                         {
                             Console.WriteLine("Игра закончена.");
-                            Console.WriteLine();
-
-							Console.WriteLine(Engine.GetInstance().FirstArmy);
-							Console.WriteLine(Engine.GetInstance().SecondArmy);
+							if (Engine.GetInstance().IsFirstArmyWin)
+							{
+								Console.WriteLine("Победила первая армия.");
+							}
+							else if (Engine.GetInstance().IsSecondArmyWin)
+							{
+								Console.WriteLine("Победила вторая армия.");
+							}
+							Console.WriteLine();
                         }
                         else
                         {
